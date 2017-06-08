@@ -45,8 +45,8 @@ public class VRUI_Text : VRUI_Object {
 
 		vruiText.textMesh.text = s;
 		bounds = vruiText.meshRenderer.bounds;
-		vruiText.width = bounds.size.x;
-		vruiText.height = bounds.size.y;
+		vruiText._width = bounds.size.x;
+		vruiText._height = bounds.size.y;
 
 		++_counter;
 		go.name = "VRUI_Text ("+_counter+")";

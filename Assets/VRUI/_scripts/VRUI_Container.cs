@@ -24,6 +24,7 @@ public class VRUI_Container : VRUI_Object {
 
 	protected Color _clrBg;
 	protected Color _clrBorder;
+	protected float childZ = -0.001f;
 
 	private static int _counter = 0;
 
@@ -34,8 +35,8 @@ public class VRUI_Container : VRUI_Object {
 		VRUI_Container vruiContainer = go.AddComponent<VRUI_Container> ();
 		VRUI_Container.Init ();
 
-		vruiContainer.width = width;
-		vruiContainer.height = height;
+		vruiContainer._width = width;
+		vruiContainer._height = height;
 		vruiContainer._layout = layout;
 //		vruiContainer.surface = surface;
 
@@ -87,11 +88,11 @@ public class VRUI_Container : VRUI_Object {
 		float x, y;
 		TextAnchor textAnchor = TextAnchor.MiddleCenter;
 		if (IsGravityLeft (_gravity)) {
-			x = -width / 2f + _paddingLeft;
+			x = -_width / 2f + _paddingLeft;
 //			textAnchor = IsGravityTop (_gravity) ? TextAnchor.UpperLeft : (IsGravityBottom (_gravity) ? TextAnchor.LowerLeft : TextAnchor.MiddleLeft);
 //			textAnchor = IsGravityBottom (_gravity) ? TextAnchor.LowerLeft : TextAnchor.UpperLeft;
 		} else if (IsGravityRight (_gravity)) {
-			x = width / 2f - _paddingRight;
+			x = _width / 2f - _paddingRight;
 //			textAnchor = IsGravityTop (_gravity) ? TextAnchor.UpperRight : (IsGravityBottom (_gravity) ? TextAnchor.LowerRight : TextAnchor.MiddleRight);
 //			textAnchor = IsGravityBottom (_gravity) ? TextAnchor.LowerRight : TextAnchor.UpperRight;
 		} else {
@@ -104,23 +105,23 @@ public class VRUI_Container : VRUI_Object {
 		float objectsHeight = 0;
 		int i;
 		for (i = 0; i < _objects.Count; i++) {
-			objectsHeight += _objects [i].height + _objects [i].marginTop + _objects [i].paddingTop + _objects [i].marginBottom + _objects [i].paddingBottom;
+			objectsHeight += _objects [i]._height + _objects [i].marginTop + _objects [i].paddingTop + _objects [i].marginBottom + _objects [i].paddingBottom;
 			if (_objects [i] is VRUI_Text) {
 				(_objects [i] as VRUI_Text).SetAnchor (textAnchor);
 			}
 		}
 
-		float topY = height / 2f - _paddingTop;
-		float bottomY = -height / 2f + _paddingTop;
+		float topY = _height / 2f - _paddingTop;
+		float bottomY = -_height / 2f + _paddingTop;
 		if (IsGravityTop (_gravity)) {
 			y = topY;
 			for (i = 0; (i < _objects.Count) && (y > bottomY); i++) {
 				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
-				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i].width);
+				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y -= (_objects [i].marginTop + _objects [i].paddingTop);
-				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i].height / 2f, 0f);
-				y -= (_objects [i].height + _objects [i].marginBottom + _objects [i].paddingBottom);
+				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i]._height / 2f, childZ);
+				y -= (_objects [i]._height + _objects [i].marginBottom + _objects [i].paddingBottom);
 			}
 			for (; i < _objects.Count; i++) {
 				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(false)");
@@ -131,10 +132,10 @@ public class VRUI_Container : VRUI_Object {
 			for (i = _objects.Count-1; (i >= 0) && (y < topY); i--) {
 				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
-				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i].width);
+				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y += (_objects [i].marginBottom + _objects [i].paddingBottom);
-				_objects [i].transform.localPosition = new Vector3 (objX, y + _objects [i].height / 2f, 0f);
-				y += (_objects [i].height + _objects [i].marginTop + _objects [i].paddingTop);
+				_objects [i].transform.localPosition = new Vector3 (objX, y + _objects [i]._height / 2f, childZ);
+				y += (_objects [i]._height + _objects [i].marginTop + _objects [i].paddingTop);
 //				y += (_objects [i].height + _objects [i].marginTop + _objects [i].marginBottom + _objects [i].paddingTop + _objects [i].paddingBottom);
 			}
 			for (; i >= 0; i--) {
@@ -145,16 +146,16 @@ public class VRUI_Container : VRUI_Object {
 			y = objectsHeight / 2;
 			for (i = 0; (i < _objects.Count) && (y > topY); i++) {
 				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(false)");
-				y -= (_objects [i].height + _objects [i].marginTop + _objects [i].marginBottom + _objects [i].paddingTop + _objects [i].paddingBottom);
+				y -= (_objects [i]._height + _objects [i].marginTop + _objects [i].marginBottom + _objects [i].paddingTop + _objects [i].paddingBottom);
 				_objects [i].gameObject.SetActive (false);
 			}
 			for (; (i < _objects.Count) && (y > bottomY); i++) {
 				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
-				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i].width);
+				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y -= (_objects [i].marginTop + _objects [i].paddingTop);
-				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i].height / 2f, 0f);
-				y -= (_objects [i].height + _objects [i].marginBottom + _objects [i].paddingBottom);
+				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i]._height / 2f, childZ);
+				y -= (_objects [i]._height + _objects [i].marginBottom + _objects [i].paddingBottom);
 			}
 			for (; i < _objects.Count; i++) {
 				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(false)");
@@ -177,9 +178,9 @@ public class VRUI_Container : VRUI_Object {
 		TextAnchor textAnchor = TextAnchor.MiddleCenter;
 
 		if (IsGravityBottom (_gravity)) {
-			y = -height / 2f + _paddingBottom;
+			y = -_height / 2f + _paddingBottom;
 		} else if (IsGravityTop (_gravity)) {
-			y = height / 2f - _paddingTop;
+			y = _height / 2f - _paddingTop;
 		} else {
 			y = 0f;
 		}
@@ -188,23 +189,23 @@ public class VRUI_Container : VRUI_Object {
 		float objectsWidth = 0;
 		int i;
 		for (i = 0; i < _objects.Count; i++) {
-			objectsWidth += _objects [i].width + _objects [i].marginLeft + _objects [i].paddingLeft + _objects [i].marginRight + _objects [i].paddingRight;
+			objectsWidth += _objects [i]._width + _objects [i].marginLeft + _objects [i].paddingLeft + _objects [i].marginRight + _objects [i].paddingRight;
 			if (_objects [i] is VRUI_Text) {
 				(_objects [i] as VRUI_Text).SetAnchor (textAnchor);
 			}
 		}
 
-		float rightX = width / 2f - _paddingRight;
-		float leftX = -width / 2f + _paddingLeft;
+		float rightX = _width / 2f - _paddingRight;
+		float leftX = -_width / 2f + _paddingLeft;
 		if (IsGravityLeft (_gravity)) {
 			x = leftX;
 			for (i = 0; (i < _objects.Count) && (x < rightX); i++) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
-				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i].height);
+				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x += (_objects [i].marginLeft + _objects [i].paddingLeft);
-				_objects [i].transform.localPosition = new Vector3 (x + _objects [i].width / 2f, objY, 0f);
-				x += (_objects [i].width + _objects [i].marginRight + _objects [i].paddingRight);
+				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, childZ);
+				x += (_objects [i]._width + _objects [i].marginRight + _objects [i].paddingRight);
 			}
 			for (; i < _objects.Count; i++) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(false)");
@@ -215,10 +216,10 @@ public class VRUI_Container : VRUI_Object {
 			for (i = _objects.Count-1; (i >= 0) && (x > leftX); i--) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
-				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i].height);
+				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x -= (_objects [i].marginRight + _objects [i].paddingRight);
-				_objects [i].transform.localPosition = new Vector3 (x - _objects [i].width / 2f, objY, 0f);
-				x -= (_objects [i].width + _objects [i].marginLeft + _objects [i].paddingLeft);
+				_objects [i].transform.localPosition = new Vector3 (x - _objects [i]._width / 2f, objY, childZ);
+				x -= (_objects [i]._width + _objects [i].marginLeft + _objects [i].paddingLeft);
 			}
 			for (; i >= 0; i--) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(false)");
@@ -230,16 +231,16 @@ public class VRUI_Container : VRUI_Object {
 			Debug.Log ("(x < leftX): "+(x < leftX));
 			for (i = 0; (i < _objects.Count) && (x < leftX); i++) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(false)");
-				x += (_objects [i].width + _objects [i].marginLeft + _objects [i].marginRight + _objects [i].paddingLeft + _objects [i].paddingRight);
+				x += (_objects [i]._width + _objects [i].marginLeft + _objects [i].marginRight + _objects [i].paddingLeft + _objects [i].paddingRight);
 				_objects [i].gameObject.SetActive (false);
 			}
 			for (; (i < _objects.Count) && (x < rightX); i++) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
-				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i].height);
+				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x += (_objects [i].marginLeft + _objects [i].paddingLeft);
-				_objects [i].transform.localPosition = new Vector3 (x + _objects [i].width / 2f, objY, 0f);
-				x += (_objects [i].width + _objects [i].marginRight + _objects [i].paddingRight);
+				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, childZ);
+				x += (_objects [i]._width + _objects [i].marginRight + _objects [i].paddingRight);
 			}
 			for (; i < _objects.Count; i++) {
 				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(false)");

@@ -6,6 +6,10 @@ using System.IO;
 public class FileManager {
 	private static string gear360Path = FindGear360Path ();
 
+	public static void WriteToLog (string s) {
+		WriteTextToFile (Application.persistentDataPath+Path.DirectorySeparatorChar+"log.txt", s);
+	}
+
 	public static void WriteTextToFile (string fname, string data) {
 		using (StreamWriter file = new StreamWriter(fname)) {
 			file.Write (data);

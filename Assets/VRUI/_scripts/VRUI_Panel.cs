@@ -20,8 +20,8 @@ public class VRUI_Panel: VRUI_Object {
 		GameObject go = new GameObject ();
 		VRUI_Panel vruiPanel = go.AddComponent<VRUI_Panel> ();
 		VRUI_Panel.Init ();
-		vruiPanel.width = width;
-		vruiPanel.height = height;
+		vruiPanel._width = width;
+		vruiPanel._height = height;
 
 		vruiPanel.SetBgColor (clrBg);
 		vruiPanel.SetBorderColor (clrBorder);
@@ -43,7 +43,7 @@ public class VRUI_Panel: VRUI_Object {
 				goBg.transform.SetParent (transform);
 				bgBoxCollider = goBg.AddComponent<BoxCollider> ();
 				bgMeshRenderer = goBg.GetComponent<MeshRenderer> ();
-				goBg.transform.localScale = new Vector3 (width, height, 1f);
+				goBg.transform.localScale = new Vector3 (_width, _height, 1f);
 				goBg.transform.localPosition = new Vector3 (0f, 0f, bgDepth);
 			}
 		}
@@ -59,27 +59,27 @@ public class VRUI_Panel: VRUI_Object {
 				borderMeshRenderer = new MeshRenderer[4];
 
 				goBorder [0] = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				goBorder [0].transform.localScale = new Vector3 (borderWidth, height + borderWidth, 1f);
+				goBorder [0].transform.localScale = new Vector3 (borderWidth, _height + borderWidth, 1f);
 				goBorder [0].transform.SetParent (transform);
-				goBorder [0].transform.localPosition = new Vector3 (-width/2, 0f, 0f);
+				goBorder [0].transform.localPosition = new Vector3 (-_width/2, 0f, 0f);
 				borderMeshRenderer [0] = goBorder [0].GetComponent<MeshRenderer> ();
 
 				goBorder [1] = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				goBorder [1].transform.localScale = new Vector3 (borderWidth, height + borderWidth, 1f);
+				goBorder [1].transform.localScale = new Vector3 (borderWidth, _height + borderWidth, 1f);
 				goBorder [1].transform.SetParent (transform);
-				goBorder [1].transform.localPosition = new Vector3 (width/2, 0f, 0f);
+				goBorder [1].transform.localPosition = new Vector3 (_width/2, 0f, 0f);
 				borderMeshRenderer [1] = goBorder [1].GetComponent<MeshRenderer> ();
 
 				goBorder [2] = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				goBorder [2].transform.localScale = new Vector3 (width + borderWidth, borderWidth, 1f);
+				goBorder [2].transform.localScale = new Vector3 (_width + borderWidth, borderWidth, 1f);
 				goBorder [2].transform.SetParent (transform);
-				goBorder [2].transform.localPosition = new Vector3 (0f, -height/2, 0f);
+				goBorder [2].transform.localPosition = new Vector3 (0f, -_height/2, 0f);
 				borderMeshRenderer [2] = goBorder [2].GetComponent<MeshRenderer> ();
 
 				goBorder [3] = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				goBorder [3].transform.localScale = new Vector3 (width + borderWidth, borderWidth, 1f);
+				goBorder [3].transform.localScale = new Vector3 (_width + borderWidth, borderWidth, 1f);
 				goBorder [3].transform.SetParent (transform);
-				goBorder [3].transform.localPosition = new Vector3 (0f, height/2, 0f);
+				goBorder [3].transform.localPosition = new Vector3 (0f, _height/2, 0f);
 				borderMeshRenderer [3] = goBorder [3].GetComponent<MeshRenderer> ();
 			}
 		}

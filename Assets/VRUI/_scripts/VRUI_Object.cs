@@ -6,8 +6,8 @@ public class VRUI_Object : MonoBehaviour {
 //	public Vector3 position = Vector3.zero;
 //	public Vector3 rotation = Vector3.zero;
 
-	public float width;
-	public float height;
+	public float _width;
+	public float _height;
 
 	// Margin: space between the element and other element
 	protected float _marginLeft = 0f;
@@ -125,8 +125,8 @@ public class VRUI_Object : MonoBehaviour {
 	public virtual void Refresh () {}
 
 	public void CopyTo (VRUI_Object other) {
-		other.width = this.width;
-		other.height = this.height;
+		other._width = this._width;
+		other._height = this._height;
 		other._marginLeft = this._marginLeft;
 		other._marginTop = this._marginTop;
 		other._marginRight = this._marginRight;

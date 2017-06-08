@@ -113,7 +113,7 @@ public class VRUI_Button : VRUI_Container {
 
 	public void AddText (string s) {
 		Color textColor = (_clrBg == Color.clear) ? ((_clrBorder == Color.clear) ? Color.blue : _clrBorder) : AdditionalColor (_clrBg);
-		AddText (s, height/2, textColor);
+		AddText (s, _height/2, textColor);
 	}
 
 	public void AddImage (Texture2D texture, float imageHeight) {
@@ -122,7 +122,7 @@ public class VRUI_Button : VRUI_Container {
 	}
 
 	public void AddImage (Texture2D texture) {
-		VRUI_Image img = VRUI_Image.Create (texture, height);
+		VRUI_Image img = VRUI_Image.Create (texture, _height);
 		Add (img);
 	}
 }

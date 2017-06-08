@@ -3,13 +3,137 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VRUI_TestScript : MonoBehaviour {
+	public GameObject mainCamera;
+	public GameObject ovrCamera;
+	public Transform gearVrHeadRaycastCenter;
+
+	public Transform headRaycastCenter;
+	public Transform controllerRaycastCenter;
 
 	void Start () {
 //		TestVerticalLayout ();
 //		TestHorizontalLayout ();
 //		TestNestedLayouts1 ();
 //		TestNestedLayouts2 ();
-		TestButtons ();
+//		TestButtons ();
+		TestReticle ();
+
+		Font fontGothic = (Font)Resources.Load("GOTHICB");
+		Font fontShowcardGothic = (Font)Resources.Load("SHOWG");
+
+		VRUI_Container infoContainer = VRUI_Container.Create (1f, 0.6f, VRUI_Container.Layout.VERTICAL, Color.gray, Color.blue);
+		infoContainer.SetGravity (VRUI_Container.GRAVITY_TOP | VRUI_Container.GRAVITY_HCENTER);
+		infoContainer.SetPadding (0.03f);
+
+		VRUI_Text text = VRUI_Text.Create ("Container #1", 0.1f, Color.white, fontGothic);
+		infoContainer.Add (text);
+		text = VRUI_Text.Create ("with VERTICAL layout and", 0.07f, Color.black, fontGothic);
+		infoContainer.Add (text);
+		text = VRUI_Text.Create ("GRAVITY_TOP|GRAVITY_HCENTER", 0.07f, Color.black, fontGothic);
+		infoContainer.Add (text);
+
+		VRUI_Container subContainer = VRUI_Container.Create (0.9f, 0.21f, VRUI_Container.Layout.HORIZONTAL, Color.clear, Color.black);
+		subContainer.SetGravity (VRUI_Container.GRAVITY_TOP | VRUI_Container.GRAVITY_HCENTER);
+		subContainer.SetPadding (0.03f);
+
+//		text = VRUI_Text.Create ("Sub-container #2", 0.1f, Color.white, fontGothic);
+//		subContainer.Add (text);
+//		text = VRUI_Text.Create ("with HORIZONTAL layout", 0.07f, Color.black, fontGothic);
+//		subContainer.Add (text);
+
+		VRUI_Button vruiButton = VRUI_Button.Create (0.3f, 0.15f, VRUI_Container.Layout.HORIZONTAL);
+		vruiButton.SetStateColors (VRUI_Button.State.NORMAL, Color.white, Color.black, Color.black);
+		vruiButton.SetStateColors (VRUI_Button.State.OVER, Color.cyan, Color.yellow, Color.blue);
+		vruiButton.SetStateColors (VRUI_Button.State.ACTIVATED, Color.blue, Color.white, Color.yellow);
+		vruiButton.SetStateColors (VRUI_Button.State.DISABLED, Color.gray, Color.grey, Color.grey);
+		Texture2D imgInfo = FileManager.ReadImageFromResources (null, "info");
+		vruiButton.AddImage (imgInfo, 0.12f);
+		vruiButton.AddText (" Info");
+		vruiButton.SetMargin (0.01f);
+		//		vruiButton.AddText ("Info", 0.25f, Color.red);
+		//		vruiButton.SetState (VRUI_Button.State.DISABLED);
+		subContainer.Add (vruiButton);
+
+		vruiButton = VRUI_Button.Create (0.3f, 0.15f, VRUI_Container.Layout.HORIZONTAL);
+		vruiButton.SetStateColors (VRUI_Button.State.NORMAL, Color.white, Color.black, Color.black);
+		vruiButton.SetStateColors (VRUI_Button.State.OVER, Color.cyan, Color.yellow, Color.blue);
+		vruiButton.SetStateColors (VRUI_Button.State.ACTIVATED, Color.blue, Color.white, Color.yellow);
+		vruiButton.SetStateColors (VRUI_Button.State.DISABLED, Color.gray, Color.grey, Color.grey);
+		imgInfo = FileManager.ReadImageFromResources (null, "faq");
+		vruiButton.AddImage (imgInfo, 0.12f);
+		vruiButton.AddText (" FAQ");
+		vruiButton.SetMargin (0.01f);
+		subContainer.Add (vruiButton);
+
+		infoContainer.Add (subContainer);
+
+
+		infoContainer.transform.position = new Vector3 (0f, 0f, 2f);
+	}
+
+	VRUI_Reticle reticleGaze = null;
+	VRUI_Reticle reticleController = null;
+	VRUI_Reticle reticleMouse = null;
+	private void TestReticle () {
+		float noHitDistance = 3f;
+		if (Application.isEditor) {
+			Texture2D imgMouse = FileManager.ReadImageFromResources (null, "reticle_mouse");
+			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.3f, noHitDistance);
+		}
+
+		Texture2D imgGaze = FileManager.ReadImageFromResources (null, "reticle_gaze");
+		reticleGaze = VRUI_Reticle.Create (imgGaze, 0.1f, noHitDistance);
+
+		#if GEAR_VR
+		mainCamera.SetActive (false);
+		ovrCamera.SetActive (true);
+		Texture2D imgCross = FileManager.ReadImageFromResources (null, "reticle_cross");
+		reticleController = VRUI_Reticle.Create (imgCross, 0.1f, noHitDistance);
+		#else
+		mainCamera.SetActive (true);
+		ovrCamera.SetActive (false);
+		#endif
+	}
+
+	private void UpdateReticle () {
+		#if GEAR_VR
+		headRaycastCenter.rotation = gearVrHeadRaycastCenter.rotation;
+		if (OVRInput.GetActiveController () == OVRInput.Controller.LTrackedRemote ||
+			OVRInput.GetActiveController () == OVRInput.Controller.RTrackedRemote) {
+			Quaternion q = OVRInput.GetLocalControllerRotation (OVRInput.GetActiveController ());
+			controllerRaycastCenter.rotation = q;
+		} else {
+			controllerRaycastCenter.localRotation = Quaternion.identity;
+		}
+		reticleController.CastRay (controllerRaycastCenter.position, controllerRaycastCenter.forward, 100f);
+		#elif CARDBOARD
+		headRaycastCenter.rotation = mainCamera.transform.rotation;
+		#endif
+
+		if (reticleGaze != null) {
+			reticleGaze.CastRay (headRaycastCenter.position, headRaycastCenter.forward, 100f);
+			if (reticleGaze.GetSelectedObject() != null) {
+				Debug.Log ("Gaze: \"" + reticleGaze.GetSelectedObject().name + "\"");
+			}
+		}
+
+		if (reticleController != null) {
+			if (reticleController.GetSelectedObject () != null) {
+				Debug.Log ("Controller: \"" + reticleController.GetSelectedObject ().name + "\"");
+			}
+		}
+
+		if (reticleMouse != null) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			reticleMouse.CastRay (ray, 100f);
+			if (reticleMouse.GetSelectedObject () != null) {
+				Debug.Log ("Mouse: \"" + reticleMouse.GetSelectedObject ().name + "\"");
+			}
+		}
+	}
+
+	void Update () {
+		UpdateReticle ();
 	}
 
 	private void TestButtons () {
@@ -226,9 +350,5 @@ public class VRUI_TestScript : MonoBehaviour {
 		VRUI_Panel panel = VRUI_Panel.Create (5f, 2f, Color.gray, Color.red);
 		panel.transform.position = new Vector3 (0f, 0f, 10.1f);
 		*/
-	}
-	
-	void Update () {
-		
 	}
 }
