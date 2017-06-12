@@ -78,56 +78,87 @@ public class VRUI_TestScript : MonoBehaviour {
 		float noHitDistance = 3f;
 		if (Application.isEditor) {
 			Texture2D imgMouse = FileManager.ReadImageFromResources (null, "reticle_mouse");
-			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.3f, noHitDistance);
+			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.3f, noHitDistance, false);
 		}
 
 		Texture2D imgGaze = FileManager.ReadImageFromResources (null, "reticle_gaze");
-		reticleGaze = VRUI_Reticle.Create (imgGaze, 0.1f, noHitDistance);
 
 		#if GEAR_VR
+		reticleGaze = VRUI_Reticle.Create (imgGaze, 0.1f, noHitDistance, false);
 		mainCamera.SetActive (false);
 		ovrCamera.SetActive (true);
 		Texture2D imgCross = FileManager.ReadImageFromResources (null, "reticle_cross");
-		reticleController = VRUI_Reticle.Create (imgCross, 0.1f, noHitDistance);
+		reticleController = VRUI_Reticle.Create (imgCross, 0.1f, noHitDistance, false);
 		#else
+		reticleGaze = VRUI_Reticle.Create (imgGaze, 0.1f, noHitDistance, true);
 		mainCamera.SetActive (true);
 		ovrCamera.SetActive (false);
 		#endif
 	}
 
 	private void UpdateReticle () {
+		GameObject selectedObject;
+		VRUI_Object vruiObject;
 		#if GEAR_VR
 		headRaycastCenter.rotation = gearVrHeadRaycastCenter.rotation;
 		if (OVRInput.GetActiveController () == OVRInput.Controller.LTrackedRemote ||
 			OVRInput.GetActiveController () == OVRInput.Controller.RTrackedRemote) {
 			Quaternion q = OVRInput.GetLocalControllerRotation (OVRInput.GetActiveController ());
 			controllerRaycastCenter.rotation = q;
+
+			if (OVRInput.GetDown (OVRInput.Button.PrimaryIndexTrigger)) { // , OVRInput.GetActiveController ())) {
+				reticleController.SetTriggerOn ();
+			}
 		} else {
 			controllerRaycastCenter.localRotation = Quaternion.identity;
 		}
-		reticleController.CastRay (controllerRaycastCenter.position, controllerRaycastCenter.forward, 100f);
+//		reticleController.CastRay (controllerRaycastCenter.position, controllerRaycastCenter.forward, 100f);
+
+		if (OVRInput.Get (OVRInput.Button.One)) {
+			reticleGaze.SetTriggerOn ();
+		}
+
 		#elif CARDBOARD
 		headRaycastCenter.rotation = mainCamera.transform.rotation;
 		#endif
 
 		if (reticleGaze != null) {
 			reticleGaze.CastRay (headRaycastCenter.position, headRaycastCenter.forward, 100f);
-			if (reticleGaze.GetSelectedObject() != null) {
+			selectedObject = reticleGaze.GetSelectedObject ();
+			if (selectedObject != null) {
 				Debug.Log ("Gaze: \"" + reticleGaze.GetSelectedObject().name + "\"");
+				vruiObject = selectedObject.GetComponent<VRUI_Object> ();
+				if ((vruiObject != null) && (vruiObject is VRUI_Button)) {
+					(vruiObject as VRUI_Button).OnReticle (reticleGaze);
+				}
 			}
 		}
 
 		if (reticleController != null) {
-			if (reticleController.GetSelectedObject () != null) {
+			reticleController.CastRay (controllerRaycastCenter.position, controllerRaycastCenter.forward, 100f);
+			selectedObject = reticleController.GetSelectedObject ();
+			if (selectedObject != null) {
 				Debug.Log ("Controller: \"" + reticleController.GetSelectedObject ().name + "\"");
+				vruiObject = selectedObject.GetComponent<VRUI_Object> ();
+				if ((vruiObject != null) && (vruiObject is VRUI_Button)) {
+					(vruiObject as VRUI_Button).OnReticle (reticleController);
+				}
 			}
 		}
 
 		if (reticleMouse != null) {
+			if (Input.GetMouseButton (0)) {
+				reticleMouse.SetTriggerOn ();
+			}
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			reticleMouse.CastRay (ray, 100f);
-			if (reticleMouse.GetSelectedObject () != null) {
-				Debug.Log ("Mouse: \"" + reticleMouse.GetSelectedObject ().name + "\"");
+			selectedObject = reticleMouse.GetSelectedObject ();
+			if (selectedObject != null) {
+				Debug.Log ("Mouse: \"" + selectedObject.name + "\"");
+				vruiObject = selectedObject.GetComponent<VRUI_Object> ();
+				if ((vruiObject != null) && (vruiObject is VRUI_Button)) {
+					(vruiObject as VRUI_Button).OnReticle (reticleMouse);
+				}
 			}
 		}
 	}

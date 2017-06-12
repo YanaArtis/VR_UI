@@ -16,7 +16,14 @@ public class VRUI_Button : VRUI_Container {
 	private Color _clrDisabledBg;
 	private Color _clrDisabledBorder;
 	private Color _clrDisabledText;
-	
+
+	private float _gazeDelay = 1f;
+	private float _gazeStartTime;
+	private float _gazeEndTime;
+	private bool _isGazeOver = false;
+	private bool _isReticleOver = false;
+	private bool _isReticleTriggerOn = false;
+
 	private static int _counter = 0;
 
 	protected VRUI_Button () : base () {}
@@ -27,6 +34,10 @@ public class VRUI_Button : VRUI_Container {
 		vruiContainer.CopyTo (vruiButton);
 		vruiContainer.Clear ();
 		Destroy (vruiContainer);
+		BoxCollider bc = vruiButton.gameObject.AddComponent<BoxCollider> ();
+		bc.size = new Vector3(width, height, 0.01f);
+//		bc.transform.position = vruiContainer.transform.position;
+//		bc.transform.localScale = vruiContainer.transform.localScale;
 
 		++_counter;
 		vruiButton.gameObject.name = "VRUI_Button ("+_counter+")";
@@ -34,7 +45,49 @@ public class VRUI_Button : VRUI_Container {
 		return vruiButton;
 	}
 
+	void LateUpdate () {
+		Debug.Log ("Btn " + name + ": state " + _state + ", reticleOver: " + _isReticleOver + ", trigger: " + _isReticleTriggerOn);
+		switch (_state) {
+		case State.OVER:
+			if (_isGazeOver) {
+				if (Time.time <= _gazeEndTime) {
+					ShowGazeIndicator (_gazeEndTime - _gazeStartTime, _gazeDelay);
+				} else {
+					SetState (State.ACTIVATED);
+				}
+			} else {
+				if (_isReticleOver) {
+					if (_isReticleTriggerOn) {
+						SetState (State.ACTIVATED);
+					}
+				} else {
+					SetState (State.NORMAL);
+				}
+			}
+			break;
+		case State.NORMAL:
+			if (_isReticleOver) {
+				SetState (State.OVER);
+			}
+			break;
+		case State.ACTIVATED:
+			if (!_isReticleOver) {
+				SetState (State.NORMAL);
+			}
+			break;
+		}
+		_isGazeOver = _isReticleOver = _isReticleTriggerOn = false;
+	}
+
+	// TODO: make gaze indicator
+	public void ShowGazeIndicator (float timeLeft, float timeTotal) {
+	}
+
+	public void HideGazeIndicator () {
+	}
+
 	public void SetStateColors (State theState, Color clrBg, Color clrBorder, Color clrText) {
+		HideGazeIndicator ();
 		switch (theState) {
 		case State.NORMAL:
 			_clrBg = clrBg;
@@ -85,11 +138,15 @@ public class VRUI_Button : VRUI_Container {
 			vruiPanel.SetBgColor (_clrOverBg);
 			vruiPanel.SetBorderColor (_clrOverBorder);
 			SetTextsColor (_clrOverText);
+
+			_gazeStartTime = Time.time;
+			_gazeEndTime = _gazeStartTime + _gazeDelay;
 			break;
 		case State.ACTIVATED:
 			vruiPanel.SetBgColor (_clrActivatedBg);
 			vruiPanel.SetBorderColor (_clrActivatedBorder);
 			SetTextsColor (_clrActivatedText);
+			// TODO: Do the action
 			break;
 		case State.DISABLED:
 			vruiPanel.SetBgColor (_clrDisabledBg);
@@ -97,6 +154,7 @@ public class VRUI_Button : VRUI_Container {
 			SetTextsColor (_clrDisabledText);
 			break;
 		}
+		_state = newState;
 	}
 
 	public void AddText (string s, float stringHeight, Color color, Font font) {
@@ -124,5 +182,11 @@ public class VRUI_Button : VRUI_Container {
 	public void AddImage (Texture2D texture) {
 		VRUI_Image img = VRUI_Image.Create (texture, _height);
 		Add (img);
+	}
+
+	public void OnReticle (VRUI_Reticle reticle) {
+		_isReticleOver = true;
+		_isGazeOver = reticle.IsGaze ();
+		_isReticleTriggerOn = reticle.IsTriggerOn ();
 	}
 }

@@ -7,6 +7,8 @@ public class VRUI_Reticle : VRUI_Object {
 	private GameObject _goSelectedObject;
 	private Vector2 _selectedObjectPixelUV;
 	private float _noHitDistance;
+	private bool _isGaze;
+	private bool _isTriggerOn = false;
 
 	private Texture2D _texture;
 	private Material _material;
@@ -16,13 +18,15 @@ public class VRUI_Reticle : VRUI_Object {
 
 	protected VRUI_Reticle () : base () {}
 
-	public static VRUI_Reticle Create (Texture2D texture, float cursorHeight, float noHitDistance) {
+	public static VRUI_Reticle Create (Texture2D texture, float cursorHeight
+		, float noHitDistance, bool isGaze) {
 
 		GameObject go = GameObject.CreatePrimitive (PrimitiveType.Quad);
 		Destroy (go.GetComponent<MeshCollider> ());
 		VRUI_Reticle vruiReticle = go.AddComponent<VRUI_Reticle> ();
 		VRUI_Reticle.Init ();
 		vruiReticle._meshRenderer = go.GetComponent<MeshRenderer> ();
+		vruiReticle._isGaze = isGaze;
 
 		try {
 			vruiReticle._material = new Material (shaderTransparent);
@@ -51,6 +55,10 @@ public class VRUI_Reticle : VRUI_Object {
 		*/
 
 		return vruiReticle;
+	}
+
+	void LateUpdate () {
+		_isTriggerOn = false;
 	}
 
 	public RaycastHit CastRay (Vector3 origin, Vector3 direction, float maxDistance) {
@@ -93,5 +101,17 @@ public class VRUI_Reticle : VRUI_Object {
 	public void SetCursor (Texture2D texture) {
 		_material.mainTexture = texture;
 		_meshRenderer.material = _material;
+	}
+
+	public bool IsGaze () {
+		return _isGaze;
+	}
+
+	public bool IsTriggerOn () {
+		return _isTriggerOn;
+	}
+
+	public void SetTriggerOn () {
+		_isTriggerOn = true;
 	}
 }
