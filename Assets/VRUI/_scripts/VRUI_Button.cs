@@ -24,6 +24,8 @@ public class VRUI_Button : VRUI_Container {
 	private bool _isReticleOver = false;
 	private bool _isReticleTriggerOn = false;
 
+	private VRUI_Panel _indicator;
+
 	private static int _counter = 0;
 
 	protected VRUI_Button () : base () {}
@@ -51,7 +53,7 @@ public class VRUI_Button : VRUI_Container {
 		case State.OVER:
 			if (_isGazeOver) {
 				if (Time.time <= _gazeEndTime) {
-					ShowGazeIndicator (_gazeEndTime - _gazeStartTime, _gazeDelay);
+					ShowGazeIndicator (_gazeEndTime - Time.time, _gazeDelay);
 				} else {
 					SetState (State.ACTIVATED);
 				}
@@ -81,9 +83,23 @@ public class VRUI_Button : VRUI_Container {
 
 	// TODO: make gaze indicator
 	public void ShowGazeIndicator (float timeLeft, float timeTotal) {
+		if (_indicator == null) {
+			_indicator = VRUI_Panel.Create (_width, _height, _clrActivatedBg, Color.clear);
+			_indicator.transform.parent = transform;
+			_indicator.transform.localPosition = new Vector3 (0f, 0f, -vruiPanel.bgDepth/2f);
+			_indicator.name = "Indicator";
+		}
+		_indicator.gameObject.SetActive (true);
+		float newWidth = (timeLeft < 0) ? 1 :
+			(Mathf.Abs (timeTotal) < float.Epsilon) ? 1f : (1f - Mathf.Abs (timeLeft / timeTotal));
+//		float newWidth = 0.5f;
+		_indicator.transform.localScale = new Vector3 (newWidth, 1f, 1f);
 	}
 
 	public void HideGazeIndicator () {
+		if (_indicator != null) {
+			_indicator.gameObject.SetActive (false);
+		}
 	}
 
 	public void SetStateColors (State theState, Color clrBg, Color clrBorder, Color clrText) {
@@ -128,6 +144,7 @@ public class VRUI_Button : VRUI_Container {
 	}
 
 	public void SetState (State newState) {
+		HideGazeIndicator ();
 		switch (newState) {
 		case State.NORMAL:
 			vruiPanel.SetBgColor (_clrBg);

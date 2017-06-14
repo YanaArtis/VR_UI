@@ -67,7 +67,6 @@ public class VRUI_TestScript : MonoBehaviour {
 
 		infoContainer.Add (subContainer);
 
-
 		infoContainer.transform.position = new Vector3 (0f, 0f, 2f);
 	}
 
@@ -78,7 +77,8 @@ public class VRUI_TestScript : MonoBehaviour {
 		float noHitDistance = 3f;
 		if (Application.isEditor) {
 			Texture2D imgMouse = FileManager.ReadImageFromResources (null, "reticle_mouse");
-			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.3f, noHitDistance, false);
+			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.1f, noHitDistance, false);
+//			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.1f, noHitDistance, true); // false);
 		}
 
 		Texture2D imgGaze = FileManager.ReadImageFromResources (null, "reticle_gaze");
