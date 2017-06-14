@@ -14,6 +14,8 @@ public class VRUI_Reticle : VRUI_Object {
 	private Material _material;
 	private MeshRenderer _meshRenderer;
 
+	private const float DISTANCE_TO_SURFACE = 0.04f;
+
 	private static int _counter = 0;
 
 	protected VRUI_Reticle () : base () {}
@@ -69,7 +71,8 @@ public class VRUI_Reticle : VRUI_Object {
 	public RaycastHit CastRay (Ray ray, float maxDistance) {
 		RaycastHit hit;
 		Vector3 newPosition;
-		if (Physics.Raycast (ray, out hit, maxDistance)) {
+		bool flagHit;
+		if (flagHit = Physics.Raycast (ray, out hit, maxDistance)) {
 			_goSelectedObject = hit.collider.gameObject;
 			_selectedObjectHitPosition = hit.point;
 			_selectedObjectPixelUV = hit.textureCoord;
@@ -83,6 +86,9 @@ public class VRUI_Reticle : VRUI_Object {
 		gameObject.transform.position = ray.origin;
 		gameObject.transform.LookAt (newPosition);
 		gameObject.transform.position = newPosition;
+		if (flagHit) {
+			gameObject.transform.Translate ((ray.origin - newPosition).normalized * DISTANCE_TO_SURFACE);
+		}
 		return hit;
 	}
 
