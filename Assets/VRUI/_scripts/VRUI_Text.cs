@@ -85,6 +85,25 @@ public class VRUI_Text : VRUI_Object {
 	}
 
 	public void SetColor (Color newColor) {
+		Debug.Log ("VRUI_Text.SetColor(" + newColor + "), text=\"" + textMesh.text + "\"");
 		textMesh.color = newColor;
+	}
+
+	public static VRUI_Text CreateFromJSON (JSONObject j, float parentHeight) {
+//		Debug.Log ("------------- VRUI_Text CreateFromJSON ()");
+//		Debug.Log (j);
+		float stringHeight = j.HasField ("height") ? j.GetField ("height").f : parentHeight;
+		string text = j.HasField ("text") ? j.GetField ("text").str : null;
+		string sColor = j.HasField ("color") ? j.GetField ("color").str : null;
+		Color color = (sColor == null) ? Color.black : ParseColor (sColor);
+		string sFont = j.HasField ("font") ? j.GetField ("font").str : null;
+//		Debug.Log ("text: \""+text+"\"");
+//		Debug.Log ("stringHeight: "+stringHeight);
+//		Debug.Log ("color: \t\""+color+"\"");
+		return Create (text, stringHeight, color);
+	}
+
+	public static VRUI_Text CreateFromJSON (JSONObject j) {
+		return CreateFromJSON (j, 1f);
 	}
 }

@@ -68,6 +68,11 @@ public class VRUI_TestScript : MonoBehaviour {
 		infoContainer.Add (subContainer);
 
 		infoContainer.transform.position = new Vector3 (0f, 0f, 2f);
+
+		string sJson = FileManager.ReadTextFromResources ("TestMenu_json");
+		JSONObject j = new JSONObject (sJson);
+		VRUI_Container container2 = VRUI_Container.CreateFromJSON (j);
+		container2.transform.position = new Vector3 (1.2f, 0f, 2f);
 	}
 
 	VRUI_Reticle reticleGaze = null;

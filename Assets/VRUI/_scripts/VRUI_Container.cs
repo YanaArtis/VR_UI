@@ -19,12 +19,12 @@ public class VRUI_Container : VRUI_Object {
 	public const int GRAVITY_CENTER = GRAVITY_HCENTER | GRAVITY_VCENTER;
 	public int _gravity = GRAVITY_CENTER;
 
-	public VRUI_Panel vruiPanel;
+	public VRUI_Panel _vruiPanel;
 	public List <VRUI_Object> _objects = new List<VRUI_Object> ();
 
 	protected Color _clrBg;
 	protected Color _clrBorder;
-	protected float childZ = -0.001f;
+	protected float _childZ = -0.001f;
 
 	private static int _counter = 0;
 
@@ -44,8 +44,8 @@ public class VRUI_Container : VRUI_Object {
 		vruiContainer._clrBorder = clrBorder;
 
 //		if ((clrBg != Color.clear) || (clrBorder != Color.clear)) {
-			vruiContainer.vruiPanel = VRUI_Panel.Create (width, height, clrBg, clrBorder);
-			vruiContainer.vruiPanel.transform.SetParent (go.transform);
+			vruiContainer._vruiPanel = VRUI_Panel.Create (width, height, clrBg, clrBorder);
+			vruiContainer._vruiPanel.transform.SetParent (go.transform);
 //		}
 
 		++_counter;
@@ -116,49 +116,49 @@ public class VRUI_Container : VRUI_Object {
 		if (IsGravityTop (_gravity)) {
 			y = topY;
 			for (i = 0; (i < _objects.Count) && (y > bottomY); i++) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(true)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y -= (_objects [i].marginTop + _objects [i].paddingTop);
-				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i]._height / 2f, childZ);
+				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i]._height / 2f, _childZ);
 				y -= (_objects [i]._height + _objects [i].marginBottom + _objects [i].paddingBottom);
 			}
 			for (; i < _objects.Count; i++) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(false)");
 				_objects [i].gameObject.SetActive (false);
 			}
 		} else if (IsGravityBottom (_gravity)) {
 			y = bottomY;
 			for (i = _objects.Count-1; (i >= 0) && (y < topY); i--) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(true)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y += (_objects [i].marginBottom + _objects [i].paddingBottom);
-				_objects [i].transform.localPosition = new Vector3 (objX, y + _objects [i]._height / 2f, childZ);
+				_objects [i].transform.localPosition = new Vector3 (objX, y + _objects [i]._height / 2f, _childZ);
 				y += (_objects [i]._height + _objects [i].marginTop + _objects [i].paddingTop);
 //				y += (_objects [i].height + _objects [i].marginTop + _objects [i].marginBottom + _objects [i].paddingTop + _objects [i].paddingBottom);
 			}
 			for (; i >= 0; i--) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(false)");
 				_objects [i].gameObject.SetActive (false);
 			}
 		} else {
 			y = objectsHeight / 2;
 			for (i = 0; (i < _objects.Count) && (y > topY); i++) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(false)");
 				y -= (_objects [i]._height + _objects [i].marginTop + _objects [i].marginBottom + _objects [i].paddingTop + _objects [i].paddingBottom);
 				_objects [i].gameObject.SetActive (false);
 			}
 			for (; (i < _objects.Count) && (y > bottomY); i++) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(true)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y -= (_objects [i].marginTop + _objects [i].paddingTop);
-				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i]._height / 2f, childZ);
+				_objects [i].transform.localPosition = new Vector3 (objX, y - _objects [i]._height / 2f, _childZ);
 				y -= (_objects [i]._height + _objects [i].marginBottom + _objects [i].paddingBottom);
 			}
 			for (; i < _objects.Count; i++) {
-				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Vertical() IsGravity VCenter "+i+" setActive(false)");
 				_objects [i].gameObject.SetActive (false);
 			}
 		}
@@ -200,50 +200,50 @@ public class VRUI_Container : VRUI_Object {
 		if (IsGravityLeft (_gravity)) {
 			x = leftX;
 			for (i = 0; (i < _objects.Count) && (x < rightX); i++) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(true)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
 				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x += (_objects [i].marginLeft + _objects [i].paddingLeft);
-				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, childZ);
+				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, _childZ);
 				x += (_objects [i]._width + _objects [i].marginRight + _objects [i].paddingRight);
 			}
 			for (; i < _objects.Count; i++) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(false)");
 				_objects [i].gameObject.SetActive (false);
 			}
 		} else if (IsGravityRight (_gravity)) {
 			x = rightX;
 			for (i = _objects.Count-1; (i >= 0) && (x > leftX); i--) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(true)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
 				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x -= (_objects [i].marginRight + _objects [i].paddingRight);
-				_objects [i].transform.localPosition = new Vector3 (x - _objects [i]._width / 2f, objY, childZ);
+				_objects [i].transform.localPosition = new Vector3 (x - _objects [i]._width / 2f, objY, _childZ);
 				x -= (_objects [i]._width + _objects [i].marginLeft + _objects [i].paddingLeft);
 			}
 			for (; i >= 0; i--) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(false)");
 				_objects [i].gameObject.SetActive (false);
 			}
 		} else {
 			x = -objectsWidth / 2;
-			Debug.Log ("x = "+x+", leftX = "+leftX+", rightX = "+rightX);
-			Debug.Log ("(x < leftX): "+(x < leftX));
+//			Debug.Log ("x = "+x+", leftX = "+leftX+", rightX = "+rightX);
+//			Debug.Log ("(x < leftX): "+(x < leftX));
 			for (i = 0; (i < _objects.Count) && (x < leftX); i++) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(false)");
 				x += (_objects [i]._width + _objects [i].marginLeft + _objects [i].marginRight + _objects [i].paddingLeft + _objects [i].paddingRight);
 				_objects [i].gameObject.SetActive (false);
 			}
 			for (; (i < _objects.Count) && (x < rightX); i++) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(true)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(true)");
 				_objects [i].gameObject.SetActive (true);
 				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x += (_objects [i].marginLeft + _objects [i].paddingLeft);
-				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, childZ);
+				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, _childZ);
 				x += (_objects [i]._width + _objects [i].marginRight + _objects [i].paddingRight);
 			}
 			for (; i < _objects.Count; i++) {
-				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(false)");
+//				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(false)");
 				_objects [i].gameObject.SetActive (false);
 			}
 		}
@@ -290,7 +290,7 @@ public class VRUI_Container : VRUI_Object {
 		other._gravity = this._gravity;
 		other._clrBg = this._clrBg;
 		other._clrBorder = this._clrBorder;
-		other.vruiPanel = this.vruiPanel;
+		other._vruiPanel = this._vruiPanel;
 		if (this._objects == null) {
 			other._objects = null;
 		} else {
@@ -299,5 +299,96 @@ public class VRUI_Container : VRUI_Object {
 				other._objects.Add (this._objects [i]);
 			}
 		}
+	}
+
+	public void ReadDataFromJson (JSONObject j) {
+		(this as VRUI_Object).ReadDataFromJson (j);
+
+		string sGravities = j.HasField("gravity") ? j.GetField ("layout").str : null;
+		if (sGravities != null) {
+			string[] sGravity = sGravities.Split ('|');
+			int gravity = 0;
+			for (int i = 0; i < sGravity.Length; i++) {
+				if ("LEFT".Equals (sGravity [i])) {
+					gravity |= GRAVITY_LEFT;
+				} else if ("RIGHT".Equals (sGravity [i])) {
+					gravity |= GRAVITY_RIGHT;
+				} else if ("TOP".Equals (sGravity [i])) {
+					gravity |= GRAVITY_TOP;
+				} else if ("BOTTOM".Equals (sGravity [i])) {
+					gravity |= GRAVITY_BOTTOM;
+				} else if ("HCENTER".Equals (sGravity [i])) {
+					gravity |= GRAVITY_HCENTER;
+				} else if ("VCENTER".Equals (sGravity [i])) {
+					gravity |= GRAVITY_VCENTER;
+				} else if ("CENTER".Equals (sGravity [i])) {
+					gravity |= GRAVITY_CENTER;
+				}
+			}
+			_gravity = gravity;
+		}
+
+		if (j.HasField ("vrui_objects")) {
+//			Debug.Log ("vrui_objects found");
+			JSONObject jVruiObjects = j.GetField ("vrui_objects");
+			if (jVruiObjects.IsArray) {
+//				Debug.Log ("It's array");
+//				Debug.Log ("" + jVruiObjects.list.Count + " entries");
+				for (int i = 0; i < jVruiObjects.list.Count; i++) {
+					JSONObject jObj = jVruiObjects.list [i];
+					string sType = jObj.HasField("type") ? jObj.GetField ("type").str : null;
+//					Debug.Log ("entry #" + i + ": type " + sType);
+//					Debug.Log (jObj.ToString ());
+					if ("VRUI_Text".Equals(sType)) {
+						VRUI_Text txt = VRUI_Text.CreateFromJSON (jObj, _height);
+						Add (txt);
+					} else if ("VRUI_Image".Equals(sType)) {
+						VRUI_Image img = VRUI_Image.CreateFromJSON (jObj);
+						Add (img);
+					} else if ("VRUI_Button".Equals(sType)) {
+						VRUI_Button btn = VRUI_Button.CreateFromJSON (jObj);
+						Add (btn);
+					} else if ("VRUI_Container".Equals(sType)) {
+						VRUI_Container cnt = VRUI_Container.CreateFromJSON (jObj);
+						Add (cnt);
+					}
+				}
+			}
+		}
+
+//		_layout
+//		_gravity
+	}
+
+	public static VRUI_Container CreateFromJSON (JSONObject j) {
+		float width = j.HasField("width") ? j.GetField ("width").f : 1f;
+		float height = j.HasField("height") ? j.GetField ("height").f : 1f;
+
+		string sLayout = j.HasField("layout") ? j.GetField ("layout").str : null;
+		Layout layout = Layout.VERTICAL;
+		if ("VERTICAL".Equals (sLayout)) {
+			layout = Layout.VERTICAL;
+		} else if ("HORIZONTAL".Equals (sLayout)) {
+			layout = Layout.HORIZONTAL;
+		} else if ("ABSOLUTE".Equals (sLayout)) {
+			layout = Layout.ABSOLUTE;
+		} else if ("FRAME".Equals (sLayout)) {
+			layout = Layout.FRAME;
+		} else if ("GRID".Equals (sLayout)) {
+			layout = Layout.GRID;
+		} else if ("LIST".Equals (sLayout)) {
+			layout = Layout.LIST;
+		} else if ("RELATIVE".Equals (sLayout)) {
+			layout = Layout.RELATIVE;
+		}
+
+		string sClrBg = j.HasField("color_background") ? j.GetField ("color_background").str : null;
+		Color clrBg = VRUI_Object.ParseColor (sClrBg);
+		string sClrBorder = j.HasField("color_border") ? j.GetField ("color_border").str : null;
+		Color clrBorder = VRUI_Object.ParseColor (sClrBorder);
+		VRUI_Container vruiContainer = Create (width, height, layout, clrBg, clrBorder);
+
+		vruiContainer.ReadDataFromJson (j);
+		return vruiContainer;
 	}
 }

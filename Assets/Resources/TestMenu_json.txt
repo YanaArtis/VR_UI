@@ -1,0 +1,133 @@
+﻿
+	{	"id":"Test Menu"
+	,	"type":"VRUI_Container"
+	,	"layout":"VERTICAL"
+	,	"width":1.0
+	,	"height":0.6
+	,	"padding":0.03
+	,	"gravity":"GRAVITY_TOP|GRAVITY_HCENTER"
+	,	"color_background":"#FF808080"
+	,	"color_border":"#FF0000FF"
+	,	"vrui_objects":
+		[	{	"id":"Text string #1"
+			,	"type":"VRUI_Text"
+			,	"height":0.1
+			,	"text":"Container #1"
+			,	"color":"#FFFFFFFF"
+			,	"font":"GOTHICB"
+			}
+		,	{	"id":"Text string #2"
+			,	"type":"VRUI_Text"
+			,	"height":0.06
+			,	"text":"with VERTICAL layout and"
+			,	"color":"#FF000000"
+			,	"font":"GOTHICB"
+			}
+		,	{	"id":"Text string #3"
+			,	"type":"VRUI_Text"
+			,	"height":0.06
+			,	"text":"GRAVITY_TOP|GRAVITY_HCENTER"
+			,	"color":"#FF000000"
+			,	"font":"GOTHICB"
+			}
+		,	{	"id":"SubContainer"
+			,	"type":"VRUI_Container"
+			,	"layout":"HORIZONTAL"
+			,	"width":0.9
+			,	"height":0.21
+			,	"padding":0.03
+			,	"gravity":"GRAVITY_TOP|GRAVITY_HCENTER"
+			,	"color_background":"#00000000"
+			,	"color_border":"#FF000000"
+			,	"vrui_objects":
+				[	{	"id":"btnInfo"
+					,	"type":"VRUI_Button"
+					,	"width":0.3
+					,	"height":0.15
+					,	"layout":"HORIZONTAL"
+					,	"margin":0.01
+					,	"states":
+						[	{	"id":"NORMAL"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FFFFFFFF"
+							,	"color_border":"#FF000000"
+							,	"color_text":"#FF000000"
+							}
+						,	{	"id":"OVER"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FF80FFFF"
+							,	"color_border":"#FFFFFF00"
+							,	"color_text":"#FF0000FF"
+							}
+						,	{	"id":"ACTIVATED"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FF0000FF"
+							,	"color_border":"#FFFFFFFF"
+							,	"color_text":"#FFFFFF00"
+							}
+						,	{	"id":"DISABLED"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FF808080"
+							,	"color_border":"#FF404040"
+							,	"color_text":"#FF404040"
+							}
+						]
+					,	"vrui_objects":
+						[	{	"type":"VRUI_Image"
+							,	"src":"info"
+							,	"height":0.10
+							}
+						,	{	"type":"VRUI_Text"
+							,	"text":" Info"
+							,	"height":0.10
+							}
+						]
+					}
+				,	{	"id":"btnFaq"
+					,	"type":"VRUI_Button"
+					,	"width":0.3
+					,	"height":0.15
+					,	"layout":"HORIZONTAL"
+					,	"margin":0.01
+					,	"states":
+						[	{	"id":"NORMAL"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FFFFFFFF"
+							,	"color_border":"#FF000000"
+							,	"color_text":"#FF000000"
+							}
+						,	{	"id":"OVER"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FF80FFFF"
+							,	"color_border":"#FFFFFF00"
+							,	"color_text":"#FF0000FF"
+							}
+						,	{	"id":"ACTIVATED"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FF0000FF"
+							,	"color_border":"#FFFFFFFF"
+							,	"color_text":"#FFFFFF00"
+							}
+						,	{	"id":"DISABLED"
+							,	"type":"VRUI_ButtonState"
+							,	"color_background":"#FF808080"
+							,	"color_border":"#FF404040"
+							,	"color_text":"#FF404040"
+							}
+						]
+					,	"vrui_objects":
+						[	{	"type":"VRUI_Image"
+							,	"src":"faq"
+							,	"height":0.10
+							}
+						,	{	"type":"VRUI_Text"
+							,	"text":" FAQ"
+							,	"height":0.08
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+

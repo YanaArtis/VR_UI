@@ -32,4 +32,22 @@ public class VRUI_Image: VRUI_Object {
 		go.name = "VRUI_Image ("+_counter+")";
 		return vruiImage;
 	}
+
+	public static VRUI_Image CreateFromJSON (JSONObject j) {
+		float height = j.HasField ("height") ? j.GetField ("height").f : 1f;
+		string sTextureFname = j.HasField ("src") ? j.GetField ("src").str : null;
+		if (sTextureFname != null) {
+			Texture2D tex = null;
+			if (sTextureFname.StartsWith ("file://")) {
+				tex = new Texture2D (2, 2);
+				FileManager.ReadImageFromDirectory(tex, sTextureFname);
+			} else {
+				tex = FileManager.ReadImageFromResources (null, sTextureFname);
+			}
+			VRUI_Image vruiImage = VRUI_Image.Create (tex, height);
+			return vruiImage;
+		}
+
+		return null;
+	}
 }

@@ -21,6 +21,8 @@ public class VRUI_Object : MonoBehaviour {
 	protected float _paddingRight = 0f;
 	protected float _paddingBottom = 0f;
 
+	public string _id = null;
+
 	public float marginLeft {
 		get {
 			return _marginLeft;
@@ -147,7 +149,7 @@ public class VRUI_Object : MonoBehaviour {
 		hNew = (h >= 0.5f) ? (h - 0.5f) : (h + 0.5f);
 //		hNew = (h >= 0.5f) ? 0f : 1f;
 		vNew = v * (s - 1) + 1;
-		sNew = v * s / vNew;
+		sNew = (v < float.Epsilon) ? 1f : v * s / vNew;
 
 		vNew = (vNew < 0.5f) ? 0f : 1f;
 
@@ -155,5 +157,86 @@ public class VRUI_Object : MonoBehaviour {
 		Debug.Log ("new color: R:" + newColor.r + " G:" + newColor.g + " B:" + newColor.b + ", H:" + hNew + " S:" + sNew + " V:" + vNew);
 //		newColor.a = 1f;
 		return newColor;
+	}
+
+	public void ReadDataFromJson (JSONObject j) {
+		_id = j.HasField("id") ? j.GetField ("id").str : null;
+		_width = j.HasField("width") ? j.GetField ("width").f : 1f;
+		_height = j.HasField("height") ? j.GetField ("height").f : 1f;
+
+		if (j.HasField("margin")) {
+			float margin = j.GetField ("margin").f;
+			_marginLeft = _marginRight = _marginTop = _marginBottom = margin;
+		}
+		if (j.HasField("marginLeft")) {
+			float margin = j.GetField ("marginLeft").f;
+			_marginLeft = margin;
+		}
+		if (j.HasField("marginRight")) {
+			float margin = j.GetField ("marginRight").f;
+			_marginRight = margin;
+		}
+		if (j.HasField("marginTop")) {
+			float margin = j.GetField ("marginTop").f;
+			_marginTop = margin;
+		}
+		if (j.HasField("marginBottom")) {
+			float margin = j.GetField ("marginBottom").f;
+			_marginBottom = margin;
+		}
+
+		if (j.HasField("padding")) {
+			float padding = j.GetField ("padding").f;
+			_paddingLeft = _paddingRight = _paddingTop = _paddingBottom = padding;
+		}
+		if (j.HasField("paddingLeft")) {
+			float padding = j.GetField ("paddingLeft").f;
+			_paddingLeft = padding;
+		}
+		if (j.HasField("paddingRight")) {
+			float padding = j.GetField ("paddingRight").f;
+			_paddingRight = padding;
+		}
+		if (j.HasField("paddingTop")) {
+			float padding = j.GetField ("paddingTop").f;
+			_paddingTop = padding;
+		}
+		if (j.HasField("paddingBottom")) {
+			float padding = j.GetField ("paddingBottom").f;
+			_paddingBottom = padding;
+		}
+	}
+
+	public static VRUI_Object CreateFromJSON (JSONObject j) {
+		VRUI_Object vruiObject = new VRUI_Object ();
+		vruiObject.ReadDataFromJson (j);
+		return vruiObject;
+	}
+
+	// http://wiki.unity3d.com/index.php?title=HexConverter
+	// Note that Color32 and Color implictly convert to each other. You may pass a Color object to this method without first casting it.
+	public static string ColorToHex(Color32 color) {
+		string hex = color.a.ToString("X2") + color.r.ToString("X2") + color.g.ToString("X2") + color.b.ToString("X2");
+		return hex;
+	}
+
+	public static Color HexToColor(string hex) {
+		byte a = byte.Parse(hex.Substring(0,2), System.Globalization.NumberStyles.HexNumber);
+		byte r = byte.Parse(hex.Substring(2,2), System.Globalization.NumberStyles.HexNumber);
+		byte g = byte.Parse(hex.Substring(4,2), System.Globalization.NumberStyles.HexNumber);
+		byte b = byte.Parse(hex.Substring(6,2), System.Globalization.NumberStyles.HexNumber);
+		return new Color32(r,g,b, a);
+	}
+
+	public static Color ParseColor (string sColor) {
+		int iColor;
+		if (sColor != null) {
+			if (sColor.StartsWith ("#")) {
+				return HexToColor (sColor.Substring (1));
+			} else if (sColor.StartsWith ("0x")) {
+				return HexToColor (sColor.Substring (2));
+			}
+		}
+		return Color.black;
 	}
 }

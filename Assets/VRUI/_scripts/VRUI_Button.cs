@@ -86,7 +86,7 @@ public class VRUI_Button : VRUI_Container {
 		if (_indicator == null) {
 			_indicator = VRUI_Panel.Create (_width, _height, _clrActivatedBg, Color.clear);
 			_indicator.transform.parent = transform;
-			_indicator.transform.localPosition = new Vector3 (0f, 0f, -vruiPanel.bgDepth/2f);
+			_indicator.transform.localPosition = new Vector3 (0f, 0f, -_vruiPanel.bgDepth/2f);
 			_indicator.name = "Indicator";
 		}
 		_indicator.gameObject.SetActive (true);
@@ -147,27 +147,27 @@ public class VRUI_Button : VRUI_Container {
 		HideGazeIndicator ();
 		switch (newState) {
 		case State.NORMAL:
-			vruiPanel.SetBgColor (_clrBg);
-			vruiPanel.SetBorderColor (_clrBorder);
+			_vruiPanel.SetBgColor (_clrBg);
+			_vruiPanel.SetBorderColor (_clrBorder);
 			SetTextsColor (_clrText);
 			break;
 		case State.OVER:
-			vruiPanel.SetBgColor (_clrOverBg);
-			vruiPanel.SetBorderColor (_clrOverBorder);
+			_vruiPanel.SetBgColor (_clrOverBg);
+			_vruiPanel.SetBorderColor (_clrOverBorder);
 			SetTextsColor (_clrOverText);
 
 			_gazeStartTime = Time.time;
 			_gazeEndTime = _gazeStartTime + _gazeDelay;
 			break;
 		case State.ACTIVATED:
-			vruiPanel.SetBgColor (_clrActivatedBg);
-			vruiPanel.SetBorderColor (_clrActivatedBorder);
+			_vruiPanel.SetBgColor (_clrActivatedBg);
+			_vruiPanel.SetBorderColor (_clrActivatedBorder);
 			SetTextsColor (_clrActivatedText);
 			// TODO: Do the action
 			break;
 		case State.DISABLED:
-			vruiPanel.SetBgColor (_clrDisabledBg);
-			vruiPanel.SetBorderColor (_clrDisabledBorder);
+			_vruiPanel.SetBgColor (_clrDisabledBg);
+			_vruiPanel.SetBorderColor (_clrDisabledBorder);
 			SetTextsColor (_clrDisabledText);
 			break;
 		}
@@ -205,5 +205,91 @@ public class VRUI_Button : VRUI_Container {
 		_isReticleOver = true;
 		_isGazeOver = reticle.IsGaze ();
 		_isReticleTriggerOn = reticle.IsTriggerOn ();
+	}
+
+	public void ReadDataFromJson (JSONObject j) {
+		(this as VRUI_Container).ReadDataFromJson (j);
+
+		if (j.HasField ("states")) {
+			Debug.Log ("states found");
+			JSONObject jVruiStates = j.GetField ("states");
+			if (jVruiStates.IsArray) {
+				Debug.Log ("It's array");
+				Debug.Log ("" + jVruiStates.list.Count + " entries");
+				for (int i = 0; i < jVruiStates.list.Count; i++) {
+					string sClr;
+					JSONObject jObj = jVruiStates.list [i];
+					string sId = jObj.HasField("id") ? jObj.GetField ("id").str : null;
+					Debug.Log ("entry #" + i + ": type " + sId);
+					Debug.Log (jObj.ToString ());
+					if ("NORMAL".Equals(sId)) {
+						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
+						Debug.Log ("NORMAL: "+sClr);
+						_clrBg = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
+						Debug.Log ("NORMAL: "+sClr);
+						_clrBorder = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
+						Debug.Log ("NORMAL: "+sClr);
+						_clrText = VRUI_Object.ParseColor (sClr);
+						Debug.Log ("NORMAL: "+_clrBg+", "+_clrBorder+", "+_clrText);
+					} else if ("OVER".Equals(sId)) {
+						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
+						_clrOverBg = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
+						_clrOverBorder = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
+						_clrOverText = VRUI_Object.ParseColor (sClr);
+					} else if ("ACTIVATED".Equals(sId)) {
+						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
+						_clrActivatedBg = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
+						_clrActivatedBorder = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
+						_clrActivatedText = VRUI_Object.ParseColor (sClr);
+					} else if ("DISABLED".Equals(sId)) {
+						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
+						_clrDisabledBg = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
+						_clrDisabledBorder = VRUI_Object.ParseColor (sClr);
+						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
+						_clrDisabledText = VRUI_Object.ParseColor (sClr);
+					}
+				}
+			}
+		}
+
+	}
+
+	public static VRUI_Button CreateFromJSON (JSONObject j) {
+		float width = j.HasField("width") ? j.GetField ("width").f : 1f;
+		float height = j.HasField("height") ? j.GetField ("height").f : 1f;
+
+		string sLayout = j.HasField("layout") ? j.GetField ("layout").str : null;
+		Layout layout = Layout.VERTICAL;
+		if ("VERTICAL".Equals (sLayout)) {
+			layout = Layout.VERTICAL;
+		} else if ("HORIZONTAL".Equals (sLayout)) {
+			layout = Layout.HORIZONTAL;
+		} else if ("ABSOLUTE".Equals (sLayout)) {
+			layout = Layout.ABSOLUTE;
+		} else if ("FRAME".Equals (sLayout)) {
+			layout = Layout.FRAME;
+		} else if ("GRID".Equals (sLayout)) {
+			layout = Layout.GRID;
+		} else if ("LIST".Equals (sLayout)) {
+			layout = Layout.LIST;
+		} else if ("RELATIVE".Equals (sLayout)) {
+			layout = Layout.RELATIVE;
+		}
+
+		Debug.Log ("============== Size: " + width + " x " + height + ", layout: " + layout);
+		Debug.Log (j);
+
+		VRUI_Button vruiButton = VRUI_Button.Create (width, height, layout);
+		vruiButton.ReadDataFromJson (j);
+		vruiButton.SetState (State.NORMAL);
+
+		return vruiButton;
 	}
 }
