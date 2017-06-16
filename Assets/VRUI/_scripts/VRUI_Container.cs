@@ -304,11 +304,12 @@ public class VRUI_Container : VRUI_Object {
 	public void ReadDataFromJson (JSONObject j) {
 		(this as VRUI_Object).ReadDataFromJson (j);
 
-		string sGravities = j.HasField("gravity") ? j.GetField ("layout").str : null;
+		string sGravities = j.HasField("gravity") ? j.GetField ("gravity").str : null;
 		if (sGravities != null) {
 			string[] sGravity = sGravities.Split ('|');
 			int gravity = 0;
 			for (int i = 0; i < sGravity.Length; i++) {
+				Debug.Log ("Gravity " + i + ": " + sGravity [i]);
 				if ("LEFT".Equals (sGravity [i])) {
 					gravity |= GRAVITY_LEFT;
 				} else if ("RIGHT".Equals (sGravity [i])) {

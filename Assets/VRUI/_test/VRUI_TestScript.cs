@@ -10,7 +10,24 @@ public class VRUI_TestScript : MonoBehaviour {
 	public Transform headRaycastCenter;
 	public Transform controllerRaycastCenter;
 
+	VRUI_Reticle reticleGaze = null;
+	VRUI_Reticle reticleController = null;
+	VRUI_Reticle reticleMouse = null;
+
 	void Start () {
+		InitReticles ();
+
+		string sJson = FileManager.ReadTextFromResources ("TestMenu_json");
+		JSONObject j = new JSONObject (sJson);
+		VRUI_Container testMenu = VRUI_Container.CreateFromJSON (j);
+		testMenu.transform.position = new Vector3 (-1.8f, 0f, 2f);
+
+		sJson = FileManager.ReadTextFromResources ("MainMenu_json");
+		j = new JSONObject (sJson);
+		VRUI_Container mainMenu = VRUI_Container.CreateFromJSON (j);
+		mainMenu.transform.position = new Vector3 (-1.15f, 0f, 2f);
+
+		/*
 //		TestVerticalLayout ();
 //		TestHorizontalLayout ();
 //		TestNestedLayouts1 ();
@@ -73,12 +90,10 @@ public class VRUI_TestScript : MonoBehaviour {
 		JSONObject j = new JSONObject (sJson);
 		VRUI_Container container2 = VRUI_Container.CreateFromJSON (j);
 		container2.transform.position = new Vector3 (1.2f, 0f, 2f);
+		*/
 	}
 
-	VRUI_Reticle reticleGaze = null;
-	VRUI_Reticle reticleController = null;
-	VRUI_Reticle reticleMouse = null;
-	private void TestReticle () {
+	private void InitReticles () {
 		float noHitDistance = 3f;
 		if (Application.isEditor) {
 			Texture2D imgMouse = FileManager.ReadImageFromResources (null, "reticle_mouse");

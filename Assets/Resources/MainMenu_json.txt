@@ -1,0 +1,334 @@
+﻿{	"id":"Test Menu"
+,	"type":"VRUI_Container"
+,	"layout":"VERTICAL"
+,	"width":0.6
+,	"height":0.9
+,	"gravity":"VCENTER|HCENTER"
+,	"color_background":"#00000000"
+,	"color_border":"#00000000"
+,	"vrui_objects":
+	[	{	"id":"btnToursOnPhone"
+		,	"type":"VRUI_Button"
+		,	"width":0.55
+		,	"height":0.085
+		,	"layout":"HORIZONTAL"
+		,	"margin":0.01
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FFFFFFFF"
+				,	"color_border":"#FF000000"
+				,	"color_text":"#FF000000"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF80FFFF"
+				,	"color_border":"#FFFFFF00"
+				,	"color_text":"#FF0000FF"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF0000FF"
+				,	"color_border":"#FFFFFFFF"
+				,	"color_text":"#FFFFFF00"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#FF404040"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Text"
+				,	"text":"Tours on phone"
+				,	"height":0.07
+				}
+			]
+		}
+	,	{	"id":"btnToursFromWeb"
+		,	"type":"VRUI_Button"
+		,	"width":0.55
+		,	"height":0.085
+		,	"layout":"HORIZONTAL"
+		,	"margin":0.01
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FFFFFFFF"
+				,	"color_border":"#FF000000"
+				,	"color_text":"#FF000000"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF80FFFF"
+				,	"color_border":"#FFFFFF00"
+				,	"color_text":"#FF0000FF"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF0000FF"
+				,	"color_border":"#FFFFFFFF"
+				,	"color_text":"#FFFFFF00"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#FF404040"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Text"
+				,	"text":"Tours from Web"
+				,	"height":0.07
+				}
+			]
+		}
+	,	{	"id":"btnAbout"
+		,	"type":"VRUI_Button"
+		,	"width":0.55
+		,	"height":0.085
+		,	"layout":"HORIZONTAL"
+		,	"margin":0.01
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FFFFFFFF"
+				,	"color_border":"#FF000000"
+				,	"color_text":"#FF000000"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF80FFFF"
+				,	"color_border":"#FFFFFF00"
+				,	"color_text":"#FF0000FF"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF0000FF"
+				,	"color_border":"#FFFFFFFF"
+				,	"color_text":"#FFFFFF00"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#FF404040"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Text"
+				,	"text":"About"
+				,	"height":0.07
+				}
+			]
+		}
+	,	{	"id":"btnSettings"
+		,	"type":"VRUI_Button"
+		,	"width":0.55
+		,	"height":0.085
+		,	"layout":"HORIZONTAL"
+		,	"margin":0.01
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FFFFFFFF"
+				,	"color_border":"#FF000000"
+				,	"color_text":"#FF000000"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF80FFFF"
+				,	"color_border":"#FFFFFF00"
+				,	"color_text":"#FF0000FF"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF0000FF"
+				,	"color_border":"#FFFFFFFF"
+				,	"color_text":"#FFFFFF00"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#FF404040"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Text"
+				,	"text":"Settings"
+				,	"height":0.07
+				}
+			]
+		}
+	,	{	"id":"SettingsContainer"
+		,	"type":"VRUI_Container"
+		,	"layout":"VERTICAL"
+		,	"width":0.6
+		,	"height":0.43
+		,	"gravity":"TOP|HCENTER"
+		,	"color_background":"#00000000"
+		,	"color_border":"#00000000"
+		,	"vrui_objects":
+			[	{	"id":"btnFAQ"
+				,	"type":"VRUI_Button"
+				,	"width":0.55
+				,	"height":0.085
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.01
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"FAQ"
+						,	"height":0.07
+						}
+					]
+				}
+			,	{	"id":"btnTerms"
+				,	"type":"VRUI_Button"
+				,	"width":0.55
+				,	"height":0.085
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.01
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"Terms & Policies"
+						,	"height":0.07
+						}
+					]
+				}
+			,	{	"id":"btnLogout"
+				,	"type":"VRUI_Button"
+				,	"width":0.55
+				,	"height":0.085
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.01
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"Log Out"
+						,	"height":0.07
+						}
+					]
+				}
+			,	{	"id":"btnContactUs"
+				,	"type":"VRUI_Button"
+				,	"width":0.55
+				,	"height":0.085
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.01
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"Contact Us"
+						,	"height":0.07
+						}
+					]
+				}
+			]
+		}
+	]
+}
