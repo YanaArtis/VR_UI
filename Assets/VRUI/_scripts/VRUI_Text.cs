@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VRUI_Text : VRUI_Object {
-	private TextMesh textMesh;
-	private MeshRenderer meshRenderer;
+	private TextMesh _textMesh;
+	private MeshRenderer _meshRenderer;
 
-	protected static string fontDefault = "Arial.ttf";
 //	private static bool isFontDefaultSeekRequired = true;
 	private static float _scaleFactor = 0.0595f;
-	private static int fontSize = 150;
+	private static int _fontSize = 150;
 
 	private static int _counter = 0;
 
@@ -20,16 +19,16 @@ public class VRUI_Text : VRUI_Object {
 
 		GameObject go = new GameObject();
 		VRUI_Text vruiText = go.AddComponent<VRUI_Text> ();
-		vruiText.textMesh = go.AddComponent<TextMesh> ();
+		vruiText._textMesh = go.AddComponent<TextMesh> ();
 		vruiText.SetColor (color);
 
-		vruiText.meshRenderer = go.GetComponent<MeshRenderer> ();
+		vruiText._meshRenderer = go.GetComponent<MeshRenderer> ();
 //		vruiText.meshRenderer.material = new Material (shaderStandard); //Shader.Find ("Standard"));
 //		vruiText.meshRenderer.material.color = color;
 		vruiText.SetFont (font);
 
-		Debug.Log ("vruiText.textMesh.fontSize: " + vruiText.textMesh.fontSize);
-		vruiText.textMesh.fontSize = fontSize;
+		Debug.Log ("vruiText.textMesh.fontSize: " + vruiText._textMesh.fontSize);
+		vruiText._textMesh.fontSize = _fontSize;
 
 		/*
 		vruiText.textMesh.text = s;
@@ -40,13 +39,13 @@ public class VRUI_Text : VRUI_Object {
 		vruiText.width = bounds.size.x;
 		vruiText.height = bounds.size.y;
 		*/
-		vruiText.textMesh.text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12334567890|";
-		Bounds bounds = vruiText.meshRenderer.bounds;
+		vruiText._textMesh.text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12334567890|";
+		Bounds bounds = vruiText._meshRenderer.bounds;
 		float scaleFactor = stringHeight / bounds.size.y;
 		go.transform.localScale = new Vector3 (scaleFactor, scaleFactor, scaleFactor);
 
-		vruiText.textMesh.text = s;
-		bounds = vruiText.meshRenderer.bounds;
+		vruiText._textMesh.text = s;
+		bounds = vruiText._meshRenderer.bounds;
 		vruiText._width = bounds.size.x;
 		vruiText._height = bounds.size.y;
 
@@ -58,7 +57,7 @@ public class VRUI_Text : VRUI_Object {
 	public static VRUI_Text Create (string s, float stringHeight, Color color) {
 		VRUI_Text.Init ();
 //		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, fontDefault);
-		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, VRUI_FontManager.GetFont (fontDefault));
+		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, VRUI_FontManager.defaultFont);
 		return vruiText;
 	}
 
@@ -67,12 +66,12 @@ public class VRUI_Text : VRUI_Object {
 	}
 
 	public static VRUI_Text Create (string s, float stringHeight, Color color, string fontName) {
-		return VRUI_Text._Create (s, stringHeight, color, VRUI_FontManager.GetFont ((fontName == null) ? fontDefault : fontName));
+		return VRUI_Text._Create (s, stringHeight, color, (fontName == null) ? VRUI_FontManager.defaultFont : VRUI_FontManager.GetFont (fontName));
 	}
 
 	public void SetFont (Font font) {
-		textMesh.font = font;
-		meshRenderer.sharedMaterial = font.material;
+		_textMesh.font = font;
+		_meshRenderer.sharedMaterial = font.material;
 	}
 
 	public void SetFont (string fontName) {
@@ -87,16 +86,16 @@ public class VRUI_Text : VRUI_Object {
 	}
 
 	public void SetAlignment (TextAlignment alignment) {
-		textMesh.alignment = alignment;
+		_textMesh.alignment = alignment;
 	}
 
 	public void SetAnchor (TextAnchor anchor) {
-		textMesh.anchor = anchor;
+		_textMesh.anchor = anchor;
 	}
 
 	public void SetColor (Color newColor) {
-		Debug.Log ("VRUI_Text.SetColor(" + newColor + "), text=\"" + textMesh.text + "\"");
-		textMesh.color = newColor;
+		Debug.Log ("VRUI_Text.SetColor(" + newColor + "), text=\"" + _textMesh.text + "\"");
+		_textMesh.color = newColor;
 	}
 
 	public static VRUI_Text CreateFromJSON (JSONObject j, float parentHeight) {

@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 
 public class FileManager {
-	private static string gear360Path = FindGear360Path ();
+	private static string _gear360Path = FindGear360Path ();
 
 	public static void WriteToLog (string s) {
 		WriteTextToFile (Application.persistentDataPath+Path.DirectorySeparatorChar+"log.txt", s);
@@ -141,8 +141,8 @@ public class FileManager {
 	}
 
 	public static string[] LoadFilesList () {
-		string[] files = System.IO.Directory.GetFiles (gear360Path);
-		foreach(string file in System.IO.Directory.GetFiles(gear360Path)) {
+		string[] files = System.IO.Directory.GetFiles (_gear360Path);
+		foreach(string file in System.IO.Directory.GetFiles(_gear360Path)) {
 			Debug.Log("file: "+file);
 			Debug.Log("file: "+System.IO.Path.GetFileNameWithoutExtension (file));
 		}

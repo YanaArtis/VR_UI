@@ -180,6 +180,10 @@ public class VRUI_Button : VRUI_Container {
 		Refresh ();
 	}
 
+	public void AddText (string s, float stringHeight, Color color, string fontName) {
+		AddText (s, stringHeight, color, VRUI_FontManager.GetFont(fontName));
+	}
+
 	public void AddText (string s, float stringHeight, Color color) {
 		VRUI_Text text = VRUI_Text.Create (s, stringHeight, color);
 		Add (text);
