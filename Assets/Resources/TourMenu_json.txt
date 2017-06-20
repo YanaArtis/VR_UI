@@ -1,18 +1,310 @@
 {	"id":"Tour Menu"
 ,	"type":"VRUI_Container"
-,	"layout":"HORIZONTAL"
-,	"width":1
-,	"height":0.2
-,	"gravity":"VCENTER|HCENTER"
-,	"color_background":"#FF808080"
-,	"color_border":"#FF000000"
+,	"layout":"VERTICAL"
+,	"width":1.36
+,	"height":0.4
+,	"gravity":"BOTTOM|HCENTER"
+,	"color_background":"#FF1e1736"
+,	"color_border":"#00000000"
 ,	"vrui_objects":
-	[	{	"id":"Tour Menu Switch"
+	[	{	"id":"Current Tour Title"
 		,	"type":"VRUI_Text"
-		,	"height":0.2
-		,	"text":"\uf142ABC"
+		,	"height":0.07
+		,	"text":"'Current Tour Title', \uf06e123"
 		,	"color":"#FFFFFFFF"
+		,	"margin_bottom":0.0
 		,	"font":"fontawesome-webfont"
+		}
+	,	{	"id":"Current Tour Title"
+		,	"type":"VRUI_Text"
+		,	"height":0.07
+		,	"text":"temporary string"
+		,	"color":"#FFFFFFFF"
+		,	"margin_bottom":0.0
+		}
+	,	{	"id":"Tour Menu"
+		,	"type":"VRUI_Container"
+		,	"layout":"HORIZONTAL"
+		,	"width":1.36
+		,	"height":0.2
+		,	"gravity":"BOTTOM|RIGHT"
+		,	"color_background":"#FF1e1736"
+		,	"color_border":"#00000000"
+		,	"vrui_objects":
+			[	{	"id":"btnMainMenu"
+				,	"type":"VRUI_Button"
+				,	"width":0.16
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf28c"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			,	{	"id":"btnLikes"
+				,	"type":"VRUI_Button"
+				,	"width":0.16
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf08a"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			,	{	"id":"btnComments"
+				,	"type":"VRUI_Button"
+				,	"width":0.16
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf0e6"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			,	{	"id":"btnSoundOn"
+				,	"type":"VRUI_Button"
+				,	"width":0.16
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf028"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			,	{	"id":"btnComplain"
+				,	"type":"VRUI_Button"
+				,	"width":0.16
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf071"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			,	{	"id":"btnDownload"
+				,	"type":"VRUI_Button"
+				,	"width":0.16
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf019"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			,	{	"id":"btnTourMenuSwitch"
+				,	"type":"VRUI_Button"
+				,	"width":0.12
+				,	"height":0.16
+				,	"layout":"HORIZONTAL"
+				,	"margin":0.02
+				,	"states":
+					[	{	"id":"NORMAL"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FFFFFFFF"
+						,	"color_border":"#FF000000"
+						,	"color_text":"#FF000000"
+						}
+					,	{	"id":"OVER"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF80FFFF"
+						,	"color_border":"#FFFFFF00"
+						,	"color_text":"#FF0000FF"
+						}
+					,	{	"id":"ACTIVATED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF0000FF"
+						,	"color_border":"#FFFFFFFF"
+						,	"color_text":"#FFFFFF00"
+						}
+					,	{	"id":"DISABLED"
+						,	"type":"VRUI_ButtonState"
+						,	"color_background":"#FF808080"
+						,	"color_border":"#FF404040"
+						,	"color_text":"#FF404040"
+						}
+					]
+				,	"vrui_objects":
+					[	{	"type":"VRUI_Text"
+						,	"text":"\uf142"
+						,	"font":"fontawesome-webfont"
+						}
+					]
+				}
+			]
 		}
 	]
 }

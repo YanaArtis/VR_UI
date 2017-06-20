@@ -171,20 +171,20 @@ public class VRUI_Object : MonoBehaviour {
 			float margin = j.GetField ("margin").f;
 			_marginLeft = _marginRight = _marginTop = _marginBottom = margin;
 		}
-		if (j.HasField("marginLeft")) {
-			float margin = j.GetField ("marginLeft").f;
+		if (j.HasField("margin_left")) {
+			float margin = j.GetField ("margin_left").f;
 			_marginLeft = margin;
 		}
-		if (j.HasField("marginRight")) {
-			float margin = j.GetField ("marginRight").f;
+		if (j.HasField("margin_right")) {
+			float margin = j.GetField ("margin_right").f;
 			_marginRight = margin;
 		}
-		if (j.HasField("marginTop")) {
-			float margin = j.GetField ("marginTop").f;
+		if (j.HasField("margin_top")) {
+			float margin = j.GetField ("margin_top").f;
 			_marginTop = margin;
 		}
-		if (j.HasField("marginBottom")) {
-			float margin = j.GetField ("marginBottom").f;
+		if (j.HasField("margin_bottom")) {
+			float margin = j.GetField ("margin_bottom").f;
 			_marginBottom = margin;
 		}
 
@@ -192,20 +192,20 @@ public class VRUI_Object : MonoBehaviour {
 			float padding = j.GetField ("padding").f;
 			_paddingLeft = _paddingRight = _paddingTop = _paddingBottom = padding;
 		}
-		if (j.HasField("paddingLeft")) {
-			float padding = j.GetField ("paddingLeft").f;
+		if (j.HasField("padding_left")) {
+			float padding = j.GetField ("padding_left").f;
 			_paddingLeft = padding;
 		}
-		if (j.HasField("paddingRight")) {
-			float padding = j.GetField ("paddingRight").f;
+		if (j.HasField("padding_right")) {
+			float padding = j.GetField ("padding_right").f;
 			_paddingRight = padding;
 		}
-		if (j.HasField("paddingTop")) {
-			float padding = j.GetField ("paddingTop").f;
+		if (j.HasField("padding_top")) {
+			float padding = j.GetField ("padding_top").f;
 			_paddingTop = padding;
 		}
-		if (j.HasField("paddingBottom")) {
-			float padding = j.GetField ("paddingBottom").f;
+		if (j.HasField("padding_bottom")) {
+			float padding = j.GetField ("padding_bottom").f;
 			_paddingBottom = padding;
 		}
 	}

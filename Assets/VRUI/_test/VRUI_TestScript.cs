@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: add styles
+
 public class VRUI_TestScript : MonoBehaviour {
 	public GameObject mainCamera;
 	public GameObject ovrCamera;

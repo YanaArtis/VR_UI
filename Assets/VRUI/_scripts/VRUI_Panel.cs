@@ -53,7 +53,13 @@ public class VRUI_Panel: VRUI_Object {
 			}
 		}
 		if (_bgMeshRenderer != null) {
-			_bgMeshRenderer.material.color = newBgColor;
+			if (newBgColor == Color.clear) {
+				_goBg.SetActive (false);
+			} else {
+				_goBg.SetActive (true);
+				_bgMeshRenderer.material.shader = VRUI_ShaderManager.GetShader ("Unlit/Color");
+				_bgMeshRenderer.material.color = newBgColor;
+			}
 		}
 	}
 
@@ -89,8 +95,16 @@ public class VRUI_Panel: VRUI_Object {
 			}
 		}
 		if (_borderMeshRenderer != null) {
-			for (int i = 0; i < _borderMeshRenderer.Length; i++) {
-				_borderMeshRenderer [i].material.color = newBorderColor;
+			if (newBorderColor == Color.clear) {
+				for (int i = 0; i < _borderMeshRenderer.Length; i++) {
+					_goBorder [i].SetActive (false);
+				}
+			} else {
+				for (int i = 0; i < _borderMeshRenderer.Length; i++) {
+					_goBorder [i].SetActive (true);
+					_borderMeshRenderer [i].material.shader = VRUI_ShaderManager.GetShader ("Unlit/Color");
+					_borderMeshRenderer [i].material.color = newBorderColor;
+				}
 			}
 		}
 	}
