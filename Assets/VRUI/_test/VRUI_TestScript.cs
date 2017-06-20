@@ -103,7 +103,7 @@ public class VRUI_TestScript : MonoBehaviour {
 
 		Texture2D imgGaze = FileManager.ReadImageFromResources (null, "reticle_gaze");
 
-		#if GEAR_VR
+		#if GEAR_VR || OCULUS
 		reticleGaze = VRUI_Reticle.Create (imgGaze, 0.1f, noHitDistance, false);
 		mainCamera.SetActive (false);
 		ovrCamera.SetActive (true);
@@ -119,10 +119,12 @@ public class VRUI_TestScript : MonoBehaviour {
 	private void UpdateReticle () {
 		GameObject selectedObject;
 		VRUI_Object vruiObject;
-		#if GEAR_VR
+		#if GEAR_VR || OCULUS
 		headRaycastCenter.rotation = gearVrHeadRaycastCenter.rotation;
 		if (OVRInput.GetActiveController () == OVRInput.Controller.LTrackedRemote ||
-			OVRInput.GetActiveController () == OVRInput.Controller.RTrackedRemote) {
+			OVRInput.GetActiveController () == OVRInput.Controller.RTrackedRemote ||
+			OVRInput.GetActiveController () == OVRInput.Controller.LTouch ||
+			OVRInput.GetActiveController () == OVRInput.Controller.RTouch ) {
 			Quaternion q = OVRInput.GetLocalControllerRotation (OVRInput.GetActiveController ());
 			controllerRaycastCenter.rotation = q;
 
@@ -137,7 +139,6 @@ public class VRUI_TestScript : MonoBehaviour {
 		if (OVRInput.Get (OVRInput.Button.One)) {
 			reticleGaze.SetTriggerOn ();
 		}
-
 		#elif CARDBOARD
 		headRaycastCenter.rotation = mainCamera.transform.rotation;
 		#endif
