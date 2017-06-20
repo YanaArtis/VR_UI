@@ -1,4 +1,4 @@
-﻿{	"id":"Test Menu"
+﻿{	"id":"Main Menu"
 ,	"type":"VRUI_Container"
 ,	"layout":"VERTICAL"
 ,	"width":0.6

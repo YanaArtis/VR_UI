@@ -18,7 +18,8 @@ public class VRUI_Image: VRUI_Object {
 		VRUI_Image.Init ();
 		vruiImage._boxCollider = go.AddComponent<BoxCollider> ();
 		vruiImage._meshRenderer = go.GetComponent<MeshRenderer> ();
-		vruiImage._material = new Material (shaderTransparent);
+//		vruiImage._material = new Material (shaderTransparent);
+		vruiImage._material = new Material (VRUI_ShaderManager.GetShader ("Unlit/Transparent"));
 		vruiImage._material.mainTexture = tex;
 		vruiImage._meshRenderer.material = vruiImage._material;
 		go.transform.localScale = new Vector3 (imageHeight*(float)tex.width/(float)tex.height, imageHeight, 1f);

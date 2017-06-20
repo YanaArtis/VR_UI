@@ -97,21 +97,24 @@ public class VRUI_Object : MonoBehaviour {
 		}
 	}
 
+	/*
 	protected static Shader shaderStandard;
 	private static bool isShaderStandardSeekRequired = true;
 
 	protected static Shader shaderTransparent;
 	private static bool isShaderTransparentSeekRequired = true;
-
+	*/
 	public VRUI_Object () {}
 
 	protected static void Init () {
+		/*
 		if (isShaderStandardSeekRequired) {
 			shaderStandard = Shader.Find ("Standard");
 		}
 		if (isShaderTransparentSeekRequired) {
 			shaderTransparent = Shader.Find ("Unlit/Transparent");
 		}
+		*/
 	}
 
 	public void SetMargin (float marginSpace) {
@@ -239,4 +242,32 @@ public class VRUI_Object : MonoBehaviour {
 		}
 		return Color.black;
 	}
+
+	// https://stackoverflow.com/questions/1615559/convert-a-unicode-string-to-an-escaped-ascii-string
+	/*
+	public static string EncodeNonAsciiCharacters( string value ) {
+		StringBuilder sb = new StringBuilder();
+		foreach( char c in value ) {
+			if( c > 127 ) {
+				// This character is too big for ASCII
+				string encodedValue = "\\u" + ((int) c).ToString( "x4" );
+				sb.Append( encodedValue );
+			}
+			else {
+				sb.Append( c );
+			}
+		}
+		return sb.ToString();
+	}
+	*/
+
+	public static string DecodeEncodedNonAsciiCharacters( string value ) {
+		return System.Text.RegularExpressions.Regex.Replace(
+			value,
+			@"\\u(?<Value>[a-zA-Z0-9]{4})",
+			m => {
+				return ((char) int.Parse( m.Groups["Value"].Value, System.Globalization.NumberStyles.HexNumber )).ToString();
+			} );
+	}
+
 }

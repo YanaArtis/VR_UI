@@ -31,7 +31,8 @@ public class VRUI_Reticle : VRUI_Object {
 		vruiReticle._isGaze = isGaze;
 
 		try {
-			vruiReticle._material = new Material (shaderTransparent);
+//			vruiReticle._material = new Material (shaderTransparent);
+			vruiReticle._material = new Material (VRUI_ShaderManager.GetShader ("Unlit/Transparent"));
 		} catch (System.Exception e) {
 			FileManager.WriteToLog (e.ToString());
 		}

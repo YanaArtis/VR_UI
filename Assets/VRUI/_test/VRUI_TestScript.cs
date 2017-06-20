@@ -27,13 +27,18 @@ public class VRUI_TestScript : MonoBehaviour {
 		VRUI_Container mainMenu = VRUI_Container.CreateFromJSON (j);
 		mainMenu.transform.position = new Vector3 (-1.15f, 0f, 2f);
 
+		sJson = FileManager.ReadTextFromResources ("TourMenu_json");
+		j = new JSONObject (sJson);
+		VRUI_Container tourMenu = VRUI_Container.CreateFromJSON (j);
+		tourMenu.transform.position = new Vector3 (0f, -1f, 2f);
+
 		/*
 //		TestVerticalLayout ();
 //		TestHorizontalLayout ();
 //		TestNestedLayouts1 ();
 //		TestNestedLayouts2 ();
 //		TestButtons ();
-		TestReticle ();
+//		TestReticle ();
 
 		Font fontGothic = (Font)Resources.Load("GOTHICB");
 		Font fontShowcardGothic = (Font)Resources.Load("SHOWG");
@@ -42,7 +47,7 @@ public class VRUI_TestScript : MonoBehaviour {
 		infoContainer.SetGravity (VRUI_Container.GRAVITY_TOP | VRUI_Container.GRAVITY_HCENTER);
 		infoContainer.SetPadding (0.03f);
 
-		VRUI_Text text = VRUI_Text.Create ("Container #1", 0.1f, Color.white, fontGothic);
+		VRUI_Text text = VRUI_Text.Create ("Container #1", 0.1f, Color.white, fontShowcardGothic);
 		infoContainer.Add (text);
 		text = VRUI_Text.Create ("with VERTICAL layout and", 0.07f, Color.black, fontGothic);
 		infoContainer.Add (text);

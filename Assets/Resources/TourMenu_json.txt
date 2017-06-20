@@ -1,0 +1,18 @@
+{	"id":"Tour Menu"
+,	"type":"VRUI_Container"
+,	"layout":"HORIZONTAL"
+,	"width":1
+,	"height":0.2
+,	"gravity":"VCENTER|HCENTER"
+,	"color_background":"#FF808080"
+,	"color_border":"#FF000000"
+,	"vrui_objects":
+	[	{	"id":"Tour Menu Switch"
+		,	"type":"VRUI_Text"
+		,	"height":0.2
+		,	"text":"\uf142ABC"
+		,	"color":"#FFFFFFFF"
+		,	"font":"fontawesome-webfont"
+		}
+	]
+}

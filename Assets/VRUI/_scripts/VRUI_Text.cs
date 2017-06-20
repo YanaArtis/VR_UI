@@ -6,8 +6,8 @@ public class VRUI_Text : VRUI_Object {
 	private TextMesh textMesh;
 	private MeshRenderer meshRenderer;
 
-	protected static Font fontDefault;
-	private static bool isFontDefaultSeekRequired = true;
+	protected static string fontDefault = "Arial.ttf";
+//	private static bool isFontDefaultSeekRequired = true;
 	private static float _scaleFactor = 0.0595f;
 	private static int fontSize = 150;
 
@@ -15,7 +15,9 @@ public class VRUI_Text : VRUI_Object {
 
 	protected VRUI_Text () : base () {}
 
-	protected static VRUI_Text _Create (string s, float stringHeight, Color color, Font font) {
+	protected static VRUI_Text _Create (string ss, float stringHeight, Color color, Font font) {
+		string s = DecodeEncodedNonAsciiCharacters(ss);
+
 		GameObject go = new GameObject();
 		VRUI_Text vruiText = go.AddComponent<VRUI_Text> ();
 		vruiText.textMesh = go.AddComponent<TextMesh> ();
@@ -55,13 +57,17 @@ public class VRUI_Text : VRUI_Object {
 
 	public static VRUI_Text Create (string s, float stringHeight, Color color) {
 		VRUI_Text.Init ();
-		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, fontDefault);
+//		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, fontDefault);
+		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, VRUI_FontManager.GetFont (fontDefault));
 		return vruiText;
 	}
 
 	public static VRUI_Text Create (string s, float stringHeight, Color color, Font font) {
-		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, font);
-		return vruiText;
+		return VRUI_Text._Create (s, stringHeight, color, font);
+	}
+
+	public static VRUI_Text Create (string s, float stringHeight, Color color, string fontName) {
+		return VRUI_Text._Create (s, stringHeight, color, VRUI_FontManager.GetFont ((fontName == null) ? fontDefault : fontName));
 	}
 
 	public void SetFont (Font font) {
@@ -69,11 +75,15 @@ public class VRUI_Text : VRUI_Object {
 		meshRenderer.sharedMaterial = font.material;
 	}
 
+	public void SetFont (string fontName) {
+		SetFont (VRUI_FontManager.GetFont (fontName));
+	}
+
 	protected static void Init () {
-		if (isFontDefaultSeekRequired) {
-			fontDefault = (Font)Resources.GetBuiltinResource (typeof(Font), "Arial.ttf");
-				//Instantiate (Resources.FindObjectsOfTypeAll (typeof (Font)) [0]) as Font;
-		}
+//		if (isFontDefaultSeekRequired) {
+//			fontDefault = (Font)Resources.GetBuiltinResource (typeof(Font), "Arial.ttf");
+//				//Instantiate (Resources.FindObjectsOfTypeAll (typeof (Font)) [0]) as Font;
+//		}
 	}
 
 	public void SetAlignment (TextAlignment alignment) {
@@ -100,7 +110,7 @@ public class VRUI_Text : VRUI_Object {
 //		Debug.Log ("text: \""+text+"\"");
 //		Debug.Log ("stringHeight: "+stringHeight);
 //		Debug.Log ("color: \t\""+color+"\"");
-		return Create (text, stringHeight, color);
+		return Create (text, stringHeight, color, sFont);
 	}
 
 	public static VRUI_Text CreateFromJSON (JSONObject j) {
