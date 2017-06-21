@@ -7,15 +7,28 @@
 ,	"color_background":"#FF1e1736"
 ,	"color_border":"#00000000"
 ,	"vrui_objects":
-	[	{	"id":"Current Tour Title"
-		,	"type":"VRUI_Text"
-		,	"height":0.07
-		,	"text":"'Current Tour Title', \uf06e123"
-		,	"color":"#FFFFFFFF"
-		,	"margin_bottom":0.05
-		,	"font":"fontawesome-webfont"
+	[	{	"id":"Tour Menu Top"
+		,	"type":"VRUI_Container"
+		,	"layout":"VERTICAL"
+		,	"width":1.36
+		,	"height":0.2
+		,	"gravity":"TOP|HCENTER"
+		,	"color_background":"#FF1e1736"
+		,	"color_border":"#00000000"
+		,	"padding_bottom":0.01
+		,	"padding_top":0.01
+		,	"vrui_objects":
+		[	{	"id":"Current Tour Title"
+			,	"type":"VRUI_Text"
+			,	"height":0.07
+			,	"text":"'Current Tour Title', \uf06e123"
+			,	"color":"#FFFFFFFF"
+			,	"margin_top":0.01
+			,	"font":"fontawesome-webfont"
+			}
+		]
 		}
-	,	{	"id":"Tour Menu"
+	,	{	"id":"Tour Menu Bottom"
 		,	"type":"VRUI_Container"
 		,	"layout":"HORIZONTAL"
 		,	"width":1.36
@@ -23,6 +36,7 @@
 		,	"gravity":"BOTTOM|RIGHT"
 		,	"color_background":"#FF1e1736"
 		,	"color_border":"#00000000"
+		,	"padding_bottom":0.01
 		,	"vrui_objects":
 			[	{	"id":"btnMainMenu"
 				,	"type":"VRUI_Button"

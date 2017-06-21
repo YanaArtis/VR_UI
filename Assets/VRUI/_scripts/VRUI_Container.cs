@@ -117,6 +117,7 @@ public class VRUI_Container : VRUI_Object {
 			y = topY;
 			for (i = 0; (i < _objects.Count) && (y > bottomY); i++) {
 //				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(true)");
+				Debug.Log ("Object #"+i+" ("+_objects[i]._id+") margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y -= (_objects [i].marginTop + _objects [i].paddingTop);
@@ -131,7 +132,7 @@ public class VRUI_Container : VRUI_Object {
 			y = bottomY;
 			for (i = _objects.Count-1; (i >= 0) && (y < topY); i--) {
 //				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(true)");
-				Debug.Log ("Object #"+i+" margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
+				Debug.Log ("Object #"+i+" ("+_objects[i]._id+") margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y += (_objects [i].marginBottom + _objects [i].paddingBottom);
