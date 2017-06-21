@@ -1,4 +1,4 @@
-![VR_UI](http://www.kiborgov.net/files/vr_ui-logo.jpg)
+![VR_UI](https://github.com/YanaArtis/VR_UI/blob/develop/vr_ui.png)
 
 ## About
 [![License](https://img.shields.io/badge/license-Apache%202.0%20License-blue.svg)](https://github.com/YanaArtis/VR_UI/blob/master/LICENSE.txt)
