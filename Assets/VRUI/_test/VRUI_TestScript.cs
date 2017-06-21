@@ -29,9 +29,9 @@ public class VRUI_TestScript : MonoBehaviour {
 		VRUI_Container mainMenu = VRUI_Container.CreateFromJSON (j);
 		mainMenu.transform.position = new Vector3 (-1.15f, 0f, 2f);
 
-		sJson = FileManager.ReadTextFromResources ("TourMenu_json");
-		j = new JSONObject (sJson);
-		VRUI_Container tourMenu = VRUI_Container.CreateFromJSON (j);
+		string sJson2 = FileManager.ReadTextFromResources ("TourMenu_json");
+		JSONObject j2 = new JSONObject (sJson2);
+		VRUI_Container tourMenu = VRUI_Container.CreateFromJSON (j2);
 		tourMenu.transform.position = new Vector3 (0f, -1f, 2f);
 
 		/*

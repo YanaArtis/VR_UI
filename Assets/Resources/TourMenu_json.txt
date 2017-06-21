@@ -12,15 +12,8 @@
 		,	"height":0.07
 		,	"text":"'Current Tour Title', \uf06e123"
 		,	"color":"#FFFFFFFF"
-		,	"margin_bottom":0.0
+		,	"margin_bottom":0.05
 		,	"font":"fontawesome-webfont"
-		}
-	,	{	"id":"Current Tour Title"
-		,	"type":"VRUI_Text"
-		,	"height":0.07
-		,	"text":"temporary string"
-		,	"color":"#FFFFFFFF"
-		,	"margin_bottom":0.0
 		}
 	,	{	"id":"Tour Menu"
 		,	"type":"VRUI_Container"
@@ -46,20 +39,20 @@
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]
@@ -79,26 +72,26 @@
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FFFFFFFF"
-						,	"color_border":"#FF000000"
-						,	"color_text":"#FF000000"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]
@@ -118,26 +111,26 @@
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FFFFFFFF"
-						,	"color_border":"#FF000000"
-						,	"color_text":"#FF000000"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]
@@ -157,26 +150,26 @@
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FFFFFFFF"
-						,	"color_border":"#FF000000"
-						,	"color_text":"#FF000000"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]
@@ -196,26 +189,26 @@
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FFFFFFFF"
-						,	"color_border":"#FF000000"
-						,	"color_text":"#FF000000"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]
@@ -235,26 +228,26 @@
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FFFFFFFF"
-						,	"color_border":"#FF000000"
-						,	"color_text":"#FF000000"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]
@@ -274,26 +267,26 @@
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FFFFFFFF"
-						,	"color_border":"#FF000000"
-						,	"color_text":"#FF000000"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF606060"
 						}
 					,	{	"id":"OVER"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF80FFFF"
-						,	"color_border":"#FFFFFF00"
-						,	"color_text":"#FF0000FF"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FF808080"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF0000FF"
-						,	"color_border":"#FFFFFFFF"
-						,	"color_text":"#FFFFFF00"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
-						,	"color_background":"#FF808080"
-						,	"color_border":"#FF404040"
+						,	"color_background":"#FF302a48"
+						,	"color_border":"#00000000"
 						,	"color_text":"#FF404040"
 						}
 					]

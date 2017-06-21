@@ -98,6 +98,12 @@ public class VRUI_Text : VRUI_Object {
 		_textMesh.color = newColor;
 	}
 
+	public void ReadDataFromJson (JSONObject j) {
+		float oldWidth = _width;
+		(this as VRUI_Object).ReadDataFromJson (j);
+		_width = oldWidth;
+	}
+
 	public static VRUI_Text CreateFromJSON (JSONObject j, float parentHeight) {
 //		Debug.Log ("------------- VRUI_Text CreateFromJSON ()");
 //		Debug.Log (j);
@@ -109,7 +115,9 @@ public class VRUI_Text : VRUI_Object {
 //		Debug.Log ("text: \""+text+"\"");
 //		Debug.Log ("stringHeight: "+stringHeight);
 //		Debug.Log ("color: \t\""+color+"\"");
-		return Create (text, stringHeight, color, sFont);
+		VRUI_Text vruiText = Create (text, stringHeight, color, sFont);
+		vruiText.ReadDataFromJson (j);
+		return vruiText;
 	}
 
 	public static VRUI_Text CreateFromJSON (JSONObject j) {

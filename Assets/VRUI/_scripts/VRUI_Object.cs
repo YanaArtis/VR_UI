@@ -168,24 +168,28 @@ public class VRUI_Object : MonoBehaviour {
 		_height = j.HasField("height") ? j.GetField ("height").f : 1f;
 
 		if (j.HasField("margin")) {
-			float margin = j.GetField ("margin").f;
-			_marginLeft = _marginRight = _marginTop = _marginBottom = margin;
+			float newMargin = j.GetField ("margin").f;
+			_marginLeft = _marginRight = _marginTop = _marginBottom = newMargin;
 		}
 		if (j.HasField("margin_left")) {
-			float margin = j.GetField ("margin_left").f;
-			_marginLeft = margin;
+			float newMarginLeft = j.GetField ("margin_left").f;
+			_marginLeft = newMarginLeft;
 		}
 		if (j.HasField("margin_right")) {
-			float margin = j.GetField ("margin_right").f;
-			_marginRight = margin;
+			float newMarginRight = j.GetField ("margin_right").f;
+			_marginRight = newMarginRight;
 		}
 		if (j.HasField("margin_top")) {
-			float margin = j.GetField ("margin_top").f;
-			_marginTop = margin;
+			float newMarginTop = j.GetField ("margin_top").f;
+			Debug.Log ("Object \""+_id+"\": margin_top: "+newMarginTop);
+			_marginTop = newMarginTop;
+			Debug.Log ("_margin_top: "+_marginTop);
 		}
 		if (j.HasField("margin_bottom")) {
-			float margin = j.GetField ("margin_bottom").f;
-			_marginBottom = margin;
+			float newMarginBottom = j.GetField ("margin_bottom").f;
+			Debug.Log ("Object \""+_id+"\": margin_bottom: "+newMarginBottom);
+			_marginBottom = newMarginBottom;
+			Debug.Log ("_marginBottom: "+_marginBottom);
 		}
 
 		if (j.HasField("padding")) {
@@ -193,20 +197,20 @@ public class VRUI_Object : MonoBehaviour {
 			_paddingLeft = _paddingRight = _paddingTop = _paddingBottom = padding;
 		}
 		if (j.HasField("padding_left")) {
-			float padding = j.GetField ("padding_left").f;
-			_paddingLeft = padding;
+			float newPaddingLeft = j.GetField ("padding_left").f;
+			_paddingLeft = newPaddingLeft;
 		}
 		if (j.HasField("padding_right")) {
-			float padding = j.GetField ("padding_right").f;
-			_paddingRight = padding;
+			float newPaddingRight = j.GetField ("padding_right").f;
+			_paddingRight = newPaddingRight;
 		}
 		if (j.HasField("padding_top")) {
-			float padding = j.GetField ("padding_top").f;
-			_paddingTop = padding;
+			float newPaddingTop = j.GetField ("padding_top").f;
+			_paddingTop = newPaddingTop;
 		}
 		if (j.HasField("padding_bottom")) {
-			float padding = j.GetField ("padding_bottom").f;
-			_paddingBottom = padding;
+			float newPaddingBottom = j.GetField ("padding_bottom").f;
+			_paddingBottom = newPaddingBottom;
 		}
 	}
 

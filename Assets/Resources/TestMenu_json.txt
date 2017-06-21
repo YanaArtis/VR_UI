@@ -51,6 +51,11 @@
 				,	"text":"Main Menu"
 				,	"height":0.07
 				}
+			,	{	"type":"VRUI_Image"
+				,	"src": "info"
+				,	"height":0.07
+				,	"margin_left":0.03
+				}
 			]
 		}
 	,	{	"id":"btnTourMenu"
@@ -89,6 +94,11 @@
 			[	{	"type":"VRUI_Text"
 				,	"text":"Tour Menu"
 				,	"height":0.07
+				}
+			,	{	"type":"VRUI_Image"
+				,	"src": "faq"
+				,	"height":0.07
+				,	"margin_left":0.03
 				}
 			]
 		}

@@ -34,6 +34,12 @@ public class VRUI_Image: VRUI_Object {
 		return vruiImage;
 	}
 
+	public void ReadDataFromJson (JSONObject j) {
+		float oldWidth = _width;
+		(this as VRUI_Object).ReadDataFromJson (j);
+		_width = oldWidth;
+	}
+
 	public static VRUI_Image CreateFromJSON (JSONObject j) {
 		float height = j.HasField ("height") ? j.GetField ("height").f : 1f;
 		string sTextureFname = j.HasField ("src") ? j.GetField ("src").str : null;
@@ -46,6 +52,7 @@ public class VRUI_Image: VRUI_Object {
 				tex = FileManager.ReadImageFromResources (null, sTextureFname);
 			}
 			VRUI_Image vruiImage = VRUI_Image.Create (tex, height);
+			vruiImage.ReadDataFromJson (j);
 			return vruiImage;
 		}
 
