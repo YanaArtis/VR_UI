@@ -104,7 +104,7 @@ public class VRUI_TestScript : MonoBehaviour {
 		float noHitDistance = 3f;
 		if (Application.isEditor) {
 			Texture2D imgMouse = FileManager.ReadImageFromResources (null, "reticle_mouse");
-			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.1f, noHitDistance, false);
+			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.1f, noHitDistance, false, 0f, -0.07f);
 //			reticleMouse = VRUI_Reticle.Create (imgMouse, 0.1f, noHitDistance, true); // false);
 		}
 

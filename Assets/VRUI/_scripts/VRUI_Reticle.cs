@@ -13,6 +13,9 @@ public class VRUI_Reticle : VRUI_Object {
 	private Texture2D _texture;
 	private Material _material;
 	private MeshRenderer _meshRenderer;
+	private GameObject _goCursor;
+	private float _dx = 0f;
+	private float _dy = 0f;
 
 	private const float DISTANCE_TO_SURFACE = 0.04f;
 
@@ -21,25 +24,31 @@ public class VRUI_Reticle : VRUI_Object {
 	protected VRUI_Reticle () : base () {}
 
 	public static VRUI_Reticle Create (Texture2D texture, float cursorHeight
-		, float noHitDistance, bool isGaze) {
+		, float noHitDistance, bool isGaze,float dx, float dy) {
 
-		GameObject go = GameObject.CreatePrimitive (PrimitiveType.Quad);
-		Destroy (go.GetComponent<MeshCollider> ());
+		GameObject go = new GameObject ();
 		VRUI_Reticle vruiReticle = go.AddComponent<VRUI_Reticle> ();
 		VRUI_Reticle.Init ();
-		vruiReticle._meshRenderer = go.GetComponent<MeshRenderer> ();
+		vruiReticle._goCursor = GameObject.CreatePrimitive (PrimitiveType.Quad);
+		Destroy (vruiReticle._goCursor.GetComponent<MeshCollider> ());
+		vruiReticle._meshRenderer = vruiReticle._goCursor.GetComponent<MeshRenderer> ();
 		vruiReticle._isGaze = isGaze;
+		vruiReticle._dx = dx;
+		vruiReticle._dy = dy;
 
 		try {
-//			vruiReticle._material = new Material (shaderTransparent);
 			vruiReticle._material = new Material (VRUI_ShaderManager.GetShader ("Unlit/Transparent"));
 		} catch (System.Exception e) {
 			FileManager.WriteToLog (e.ToString());
 		}
 
 		vruiReticle.SetCursor (texture);
-		go.transform.localScale = new Vector3 (cursorHeight*(float)texture.width/(float)texture.height, cursorHeight, 1f);
 		go.transform.localRotation = Quaternion.Euler (0f, 0f, 0f);
+		vruiReticle._goCursor.transform.SetParent (go.transform);
+		vruiReticle._goCursor.transform.localScale = new Vector3 (cursorHeight*(float)texture.width/(float)texture.height, cursorHeight, 1f);
+		vruiReticle._goCursor.transform.localRotation = Quaternion.Euler (0f, 0f, 0f);
+		vruiReticle._goCursor.transform.localPosition = new Vector3 (vruiReticle._dx, vruiReticle._dy, 0f);
+		vruiReticle._goCursor.name = "Cursor";
 		Bounds bounds = vruiReticle._meshRenderer.bounds;
 		vruiReticle._width = bounds.size.x;
 		vruiReticle._height = bounds.size.y;
@@ -48,16 +57,12 @@ public class VRUI_Reticle : VRUI_Object {
 
 		++_counter;
 		go.name = "VRUI_Reticle ("+_counter+")";
-
-		/*
-		GameObject go2 = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-		Destroy (go2.GetComponent<MeshCollider> ());
-		go2.transform.SetParent (go.transform);
-		go2.transform.localPosition = Vector3.zero;
-		go2.transform.localScale = Vector3.one;
-		*/
-
 		return vruiReticle;
+	}
+
+	public static VRUI_Reticle Create (Texture2D texture, float cursorHeight
+		, float noHitDistance, bool isGaze) {
+		return Create (texture, cursorHeight, noHitDistance, isGaze, 0f, 0f);
 	}
 
 	void LateUpdate () {
