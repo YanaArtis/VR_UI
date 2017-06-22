@@ -5,8 +5,7 @@ using UnityEngine;
 public class VRUI_Container : VRUI_Object {
 	public enum Surface {PLANE, CYLINDER, SPHERE}
 	private Surface _surface;
-	public enum Layout {VERTICAL, HORIZONTAL
-		, ABSOLUTE	// With coordinates of items
+	public enum Layout {VERTICAL, HORIZONTAL, ZSORTED
 		, RELATIVE	// not implemented yet
 		, GRID		// not implemented yet
 		, LIST		// not implemented yet
@@ -80,7 +79,7 @@ public class VRUI_Container : VRUI_Object {
 			(obj as VRUI_Text).SetAnchor (TextAnchor.MiddleCenter);
 		}
 		switch (_layout) {
-		case Layout.ABSOLUTE:
+		case Layout.ZSORTED:
 			obj.transform.localPosition = obj.transform.position;
 			break;
 		}
@@ -381,8 +380,8 @@ public class VRUI_Container : VRUI_Object {
 			layout = Layout.VERTICAL;
 		} else if ("HORIZONTAL".Equals (sLayout)) {
 			layout = Layout.HORIZONTAL;
-		} else if ("ABSOLUTE".Equals (sLayout)) {
-			layout = Layout.ABSOLUTE;
+		} else if ("ZSORTED".Equals (sLayout)) {
+			layout = Layout.ZSORTED;
 //		} else if ("FRAME".Equals (sLayout)) {
 //			layout = Layout.FRAME;
 		} else if ("GRID".Equals (sLayout)) {
@@ -394,9 +393,9 @@ public class VRUI_Container : VRUI_Object {
 		}
 
 		string sClrBg = j.HasField("color_background") ? j.GetField ("color_background").str : null;
-		Color clrBg = VRUI_Object.ParseColor (sClrBg);
+		Color clrBg = VRUI_Utils.ParseColor (sClrBg);
 		string sClrBorder = j.HasField("color_border") ? j.GetField ("color_border").str : null;
-		Color clrBorder = VRUI_Object.ParseColor (sClrBorder);
+		Color clrBorder = VRUI_Utils.ParseColor (sClrBorder);
 		VRUI_Container vruiContainer = Create (width, height, layout, clrBg, clrBorder);
 
 		vruiContainer.ReadDataFromJson (j);

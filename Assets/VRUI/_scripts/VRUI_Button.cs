@@ -183,7 +183,7 @@ public class VRUI_Button : VRUI_Container {
 	}
 
 	public void AddText (string s) {
-		Color textColor = (_clrBg == Color.clear) ? ((_clrBorder == Color.clear) ? Color.blue : _clrBorder) : AdditionalColor (_clrBg);
+		Color textColor = (_clrBg == Color.clear) ? ((_clrBorder == Color.clear) ? Color.blue : _clrBorder) : VRUI_Utils.AdditionalColor (_clrBg);
 		AddText (s, _height/2, textColor);
 	}
 
@@ -221,35 +221,35 @@ public class VRUI_Button : VRUI_Container {
 					if ("NORMAL".Equals(sId)) {
 						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
 						Debug.Log ("NORMAL: "+sClr);
-						_clrBg = VRUI_Object.ParseColor (sClr);
+						_clrBg = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
 						Debug.Log ("NORMAL: "+sClr);
-						_clrBorder = VRUI_Object.ParseColor (sClr);
+						_clrBorder = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
 						Debug.Log ("NORMAL: "+sClr);
-						_clrText = VRUI_Object.ParseColor (sClr);
+						_clrText = VRUI_Utils.ParseColor (sClr);
 						Debug.Log ("NORMAL: "+_clrBg+", "+_clrBorder+", "+_clrText);
 					} else if ("OVER".Equals(sId)) {
 						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
-						_clrOverBg = VRUI_Object.ParseColor (sClr);
+						_clrOverBg = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
-						_clrOverBorder = VRUI_Object.ParseColor (sClr);
+						_clrOverBorder = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
-						_clrOverText = VRUI_Object.ParseColor (sClr);
+						_clrOverText = VRUI_Utils.ParseColor (sClr);
 					} else if ("ACTIVATED".Equals(sId)) {
 						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
-						_clrActivatedBg = VRUI_Object.ParseColor (sClr);
+						_clrActivatedBg = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
-						_clrActivatedBorder = VRUI_Object.ParseColor (sClr);
+						_clrActivatedBorder = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
-						_clrActivatedText = VRUI_Object.ParseColor (sClr);
+						_clrActivatedText = VRUI_Utils.ParseColor (sClr);
 					} else if ("DISABLED".Equals(sId)) {
 						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
-						_clrDisabledBg = VRUI_Object.ParseColor (sClr);
+						_clrDisabledBg = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
-						_clrDisabledBorder = VRUI_Object.ParseColor (sClr);
+						_clrDisabledBorder = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
-						_clrDisabledText = VRUI_Object.ParseColor (sClr);
+						_clrDisabledText = VRUI_Utils.ParseColor (sClr);
 					}
 				}
 			}
@@ -266,8 +266,8 @@ public class VRUI_Button : VRUI_Container {
 			layout = Layout.VERTICAL;
 		} else if ("HORIZONTAL".Equals (sLayout)) {
 			layout = Layout.HORIZONTAL;
-		} else if ("ABSOLUTE".Equals (sLayout)) {
-			layout = Layout.ABSOLUTE;
+		} else if ("ZSORTED".Equals (sLayout)) {
+			layout = Layout.ZSORTED;
 //		} else if ("FRAME".Equals (sLayout)) {
 //			layout = Layout.FRAME;
 		} else if ("GRID".Equals (sLayout)) {

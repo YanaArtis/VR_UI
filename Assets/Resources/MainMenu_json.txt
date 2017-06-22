@@ -9,10 +9,10 @@
 ,	"vrui_objects":
 	[	{	"id":"btnToursOnPhone"
 		,	"type":"VRUI_Button"
-		,	"width":0.55
-		,	"height":0.085
+		,	"width":"0.55m"
+		,	"height":"0.085m"
 		,	"layout":"HORIZONTAL"
-		,	"margin":0.01
+		,	"margin":"0.01m"
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
@@ -42,16 +42,16 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Text"
 				,	"text":"Tours on phone"
-				,	"height":0.07
+				,	"height":"0.07m"
 				}
 			]
 		}
 	,	{	"id":"btnToursFromWeb"
 		,	"type":"VRUI_Button"
-		,	"width":0.55
-		,	"height":0.085
+		,	"width":"0.55m"
+		,	"height":"0.085m"
 		,	"layout":"HORIZONTAL"
-		,	"margin":0.01
+		,	"margin":"0.01m"
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
@@ -81,16 +81,16 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Text"
 				,	"text":"Tours from Web"
-				,	"height":0.07
+				,	"height":"0.07m"
 				}
 			]
 		}
 	,	{	"id":"btnAbout"
 		,	"type":"VRUI_Button"
-		,	"width":0.55
-		,	"height":0.085
+		,	"width":"0.55m"
+		,	"height":"0.085m"
 		,	"layout":"HORIZONTAL"
-		,	"margin":0.01
+		,	"margin":"0.01m"
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
@@ -120,16 +120,16 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Text"
 				,	"text":"About"
-				,	"height":0.07
+				,	"height":"0.07m"
 				}
 			]
 		}
 	,	{	"id":"btnSettings"
 		,	"type":"VRUI_Button"
-		,	"width":0.55
-		,	"height":0.085
+		,	"width":"0.55m"
+		,	"height":"0.085m"
 		,	"layout":"HORIZONTAL"
-		,	"margin":0.01
+		,	"margin":"0.01m"
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
@@ -159,25 +159,25 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Text"
 				,	"text":"Settings"
-				,	"height":0.07
+				,	"height":"0.07m"
 				}
 			]
 		}
 	,	{	"id":"SettingsContainer"
 		,	"type":"VRUI_Container"
 		,	"layout":"VERTICAL"
-		,	"width":0.6
-		,	"height":0.43
+		,	"width":"0.6m"
+		,	"height":"0.43m"
 		,	"gravity":"TOP|HCENTER"
 		,	"color_background":"#00000000"
 		,	"color_border":"#00000000"
 		,	"vrui_objects":
 			[	{	"id":"btnFAQ"
 				,	"type":"VRUI_Button"
-				,	"width":0.55
-				,	"height":0.085
+				,	"width":"0.55m"
+				,	"height":"0.085m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.01
+				,	"margin":"0.01m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -207,16 +207,16 @@
 				,	"vrui_objects":
 					[	{	"type":"VRUI_Text"
 						,	"text":"FAQ"
-						,	"height":0.07
+						,	"height":"0.07m"
 						}
 					]
 				}
 			,	{	"id":"btnTerms"
 				,	"type":"VRUI_Button"
-				,	"width":0.55
-				,	"height":0.085
+				,	"width":"0.55m"
+				,	"height":"0.085m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.01
+				,	"margin":"0.01m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -246,16 +246,16 @@
 				,	"vrui_objects":
 					[	{	"type":"VRUI_Text"
 						,	"text":"Terms & Policies"
-						,	"height":0.07
+						,	"height":"0.07m"
 						}
 					]
 				}
 			,	{	"id":"btnLogout"
 				,	"type":"VRUI_Button"
-				,	"width":0.55
-				,	"height":0.085
+				,	"width":"0.55m"
+				,	"height":"0.085m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.01
+				,	"margin":"0.01m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -285,16 +285,16 @@
 				,	"vrui_objects":
 					[	{	"type":"VRUI_Text"
 						,	"text":"Log Out"
-						,	"height":0.07
+						,	"height":"0.07m"
 						}
 					]
 				}
 			,	{	"id":"btnContactUs"
 				,	"type":"VRUI_Button"
-				,	"width":0.55
-				,	"height":0.085
+				,	"width":"0.55m"
+				,	"height":"0.085m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.01
+				,	"margin":"0.01m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -324,7 +324,7 @@
 				,	"vrui_objects":
 					[	{	"type":"VRUI_Text"
 						,	"text":"Contact Us"
-						,	"height":0.07
+						,	"height":"0.07m"
 						}
 					]
 				}

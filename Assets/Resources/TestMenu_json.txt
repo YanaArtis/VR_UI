@@ -1,25 +1,25 @@
 ﻿{	"id":"Test Menu"
 ,	"type":"VRUI_Container"
 ,	"layout":"VERTICAL"
-,	"width":0.6
-,	"height":0.35
-,	"padding":0.03
+,	"width":"0.6m"
+,	"height":"0.35m"
+,	"padding":"0.03m"
 ,	"gravity":"VCENTER|HCENTER"
 ,	"color_background":"#FF808080"
 ,	"color_border":"#FF0000FF"
 ,	"vrui_objects":
 	[	{	"id":"Test Menu"
 		,	"type":"VRUI_Text"
-		,	"height":0.07
+		,	"height":"0.07m"
 		,	"text":"Choose App State:"
 		,	"color":"#FFFFFFFF"
 		}
 	,	{	"id":"btnMainMenu"
 		,	"type":"VRUI_Button"
-		,	"width":0.55
-		,	"height":0.085
+		,	"width":"0.55m"
+		,	"height":"0.085m"
 		,	"layout":"HORIZONTAL"
-		,	"margin":0.01
+		,	"margin":"0.01m"
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
@@ -49,21 +49,21 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Text"
 				,	"text":"Main Menu"
-				,	"height":0.07
+				,	"height":"0.07m"
 				}
 			,	{	"type":"VRUI_Image"
 				,	"src": "info"
-				,	"height":0.07
-				,	"margin_left":0.03
+				,	"height":"0.07m"
+				,	"margin_left":"0.03m"
 				}
 			]
 		}
 	,	{	"id":"btnTourMenu"
 		,	"type":"VRUI_Button"
-		,	"width":0.55
-		,	"height":0.085
+		,	"width":"0.55m"
+		,	"height":"0.085m"
 		,	"layout":"HORIZONTAL"
-		,	"margin":0.01
+		,	"margin":"0.01m"
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
@@ -93,12 +93,12 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Text"
 				,	"text":"Tour Menu"
-				,	"height":0.07
+				,	"height":"0.07m"
 				}
 			,	{	"type":"VRUI_Image"
 				,	"src": "faq"
-				,	"height":0.07
-				,	"margin_left":0.03
+				,	"height":"0.07m"
+				,	"margin_left":"0.03m"
 				}
 			]
 		}

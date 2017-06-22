@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Add width/height "MATCH_PARENT" value.
+// TODO: Add width/height "MATCH_PARENT", "WRAP_CONTENT", "XXXm" (in meters), "XXXg" (in grades) values - let they be in text.
 // TODO: Add weight in percent and in units to create proportional autocalculated size for container's child.
 // TODO: Create VRUI_Text with default color from code. Now such VRUI_Text can be created fron JSON only.
 // TODO: Add styles - for easier buttons colors setting.

@@ -18,7 +18,7 @@ public class VRUI_Text : VRUI_Object {
 	protected VRUI_Text () : base () {}
 
 	protected static VRUI_Text _Create (string ss, float stringHeight, Color color, Font font) {
-		string s = DecodeEncodedNonAsciiCharacters(ss);
+		string s = VRUI_Utils.DecodeEncodedNonAsciiCharacters(ss);
 
 		GameObject go = new GameObject();
 		VRUI_Text vruiText = go.AddComponent<VRUI_Text> ();
@@ -109,7 +109,7 @@ public class VRUI_Text : VRUI_Object {
 		float oldWidth = _width;
 		(this as VRUI_Object).ReadDataFromJson (j);
 		_sDefaultColor = j.HasField ("color") ? j.GetField ("color").str : null;
-		_defaultColor = (_sDefaultColor == null) ? Color.black : ParseColor (_sDefaultColor);
+		_defaultColor = (_sDefaultColor == null) ? Color.black : VRUI_Utils.ParseColor (_sDefaultColor);
 		_width = oldWidth;
 	}
 
@@ -119,7 +119,7 @@ public class VRUI_Text : VRUI_Object {
 		float stringHeight = j.HasField ("height") ? j.GetField ("height").f : parentHeight;
 		string text = j.HasField ("text") ? j.GetField ("text").str : null;
 		string sColor = j.HasField ("color") ? j.GetField ("color").str : null;
-		Color color = (sColor == null) ? Color.black : ParseColor (sColor);
+		Color color = (sColor == null) ? Color.black : VRUI_Utils.ParseColor (sColor);
 		string sFont = j.HasField ("font") ? j.GetField ("font").str : null;
 //		Debug.Log ("text: \""+text+"\"");
 //		Debug.Log ("stringHeight: "+stringHeight);
