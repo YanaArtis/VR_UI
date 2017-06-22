@@ -4,9 +4,12 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0%20License-blue.svg)](https://github.com/YanaArtis/VR_UI/blob/master/LICENSE.txt)
 
 ### Build Status
-Now VR_UI is in pre-alpha state. The actual code is in develop branch. Master branch still has very early set of code.
+Now VR_UI is in alpha state.
 
 ### News
+**6/22/2017**
+Alpha version merged into master.
+
 **6/20/2017**
 Oculus Rift+Touch support implemented. Managers for Fonts and Shaders implemented.
 
