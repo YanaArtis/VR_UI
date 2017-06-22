@@ -59,6 +59,20 @@ public class VRUI_Container : VRUI_Object {
 		Refresh ();
 	}
 
+	protected void SetTextsColor (Color newTextColor) {
+		for (int i = 0; i < _objects.Count; i++) {
+			if (_objects [i] is VRUI_Text) {
+				if (!(_objects [i] as VRUI_Text).HasDefaultColor ()) {
+					(_objects [i] as VRUI_Text).SetColor (newTextColor);
+				}
+			} else if (_objects [i] is VRUI_Button) {
+				// Do nothing
+			} else if (_objects [i] is VRUI_Container) {
+				(_objects [i] as VRUI_Container).SetTextsColor (newTextColor);
+			}
+		}
+	}
+
 	public void Add (VRUI_Object obj) {
 		_objects.Add (obj);
 		obj.transform.SetParent (transform);

@@ -132,16 +132,6 @@ public class VRUI_Button : VRUI_Container {
 		}
 	}
 
-	private void SetTextsColor (Color newTextColor) {
-		for (int i = 0; i < _objects.Count; i++) {
-			if (_objects [i] is VRUI_Text) {
-				if (!(_objects [i] as VRUI_Text).HasDefaultColor ()) {
-					(_objects [i] as VRUI_Text).SetColor (newTextColor);
-				}
-			}
-		}
-	}
-
 	public void SetStateImage (State theState, Texture2D texture) {
 	}
 
