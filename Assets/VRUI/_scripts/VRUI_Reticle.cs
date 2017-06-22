@@ -35,6 +35,7 @@ public class VRUI_Reticle : VRUI_Object {
 		vruiReticle._isGaze = isGaze;
 		vruiReticle._dx = dx;
 		vruiReticle._dy = dy;
+		vruiReticle._height = cursorHeight;
 
 		try {
 			vruiReticle._material = new Material (VRUI_ShaderManager.GetShader ("Unlit/Transparent"));
@@ -42,10 +43,9 @@ public class VRUI_Reticle : VRUI_Object {
 			FileManager.WriteToLog (e.ToString());
 		}
 
-		vruiReticle.SetCursor (texture);
 		go.transform.localRotation = Quaternion.Euler (0f, 0f, 0f);
 		vruiReticle._goCursor.transform.SetParent (go.transform);
-		vruiReticle._goCursor.transform.localScale = new Vector3 (cursorHeight*(float)texture.width/(float)texture.height, cursorHeight, 1f);
+		vruiReticle.SetCursor (texture);
 		vruiReticle._goCursor.transform.localRotation = Quaternion.Euler (0f, 0f, 0f);
 		vruiReticle._goCursor.transform.localPosition = new Vector3 (vruiReticle._dx, vruiReticle._dy, 0f);
 		vruiReticle._goCursor.name = "Cursor";
@@ -111,6 +111,14 @@ public class VRUI_Reticle : VRUI_Object {
 	}
 
 	public void SetCursor (Texture2D texture) {
+		if (texture == null) {
+			_width = _height;
+			_goCursor.SetActive (false);
+		} else {
+			_width = _height * (float)texture.width / (float)texture.height;
+			_goCursor.SetActive (true);
+		}
+		_goCursor.transform.localScale = new Vector3 (_width, _height, 1f);
 		_material.mainTexture = texture;
 		_meshRenderer.material = _material;
 	}
