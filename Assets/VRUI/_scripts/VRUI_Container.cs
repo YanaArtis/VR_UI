@@ -5,9 +5,12 @@ using UnityEngine;
 public class VRUI_Container : VRUI_Object {
 	public enum Surface {PLANE, CYLINDER, SPHERE}
 	private Surface _surface;
-	public enum Layout {VERTICAL, HORIZONTAL, GRID, RELATIVE, LIST
+	public enum Layout {VERTICAL, HORIZONTAL
 		, ABSOLUTE	// With coordinates of items
-		, FRAME		// Place items over each others
+		, RELATIVE	// not implemented yet
+		, GRID		// not implemented yet
+		, LIST		// not implemented yet
+//		, FRAME		// Place items over each others
 	}
 	public Layout _layout = Layout.VERTICAL;
 	public const int GRAVITY_LEFT = 1;
@@ -42,11 +45,8 @@ public class VRUI_Container : VRUI_Object {
 
 		vruiContainer._clrBg = clrBg;
 		vruiContainer._clrBorder = clrBorder;
-
-//		if ((clrBg != Color.clear) || (clrBorder != Color.clear)) {
-			vruiContainer._vruiPanel = VRUI_Panel.Create (width, height, clrBg, clrBorder);
-			vruiContainer._vruiPanel.transform.SetParent (go.transform);
-//		}
+		vruiContainer._vruiPanel = VRUI_Panel.Create (width, height, clrBg, clrBorder);
+		vruiContainer._vruiPanel.transform.SetParent (go.transform);
 
 		++_counter;
 		go.name = "VRUI_Container ("+_counter+")";
@@ -62,6 +62,9 @@ public class VRUI_Container : VRUI_Object {
 	public void Add (VRUI_Object obj) {
 		_objects.Add (obj);
 		obj.transform.SetParent (transform);
+		if (obj is VRUI_Text) {
+			(obj as VRUI_Text).SetAnchor (TextAnchor.MiddleCenter);
+		}
 		switch (_layout) {
 		case Layout.ABSOLUTE:
 			obj.transform.localPosition = obj.transform.position;
@@ -72,9 +75,6 @@ public class VRUI_Container : VRUI_Object {
 
 	public override void Refresh () {
 		switch (_layout) {
-		case Layout.ABSOLUTE:
-//			obj.transform.localPosition = obj.transform.position;
-			break;
 		case Layout.VERTICAL:
 			CalculateLayout_Vertical ();
 			break;
@@ -89,16 +89,10 @@ public class VRUI_Container : VRUI_Object {
 		TextAnchor textAnchor = TextAnchor.MiddleCenter;
 		if (IsGravityLeft (_gravity)) {
 			x = -_width / 2f + _paddingLeft;
-//			textAnchor = IsGravityTop (_gravity) ? TextAnchor.UpperLeft : (IsGravityBottom (_gravity) ? TextAnchor.LowerLeft : TextAnchor.MiddleLeft);
-//			textAnchor = IsGravityBottom (_gravity) ? TextAnchor.LowerLeft : TextAnchor.UpperLeft;
 		} else if (IsGravityRight (_gravity)) {
 			x = _width / 2f - _paddingRight;
-//			textAnchor = IsGravityTop (_gravity) ? TextAnchor.UpperRight : (IsGravityBottom (_gravity) ? TextAnchor.LowerRight : TextAnchor.MiddleRight);
-//			textAnchor = IsGravityBottom (_gravity) ? TextAnchor.LowerRight : TextAnchor.UpperRight;
 		} else {
 			x = 0f;
-//			textAnchor = IsGravityTop (_gravity) ? TextAnchor.UpperCenter : (IsGravityBottom (_gravity) ? TextAnchor.LowerCenter : TextAnchor.MiddleCenter);
-//			textAnchor = IsGravityBottom (_gravity) ? TextAnchor.LowerCenter : TextAnchor.UpperCenter;
 		}
 
 		// Calculate total objects height
@@ -117,7 +111,7 @@ public class VRUI_Container : VRUI_Object {
 			y = topY;
 			for (i = 0; (i < _objects.Count) && (y > bottomY); i++) {
 //				Debug.Log ("CalculateLayout_Vertical() IsGravityTop "+i+" setActive(true)");
-				Debug.Log ("Object #"+i+" ("+_objects[i]._id+") margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
+//				Debug.Log ("Object #"+i+" ("+_objects[i]._id+") margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y -= (_objects [i].marginTop + _objects [i].paddingTop);
@@ -132,7 +126,7 @@ public class VRUI_Container : VRUI_Object {
 			y = bottomY;
 			for (i = _objects.Count-1; (i >= 0) && (y < topY); i--) {
 //				Debug.Log ("CalculateLayout_Vertical() IsGravityBottom "+i+" setActive(true)");
-				Debug.Log ("Object #"+i+" ("+_objects[i]._id+") margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
+//				Debug.Log ("Object #"+i+" ("+_objects[i]._id+") margins top: "+_objects[i].marginTop+", bottom: "+_objects[i].marginBottom+" paddings top: "+_objects[i].paddingTop+", bottom: "+_objects[i].paddingBottom);
 				_objects [i].gameObject.SetActive (true);
 				float objX = x + GetObjectDeltaX_forVerticalLayout (_objects [i]._width);
 				y += (_objects [i].marginBottom + _objects [i].paddingBottom);
@@ -375,8 +369,8 @@ public class VRUI_Container : VRUI_Object {
 			layout = Layout.HORIZONTAL;
 		} else if ("ABSOLUTE".Equals (sLayout)) {
 			layout = Layout.ABSOLUTE;
-		} else if ("FRAME".Equals (sLayout)) {
-			layout = Layout.FRAME;
+//		} else if ("FRAME".Equals (sLayout)) {
+//			layout = Layout.FRAME;
 		} else if ("GRID".Equals (sLayout)) {
 			layout = Layout.GRID;
 		} else if ("LIST".Equals (sLayout)) {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VRUI_Text : VRUI_Object {
+	public string _sDefaultColor = null;
+	public Color _defaultColor;
+
 	private TextMesh _textMesh;
 	private MeshRenderer _meshRenderer;
 
@@ -98,9 +101,15 @@ public class VRUI_Text : VRUI_Object {
 		_textMesh.color = newColor;
 	}
 
+	public bool HasDefaultColor () {
+		return (_sDefaultColor != null);
+	}
+
 	public void ReadDataFromJson (JSONObject j) {
 		float oldWidth = _width;
 		(this as VRUI_Object).ReadDataFromJson (j);
+		_sDefaultColor = j.HasField ("color") ? j.GetField ("color").str : null;
+		_defaultColor = (_sDefaultColor == null) ? Color.black : ParseColor (_sDefaultColor);
 		_width = oldWidth;
 	}
 

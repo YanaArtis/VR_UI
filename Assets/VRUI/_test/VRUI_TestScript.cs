@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: add styles
+// TODO: Add styles - for easier buttons colors setting.
+// TODO: Add to container attribute that container is perpendicular to user sight. Now all containers by default lies in Y plane.
 
 public class VRUI_TestScript : MonoBehaviour {
 	public GameObject mainCamera;

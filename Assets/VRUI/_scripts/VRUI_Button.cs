@@ -135,7 +135,9 @@ public class VRUI_Button : VRUI_Container {
 	private void SetTextsColor (Color newTextColor) {
 		for (int i = 0; i < _objects.Count; i++) {
 			if (_objects [i] is VRUI_Text) {
-				(_objects [i] as VRUI_Text).SetColor (newTextColor);
+				if (!(_objects [i] as VRUI_Text).HasDefaultColor ()) {
+					(_objects [i] as VRUI_Text).SetColor (newTextColor);
+				}
 			}
 		}
 	}
@@ -262,7 +264,6 @@ public class VRUI_Button : VRUI_Container {
 				}
 			}
 		}
-
 	}
 
 	public static VRUI_Button CreateFromJSON (JSONObject j) {
@@ -277,8 +278,8 @@ public class VRUI_Button : VRUI_Container {
 			layout = Layout.HORIZONTAL;
 		} else if ("ABSOLUTE".Equals (sLayout)) {
 			layout = Layout.ABSOLUTE;
-		} else if ("FRAME".Equals (sLayout)) {
-			layout = Layout.FRAME;
+//		} else if ("FRAME".Equals (sLayout)) {
+//			layout = Layout.FRAME;
 		} else if ("GRID".Equals (sLayout)) {
 			layout = Layout.GRID;
 		} else if ("LIST".Equals (sLayout)) {

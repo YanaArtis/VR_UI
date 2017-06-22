@@ -81,7 +81,7 @@
 				,	"type":"VRUI_Button"
 				,	"width":0.16
 				,	"height":0.16
-				,	"layout":"HORIZONTAL"
+				,	"layout":"ABSOLUTE"
 				,	"margin":0.02
 				,	"states":
 					[	{	"id":"NORMAL"
@@ -113,6 +113,12 @@
 					[	{	"type":"VRUI_Text"
 						,	"text":"\uf08a"
 						,	"font":"fontawesome-webfont"
+						}
+					,	{	"type":"VRUI_Text"
+						,	"text":"123"
+						,	"height":0.06
+						,	"font":"fontawesome-webfont"
+						,	"color":"#FFFFFF00"
 						}
 					]
 				}
