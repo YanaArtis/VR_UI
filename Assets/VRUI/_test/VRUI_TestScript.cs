@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Add width/height "MATCH_PARENT" value.
+// TODO: Add weight in percent and in units to create proportional autocalculated size for container's child.
 // TODO: Create VRUI_Text with default color from code. Now such VRUI_Text can be created fron JSON only.
 // TODO: Add styles - for easier buttons colors setting.
+// TODO: Add mask for partially seen elements in containers. Now they are hidden.
 // TODO: Add to container attribute that container is perpendicular to user sight. Now all containers by default lies in Y plane.
 
 public class VRUI_TestScript : MonoBehaviour {
