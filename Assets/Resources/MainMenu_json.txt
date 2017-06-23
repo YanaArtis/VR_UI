@@ -164,6 +164,7 @@
 			]
 		}
 	,	{	"id":"SettingsContainer"
+		,	"visibility":"INVISIBLE"
 		,	"type":"VRUI_Container"
 		,	"layout":"VERTICAL"
 		,	"width":"0.6m"

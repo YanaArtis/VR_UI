@@ -32,6 +32,7 @@ public class VRUI_TestScript : MonoBehaviour {
 	VRUI_Button btnShowTourMenu;
 	VRUI_Button btnModeCardboard;
 	VRUI_Button btnModeTablet;
+	VRUI_Button btnAbout;
 
 	void Start () {
 		InitReticles ();
@@ -64,6 +65,10 @@ public class VRUI_TestScript : MonoBehaviour {
 
 		VRUI_Button btnExpandTourMenu = tourMenuBrief.FindById ("btnTourMenuExpand") as VRUI_Button;
 		btnExpandTourMenu.SetOnActivatedDelegate (OnButtonExpandTourMenu);
+
+		btnAbout = mainMenu.FindById ("btnAbout") as VRUI_Button;
+		VRUI_Button btnToursFromWeb = mainMenu.FindById ("btnToursFromWeb") as VRUI_Button;
+		btnToursFromWeb.SetOnActivatedDelegate (OnButtonToursFromWeb);
 
 		btnModeCardboard = tourMenuBrief.FindById ("btnCardboardMode") as VRUI_Button;
 		btnModeCardboard.SetOnActivatedDelegate (OnButtonModeCardboard);
@@ -150,11 +155,13 @@ public class VRUI_TestScript : MonoBehaviour {
 
 	public void OnButtonShowMainMenu (string buttonId) {
 		mainMenu.gameObject.SetActive (true);
-		settingsSubMenu.gameObject.SetActive (false);
+//		settingsSubMenu.gameObject.SetActive (false);
+		settingsSubMenu.SetVisibility (VRUI_Object.Visibility.INVISIBLE);
 		tourMenu.gameObject.SetActive (false);
 		tourMenuBrief.gameObject.SetActive (false);
 		btnShowMainMenu.SetState (VRUI_Button.State.DISABLED);
 		btnShowTourMenu.SetState (VRUI_Button.State.NORMAL);
+		mainMenu.Refresh ();
 	}
 
 	public void OnButtonShowTourMenu (string buttonId) {
@@ -166,7 +173,9 @@ public class VRUI_TestScript : MonoBehaviour {
 	}
 
 	public void OnButtonSettings (string buttonId) {
-		settingsSubMenu.gameObject.SetActive (!settingsSubMenu.gameObject.activeSelf);
+//		settingsSubMenu.gameObject.SetActive (!settingsSubMenu.gameObject.activeSelf);
+		settingsSubMenu.SetVisibility ((settingsSubMenu.GetVisibility() == VRUI_Object.Visibility.VISIBLE) ? VRUI_Object.Visibility.INVISIBLE : VRUI_Object.Visibility.VISIBLE);
+		mainMenu.Refresh ();
 	}
 
 	public void OnButtonExpandTourMenu (string buttonId) {
@@ -189,6 +198,11 @@ public class VRUI_TestScript : MonoBehaviour {
 		btnModeCardboard.SetVisibility (VRUI_Object.Visibility.VISIBLE);
 		btnModeTablet.SetVisibility (VRUI_Object.Visibility.GONE);
 		tourMenuBrief.Refresh ();
+	}
+
+	public void OnButtonToursFromWeb (string buttonId) {
+		btnAbout.SetVisibility ((btnAbout.GetVisibility() == VRUI_Object.Visibility.VISIBLE) ? VRUI_Object.Visibility.GONE : VRUI_Object.Visibility.VISIBLE);
+		mainMenu.Refresh ();
 	}
 
 	/*

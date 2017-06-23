@@ -375,4 +375,8 @@ public class VRUI_Object : MonoBehaviour {
 	public void SetVisibility (Visibility newVisibility) {
 		_visibility = newVisibility;
 	}
+
+	public Visibility GetVisibility () {
+		return _visibility;
+	}
 }
