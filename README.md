@@ -32,6 +32,6 @@ To add VR_UI to your project:
 1. Import JSONObject asset from [Asset Store](https://www.assetstore.unity3d.com/en/#!/content/710).
 2. For Gear VR or Oculus Rift project download Oculus Utilities package from [Oculus Developers Site](https://developer.oculus.com/downloads/unity/) and import the package.
 3. Create Assets/VRUI folder in your Unity3D project, and copy Assets/VRUI/_images and Assets/VRUI/_scripts in this folder.
-4. Choose in Unity3D Editor: Edit -> Project Settings -> Graphics, and add "Unlit/Transparent" to the list of "Always included shaders" in "Built-in shader settings".
+4. Choose in Unity3D Editor: Edit -> Project Settings -> Graphics then add "Unlit/Transparent" and "Unlit/Color" to the list of "Always included shaders" in "Built-in shader settings".
 
 ## Tutorials

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Add delegates to button states.
 // TODO: Refactor VRUI_Object, VRUI_Image and VRUI_Test to make standardized JSON parsing.
 // TODO: Add width/height "MATCH_PARENT", "WRAP_CONTENT", "XXXm" (in meters), "XXXd" (in degrees) values - let they be in text.
 // TODO: Add weight in percent and in units to create proportional autocalculated size for container's child.
@@ -26,6 +25,7 @@ public class VRUI_TestScript : MonoBehaviour {
 
 	VRUI_Container mainMenu;
 	VRUI_Container tourMenu;
+	VRUI_Container settingsSubMenu;
 	VRUI_Button btnShowMainMenu;
 	VRUI_Button btnShowTourMenu;
 
@@ -45,6 +45,10 @@ public class VRUI_TestScript : MonoBehaviour {
 		JSONObject j2 = new JSONObject (sJson2);
 		tourMenu = VRUI_Container.CreateFromJSON (j2);
 		tourMenu.transform.position = new Vector3 (0f, -1f, 2f);
+
+		settingsSubMenu = mainMenu.FindById ("SettingsContainer") as VRUI_Container;
+		VRUI_Button btnSettings = mainMenu.FindById ("btnSettings") as VRUI_Button;
+		btnSettings.SetOnActivatedDelegate (OnButtonSettings);
 
 		btnShowMainMenu = testMenu.FindById ("btnMainMenu") as VRUI_Button;
 //		btnShowMainMenu.SetOnOverDelegate (OnButtonOverDelegate);
@@ -126,6 +130,7 @@ public class VRUI_TestScript : MonoBehaviour {
 
 	public void OnButtonShowMainMenu (string buttonId) {
 		mainMenu.gameObject.SetActive (true);
+		settingsSubMenu.gameObject.SetActive (false);
 		tourMenu.gameObject.SetActive (false);
 		btnShowMainMenu.SetState (VRUI_Button.State.DISABLED);
 		btnShowTourMenu.SetState (VRUI_Button.State.NORMAL);
@@ -136,6 +141,10 @@ public class VRUI_TestScript : MonoBehaviour {
 		tourMenu.gameObject.SetActive (true);
 		btnShowMainMenu.SetState (VRUI_Button.State.NORMAL);
 		btnShowTourMenu.SetState (VRUI_Button.State.DISABLED);
+	}
+
+	public void OnButtonSettings (string buttonId) {
+		settingsSubMenu.gameObject.SetActive (!settingsSubMenu.gameObject.activeSelf);
 	}
 	/*
 	public void OnButtonOverDelegate (string buttonId) {
