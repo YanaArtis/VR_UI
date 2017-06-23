@@ -82,7 +82,8 @@ public class VRUI_Button : VRUI_Container {
 			break;
 		case State.ACTIVATED:
 //			Debug.Log ("Btn " + name + ": state " + _state + ", reticleOver: " + _isReticleOver + ", trigger: " + _isReticleTriggerOn);
-			if (!_isReticleOver) {
+//			if (!_isReticleOver) {
+			if (!_isReticleTriggerOn && !_isGazeOver) {
 				SetState (State.NORMAL);
 			}
 			break;
