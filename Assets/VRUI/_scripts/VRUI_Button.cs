@@ -26,6 +26,14 @@ public class VRUI_Button : VRUI_Container {
 
 	private VRUI_Panel _indicator;
 
+	public delegate void DelegateMethod (string buttonId);
+	private DelegateMethod OnOverDelegate = null;
+	private DelegateMethod OnOutDelegate = null;
+	private DelegateMethod OnActivatedDelegate = null;
+	private bool doOnOverDelegate = false;
+	private bool doOnOutDelegate = false;
+	private bool doOnActivatedDelegate = false;
+
 	private static int _counter = 0;
 
 	protected VRUI_Button () : base () {}
@@ -48,9 +56,9 @@ public class VRUI_Button : VRUI_Container {
 	}
 
 	void LateUpdate () {
-		Debug.Log ("Btn " + name + ": state " + _state + ", reticleOver: " + _isReticleOver + ", trigger: " + _isReticleTriggerOn);
 		switch (_state) {
 		case State.OVER:
+//			Debug.Log ("Btn " + name + ": state " + _state + ", reticleOver: " + _isReticleOver + ", trigger: " + _isReticleTriggerOn);
 			if (_isGazeOver) {
 				if (Time.time <= _gazeEndTime) {
 					ShowGazeIndicator (_gazeEndTime - Time.time, _gazeDelay);
@@ -73,15 +81,27 @@ public class VRUI_Button : VRUI_Container {
 			}
 			break;
 		case State.ACTIVATED:
+//			Debug.Log ("Btn " + name + ": state " + _state + ", reticleOver: " + _isReticleOver + ", trigger: " + _isReticleTriggerOn);
 			if (!_isReticleOver) {
 				SetState (State.NORMAL);
 			}
 			break;
 		}
+		if (doOnOverDelegate) {
+			doOnOverDelegate = false;
+			OnOverDelegate (_id);
+		}
+		if (doOnOutDelegate) {
+			doOnOutDelegate = false;
+			OnOutDelegate (_id);
+		}
+		if (doOnActivatedDelegate) {
+			doOnActivatedDelegate = false;
+			OnActivatedDelegate (_id);
+		}
 		_isGazeOver = _isReticleOver = _isReticleTriggerOn = false;
 	}
 
-	// TODO: make gaze indicator
 	public void ShowGazeIndicator (float timeLeft, float timeTotal) {
 		if (_indicator == null) {
 			_indicator = VRUI_Panel.Create (_width, _height, _clrActivatedBg, Color.clear);
@@ -92,7 +112,6 @@ public class VRUI_Button : VRUI_Container {
 		_indicator.gameObject.SetActive (true);
 		float newWidth = (timeLeft < 0) ? 1 :
 			(Mathf.Abs (timeTotal) < float.Epsilon) ? 1f : (1f - Mathf.Abs (timeLeft / timeTotal));
-//		float newWidth = 0.5f;
 		_indicator.transform.localScale = new Vector3 (newWidth, 1f, 1f);
 	}
 
@@ -142,6 +161,9 @@ public class VRUI_Button : VRUI_Container {
 			_vruiPanel.SetBgColor (_clrBg);
 			_vruiPanel.SetBorderColor (_clrBorder);
 			SetTextsColor (_clrText);
+			if (OnOutDelegate != null) {
+				doOnOutDelegate = true;
+			}
 			break;
 		case State.OVER:
 			_vruiPanel.SetBgColor (_clrOverBg);
@@ -150,17 +172,24 @@ public class VRUI_Button : VRUI_Container {
 
 			_gazeStartTime = Time.time;
 			_gazeEndTime = _gazeStartTime + _gazeDelay;
+			if (OnOverDelegate != null) {
+				doOnOverDelegate = true;
+			}
 			break;
 		case State.ACTIVATED:
 			_vruiPanel.SetBgColor (_clrActivatedBg);
 			_vruiPanel.SetBorderColor (_clrActivatedBorder);
 			SetTextsColor (_clrActivatedText);
-			// TODO: Do the action
+			if (OnActivatedDelegate != null) {
+				doOnActivatedDelegate = true;
+			}
 			break;
 		case State.DISABLED:
 			_vruiPanel.SetBgColor (_clrDisabledBg);
 			_vruiPanel.SetBorderColor (_clrDisabledBorder);
 			SetTextsColor (_clrDisabledText);
+			_isReticleOver = false;
+			_isGazeOver = false;
 			break;
 		}
 		_state = newState;
@@ -207,28 +236,28 @@ public class VRUI_Button : VRUI_Container {
 		(this as VRUI_Container).ReadDataFromJson (j);
 
 		if (j.HasField ("states")) {
-			Debug.Log ("states found");
+//			Debug.Log ("states found");
 			JSONObject jVruiStates = j.GetField ("states");
 			if (jVruiStates.IsArray) {
-				Debug.Log ("It's array");
-				Debug.Log ("" + jVruiStates.list.Count + " entries");
+//				Debug.Log ("It's array");
+//				Debug.Log ("" + jVruiStates.list.Count + " entries");
 				for (int i = 0; i < jVruiStates.list.Count; i++) {
 					string sClr;
 					JSONObject jObj = jVruiStates.list [i];
 					string sId = jObj.HasField("id") ? jObj.GetField ("id").str : null;
-					Debug.Log ("entry #" + i + ": type " + sId);
-					Debug.Log (jObj.ToString ());
+//					Debug.Log ("entry #" + i + ": type " + sId);
+//					Debug.Log (jObj.ToString ());
 					if ("NORMAL".Equals(sId)) {
 						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
-						Debug.Log ("NORMAL: "+sClr);
+//						Debug.Log ("NORMAL: "+sClr);
 						_clrBg = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_border") ? jObj.GetField ("color_border").str : null;
-						Debug.Log ("NORMAL: "+sClr);
+//						Debug.Log ("NORMAL: "+sClr);
 						_clrBorder = VRUI_Utils.ParseColor (sClr);
 						sClr = jObj.HasField("color_text") ? jObj.GetField ("color_text").str : null;
-						Debug.Log ("NORMAL: "+sClr);
+//						Debug.Log ("NORMAL: "+sClr);
 						_clrText = VRUI_Utils.ParseColor (sClr);
-						Debug.Log ("NORMAL: "+_clrBg+", "+_clrBorder+", "+_clrText);
+//						Debug.Log ("NORMAL: "+_clrBg+", "+_clrBorder+", "+_clrText);
 					} else if ("OVER".Equals(sId)) {
 						sClr = jObj.HasField("color_background") ? jObj.GetField ("color_background").str : null;
 						_clrOverBg = VRUI_Utils.ParseColor (sClr);
@@ -295,13 +324,25 @@ public class VRUI_Button : VRUI_Container {
 			layout = Layout.RELATIVE;
 		}
 
-		Debug.Log ("============== Size: " + width + " x " + height + ", layout: " + layout);
-		Debug.Log (j);
+//		Debug.Log ("============== Size: " + width + " x " + height + ", layout: " + layout);
+//		Debug.Log (j);
 
 		VRUI_Button vruiButton = VRUI_Button.Create (width, height, layout);
 		vruiButton.ReadDataFromJson (j);
 		vruiButton.SetState (State.NORMAL);
 
 		return vruiButton;
+	}
+
+	public void SetOnOverDelegate (DelegateMethod del) {
+		OnOverDelegate = del;
+	}
+
+	public void SetOnOutDelegate (DelegateMethod del) {
+		OnOutDelegate = del;
+	}
+
+	public void SetOnActivatedDelegate (DelegateMethod del) {
+		OnActivatedDelegate = del;
 	}
 }

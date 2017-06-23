@@ -305,33 +305,6 @@ public class VRUI_Object : MonoBehaviour {
 			_marginBottom = _layoutMarginBottom.value;
 		}
 
-		/*
-		if (j.HasField("margin")) {
-			float newMargin = j.GetField ("margin").f;
-			_marginLeft = _marginRight = _marginTop = _marginBottom = newMargin;
-		}
-		if (j.HasField("margin_left")) {
-			float newMarginLeft = j.GetField ("margin_left").f;
-			_marginLeft = newMarginLeft;
-		}
-		if (j.HasField("margin_right")) {
-			float newMarginRight = j.GetField ("margin_right").f;
-			_marginRight = newMarginRight;
-		}
-		if (j.HasField("margin_top")) {
-			float newMarginTop = j.GetField ("margin_top").f;
-			Debug.Log ("Object \""+_id+"\": margin_top: "+newMarginTop);
-			_marginTop = newMarginTop;
-			Debug.Log ("_margin_top: "+_marginTop);
-		}
-		if (j.HasField("margin_bottom")) {
-			float newMarginBottom = j.GetField ("margin_bottom").f;
-			Debug.Log ("Object \""+_id+"\": margin_bottom: "+newMarginBottom);
-			_marginBottom = newMarginBottom;
-			Debug.Log ("_marginBottom: "+_marginBottom);
-		}
-		*/
-
 		if (_layoutPaddingLeft == null) {
 			_layoutPaddingLeft = new VRUI_Dimension ();
 		}
@@ -379,29 +352,6 @@ public class VRUI_Object : MonoBehaviour {
 		if (_layoutPaddingBottom.type == VRUI_Dimension.Type.METERS) {
 			_paddingBottom = _layoutPaddingBottom.value;
 		}
-
-		/*
-		if (j.HasField("padding")) {
-			float padding = j.GetField ("padding").f;
-			_paddingLeft = _paddingRight = _paddingTop = _paddingBottom = padding;
-		}
-		if (j.HasField("padding_left")) {
-			float newPaddingLeft = j.GetField ("padding_left").f;
-			_paddingLeft = newPaddingLeft;
-		}
-		if (j.HasField("padding_right")) {
-			float newPaddingRight = j.GetField ("padding_right").f;
-			_paddingRight = newPaddingRight;
-		}
-		if (j.HasField("padding_top")) {
-			float newPaddingTop = j.GetField ("padding_top").f;
-			_paddingTop = newPaddingTop;
-		}
-		if (j.HasField("padding_bottom")) {
-			float newPaddingBottom = j.GetField ("padding_bottom").f;
-			_paddingBottom = newPaddingBottom;
-		}
-		*/
 	}
 
 	public static VRUI_Object CreateFromJSON (JSONObject j) {

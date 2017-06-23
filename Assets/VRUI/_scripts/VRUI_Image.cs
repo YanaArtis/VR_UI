@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VRUI_Image: VRUI_Object {
-//	private Texture2D _texture;
 	private Material _material;
 	private MeshRenderer _meshRenderer;
 	private BoxCollider _boxCollider;
@@ -18,7 +17,6 @@ public class VRUI_Image: VRUI_Object {
 		VRUI_Image.Init ();
 		vruiImage._boxCollider = go.AddComponent<BoxCollider> ();
 		vruiImage._meshRenderer = go.GetComponent<MeshRenderer> ();
-//		vruiImage._material = new Material (shaderTransparent);
 		vruiImage._material = new Material (VRUI_ShaderManager.GetShader ("Unlit/Transparent"));
 		vruiImage._material.mainTexture = tex;
 		vruiImage._meshRenderer.material = vruiImage._material;
@@ -41,7 +39,6 @@ public class VRUI_Image: VRUI_Object {
 	}
 
 	public static VRUI_Image CreateFromJSON (JSONObject j) {
-//		float height = j.HasField ("height") ? j.GetField ("height").f : 1f;
 		float height = 0f;
 		string sHeight = j.HasField("height") ? j.GetField ("height").str : null;
 		VRUI_Dimension d = new VRUI_Dimension ();

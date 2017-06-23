@@ -365,9 +365,6 @@ public class VRUI_Container : VRUI_Object {
 				}
 			}
 		}
-
-//		_layout
-//		_gravity
 	}
 
 	public static VRUI_Container CreateFromJSON (JSONObject j) {
@@ -417,5 +414,27 @@ public class VRUI_Container : VRUI_Object {
 
 		vruiContainer.ReadDataFromJson (j);
 		return vruiContainer;
+	}
+
+	public VRUI_Object FindById (string id) {
+		if (id == null) {
+			return null;
+		}
+		for (int i = 0; i < _objects.Count; i++) {
+			if (id.Equals (_objects [i]._id)) {
+				return _objects [i];
+			} else if (_objects [i] is VRUI_Button) {
+				VRUI_Object obj = (_objects [i] as VRUI_Button).FindById (id);
+				if (obj != null) {
+					return obj;
+				}
+			} else if (_objects [i] is VRUI_Container) {
+				VRUI_Object obj = (_objects [i] as VRUI_Container).FindById (id);
+				if (obj != null) {
+					return obj;
+				}
+			}
+		}
+		return null;
 	}
 }

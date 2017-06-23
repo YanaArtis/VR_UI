@@ -9,7 +9,6 @@ public class VRUI_Text : VRUI_Object {
 	private TextMesh _textMesh;
 	private MeshRenderer _meshRenderer;
 
-//	private static bool isFontDefaultSeekRequired = true;
 	private static float _scaleFactor = 0.0595f;
 	private static int _fontSize = 150;
 
@@ -26,22 +25,11 @@ public class VRUI_Text : VRUI_Object {
 		vruiText.SetColor (color);
 
 		vruiText._meshRenderer = go.GetComponent<MeshRenderer> ();
-//		vruiText.meshRenderer.material = new Material (shaderStandard); //Shader.Find ("Standard"));
-//		vruiText.meshRenderer.material.color = color;
 		vruiText.SetFont (font);
 
-		Debug.Log ("vruiText.textMesh.fontSize: " + vruiText._textMesh.fontSize);
+//		Debug.Log ("vruiText.textMesh.fontSize: " + vruiText._textMesh.fontSize);
 		vruiText._textMesh.fontSize = _fontSize;
 
-		/*
-		vruiText.textMesh.text = s;
-		float scaleFactor = _scaleFactor * stringHeight;
-		go.transform.localScale = new Vector3 (scaleFactor, scaleFactor, scaleFactor);
-
-		Bounds bounds = vruiText.meshRenderer.bounds;
-		vruiText.width = bounds.size.x;
-		vruiText.height = bounds.size.y;
-		*/
 		vruiText._textMesh.text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12334567890|";
 		Bounds bounds = vruiText._meshRenderer.bounds;
 		float scaleFactor = stringHeight / bounds.size.y;
@@ -59,7 +47,6 @@ public class VRUI_Text : VRUI_Object {
 
 	public static VRUI_Text Create (string s, float stringHeight, Color color) {
 		VRUI_Text.Init ();
-//		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, fontDefault);
 		VRUI_Text vruiText = VRUI_Text._Create (s, stringHeight, color, VRUI_FontManager.defaultFont);
 		return vruiText;
 	}
@@ -81,12 +68,7 @@ public class VRUI_Text : VRUI_Object {
 		SetFont (VRUI_FontManager.GetFont (fontName));
 	}
 
-	protected static void Init () {
-//		if (isFontDefaultSeekRequired) {
-//			fontDefault = (Font)Resources.GetBuiltinResource (typeof(Font), "Arial.ttf");
-//				//Instantiate (Resources.FindObjectsOfTypeAll (typeof (Font)) [0]) as Font;
-//		}
-	}
+	protected static void Init () {}
 
 	public void SetAlignment (TextAlignment alignment) {
 		_textMesh.alignment = alignment;
@@ -97,7 +79,7 @@ public class VRUI_Text : VRUI_Object {
 	}
 
 	public void SetColor (Color newColor) {
-		Debug.Log ("VRUI_Text.SetColor(" + newColor + "), text=\"" + _textMesh.text + "\"");
+//		Debug.Log ("VRUI_Text.SetColor(" + newColor + "), text=\"" + _textMesh.text + "\"");
 		_textMesh.color = newColor;
 	}
 
@@ -114,10 +96,6 @@ public class VRUI_Text : VRUI_Object {
 	}
 
 	public static VRUI_Text CreateFromJSON (JSONObject j, float parentHeight) {
-//		Debug.Log ("------------- VRUI_Text CreateFromJSON ()");
-//		Debug.Log (j);
-//		float stringHeight = j.HasField ("height") ? j.GetField ("height").f : parentHeight;
-
 		float stringHeight = parentHeight;
 		string sHeight = j.HasField("height") ? j.GetField ("height").str : null;
 		VRUI_Dimension d = new VRUI_Dimension ();
@@ -132,9 +110,6 @@ public class VRUI_Text : VRUI_Object {
 		string sColor = j.HasField ("color") ? j.GetField ("color").str : null;
 		Color color = (sColor == null) ? Color.black : VRUI_Utils.ParseColor (sColor);
 		string sFont = j.HasField ("font") ? j.GetField ("font").str : null;
-//		Debug.Log ("text: \""+text+"\"");
-//		Debug.Log ("stringHeight: "+stringHeight);
-//		Debug.Log ("color: \t\""+color+"\"");
 		VRUI_Text vruiText = Create (text, stringHeight, color, sFont);
 		vruiText.ReadDataFromJson (j);
 		return vruiText;
