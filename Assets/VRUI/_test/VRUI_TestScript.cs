@@ -5,6 +5,7 @@ using UnityEngine;
 // TODO: Refactor VRUI_Object, VRUI_Image and VRUI_Test to make standardized JSON parsing.
 // TODO: Add width/height "MATCH_PARENT", "WRAP_CONTENT", "XXXm" (in meters), "XXXd" (in degrees) values - let they be in text.
 // TODO: Add weight in percent and in units to create proportional autocalculated size for container's child.
+// TODO: Add parameter "visibility":VISIBLE|INVISIBLE|GONE
 // TODO: Create VRUI_Text with default color from code. Now such VRUI_Text can be created fron JSON only.
 // TODO: Add styles - for easier buttons colors and dimension setting.
 // TODO: Add mask for partially seen elements in containers. Now they are hidden.
@@ -24,8 +25,9 @@ public class VRUI_TestScript : MonoBehaviour {
 	VRUI_Reticle reticleMouse = null;
 
 	VRUI_Container mainMenu;
-	VRUI_Container tourMenu;
 	VRUI_Container settingsSubMenu;
+	VRUI_Container tourMenu;
+	VRUI_Container tourMenuBrief;
 	VRUI_Button btnShowMainMenu;
 	VRUI_Button btnShowTourMenu;
 
@@ -36,19 +38,30 @@ public class VRUI_TestScript : MonoBehaviour {
 		VRUI_Container testMenu = VRUI_Container.CreateFromJSON (j);
 		testMenu.transform.position = new Vector3 (-1.8f, 0f, 2f);
 
-		string sJson1 = FileManager.ReadTextFromResources ("MainMenu_json");
-		JSONObject j1 = new JSONObject (sJson1);
-		mainMenu = VRUI_Container.CreateFromJSON (j1);
+		sJson = FileManager.ReadTextFromResources ("MainMenu_json");
+		j = new JSONObject (sJson);
+		mainMenu = VRUI_Container.CreateFromJSON (j);
 		mainMenu.transform.position = new Vector3 (-1.15f, 0f, 2f);
 
-		string sJson2 = FileManager.ReadTextFromResources ("TourMenu_json");
-		JSONObject j2 = new JSONObject (sJson2);
-		tourMenu = VRUI_Container.CreateFromJSON (j2);
+		sJson = FileManager.ReadTextFromResources ("TourMenu_json");
+		j = new JSONObject (sJson);
+		tourMenu = VRUI_Container.CreateFromJSON (j);
 		tourMenu.transform.position = new Vector3 (0f, -1f, 2f);
+
+		sJson = FileManager.ReadTextFromResources ("TourMenuBrief_json");
+		j = new JSONObject (sJson);
+		tourMenuBrief = VRUI_Container.CreateFromJSON (j);
+		tourMenuBrief.transform.position = new Vector3 (0f, -1f, 2f);
 
 		settingsSubMenu = mainMenu.FindById ("SettingsContainer") as VRUI_Container;
 		VRUI_Button btnSettings = mainMenu.FindById ("btnSettings") as VRUI_Button;
 		btnSettings.SetOnActivatedDelegate (OnButtonSettings);
+
+		VRUI_Button btnShrinkTourMenu = tourMenu.FindById ("btnTourMenuShrink") as VRUI_Button;
+		btnShrinkTourMenu.SetOnActivatedDelegate (OnButtonShrinkTourMenu);
+
+		VRUI_Button btnExpandTourMenu = tourMenuBrief.FindById ("btnTourMenuExpand") as VRUI_Button;
+		btnExpandTourMenu.SetOnActivatedDelegate (OnButtonExpandTourMenu);
 
 		btnShowMainMenu = testMenu.FindById ("btnMainMenu") as VRUI_Button;
 //		btnShowMainMenu.SetOnOverDelegate (OnButtonOverDelegate);
@@ -132,6 +145,7 @@ public class VRUI_TestScript : MonoBehaviour {
 		mainMenu.gameObject.SetActive (true);
 		settingsSubMenu.gameObject.SetActive (false);
 		tourMenu.gameObject.SetActive (false);
+		tourMenuBrief.gameObject.SetActive (false);
 		btnShowMainMenu.SetState (VRUI_Button.State.DISABLED);
 		btnShowTourMenu.SetState (VRUI_Button.State.NORMAL);
 	}
@@ -139,12 +153,23 @@ public class VRUI_TestScript : MonoBehaviour {
 	public void OnButtonShowTourMenu (string buttonId) {
 		mainMenu.gameObject.SetActive (false);
 		tourMenu.gameObject.SetActive (true);
+		OnButtonShrinkTourMenu (null);
 		btnShowMainMenu.SetState (VRUI_Button.State.NORMAL);
 		btnShowTourMenu.SetState (VRUI_Button.State.DISABLED);
 	}
 
 	public void OnButtonSettings (string buttonId) {
 		settingsSubMenu.gameObject.SetActive (!settingsSubMenu.gameObject.activeSelf);
+	}
+
+	public void OnButtonExpandTourMenu (string buttonId) {
+		tourMenuBrief.gameObject.SetActive (false);
+		tourMenu.gameObject.SetActive (true);
+	}
+
+	public void OnButtonShrinkTourMenu (string buttonId) {
+		tourMenuBrief.gameObject.SetActive (true);
+		tourMenu.gameObject.SetActive (false);
 	}
 	/*
 	public void OnButtonOverDelegate (string buttonId) {

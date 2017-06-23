@@ -1,4 +1,4 @@
-{	"id":"Tour Menu"
+{	"id":"Tour Menu Full"
 ,	"type":"VRUI_Container"
 ,	"layout":"VERTICAL"
 ,	"width":"2.84m"
@@ -55,19 +55,19 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF404040"
+						,	"color_text":"#FF000000"
 						}
 					]
 				,	"vrui_objects":
@@ -94,13 +94,13 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
@@ -151,13 +151,13 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
@@ -208,13 +208,13 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
@@ -247,13 +247,13 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
@@ -286,13 +286,13 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"
@@ -308,7 +308,7 @@
 						}
 					]
 				}
-			,	{	"id":"btnTourMenuSwitch"
+			,	{	"id":"btnTourMenuShrink"
 				,	"type":"VRUI_Button"
 				,	"width":"0.16m"
 				,	"height":"0.16m"
@@ -325,13 +325,13 @@
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FF808080"
+						,	"color_text":"#FFF0F0F0"
 						}
 					,	{	"id":"ACTIVATED"
 						,	"type":"VRUI_ButtonState"
 						,	"color_background":"#FF302a48"
 						,	"color_border":"#00000000"
-						,	"color_text":"#FFF0F0F0"
+						,	"color_text":"#FF80FFFF"
 						}
 					,	{	"id":"DISABLED"
 						,	"type":"VRUI_ButtonState"

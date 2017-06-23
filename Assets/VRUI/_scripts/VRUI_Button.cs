@@ -21,8 +21,10 @@ public class VRUI_Button : VRUI_Container {
 	private float _gazeStartTime;
 	private float _gazeEndTime;
 	private bool _isGazeOver = false;
+	private bool _wasGazeOver = true;
 	private bool _isReticleOver = false;
 	private bool _isReticleTriggerOn = false;
+	private bool _wasReticleTriggerOn = true;
 
 	private VRUI_Panel _indicator;
 
@@ -67,7 +69,7 @@ public class VRUI_Button : VRUI_Container {
 				}
 			} else {
 				if (_isReticleOver) {
-					if (_isReticleTriggerOn) {
+					if (_isReticleTriggerOn	 && !_wasReticleTriggerOn) {
 						SetState (State.ACTIVATED);
 					}
 				} else {
@@ -76,14 +78,15 @@ public class VRUI_Button : VRUI_Container {
 			}
 			break;
 		case State.NORMAL:
-			if (_isReticleOver) {
+			if (_isReticleOver && !_wasGazeOver) {
+//			if (_isReticleOver && !_isReticleTriggerOn) {
 				SetState (State.OVER);
 			}
 			break;
 		case State.ACTIVATED:
 //			Debug.Log ("Btn " + name + ": state " + _state + ", reticleOver: " + _isReticleOver + ", trigger: " + _isReticleTriggerOn);
 //			if (!_isReticleOver) {
-			if (!_isReticleTriggerOn && !_isGazeOver) {
+			if (!_isReticleTriggerOn) {
 				SetState (State.NORMAL);
 			}
 			break;
@@ -100,6 +103,8 @@ public class VRUI_Button : VRUI_Container {
 			doOnActivatedDelegate = false;
 			OnActivatedDelegate (_id);
 		}
+		_wasReticleTriggerOn = _isReticleTriggerOn;
+		_wasGazeOver = _isGazeOver;
 		_isGazeOver = _isReticleOver = _isReticleTriggerOn = false;
 	}
 
@@ -156,6 +161,7 @@ public class VRUI_Button : VRUI_Container {
 	}
 
 	public void SetState (State newState) {
+		Debug.Log (""+_id+": SetState("+newState+")");
 		HideGazeIndicator ();
 		switch (newState) {
 		case State.NORMAL:
