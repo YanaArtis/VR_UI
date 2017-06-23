@@ -24,6 +24,9 @@ public class VRUI_Dimension {
 	public Type type {get {return _type;}}
 
 	public Type Parse (string s) {
+		_value = 0f;
+		_param = 0f;
+		_sParam = null;
 		if ((s == null) || (s.Length < 1)) {
 			return _type = Type.ERROR;
 		}
@@ -37,13 +40,15 @@ public class VRUI_Dimension {
 		char postfix = s [s.Length - 1];
 		float value;
 		if (postfix == '%') {
-			if (float.TryParse (s.Substring (0, s.Length - 1), out _param)) {
+			_sParam = s.Substring (0, s.Length - 1);
+			if (float.TryParse (_sParam, out _param)) {
 				return _type = Type.PERCENTS;
 			}
 			return _type = Type.ERROR;
 		}
 		if (postfix == 'm') {
-			if (float.TryParse (s.Substring (0, s.Length - 1), out _param)) {
+			_sParam = s.Substring (0, s.Length - 1);
+			if (float.TryParse (_sParam, out _param)) {
 				_value = _param;
 				return _type = Type.METERS;
 			}
@@ -57,7 +62,8 @@ public class VRUI_Dimension {
 //			return _type = Type.ERROR;
 //		}
 		if (postfix == 'p') {
-			if (float.TryParse (s.Substring (0, s.Length - 1), out _param)) {
+			_sParam = s.Substring (0, s.Length - 1);
+			if (float.TryParse (_sParam, out _param)) {
 				_value = _param;
 				return _type = Type.PROPORTION;
 			}
@@ -80,5 +86,15 @@ public class VRUI_Dimension {
 
 	public void SetUndefined () {
 		_type = Type.UNDEFINED;
+	}
+
+	public void CopyTo (VRUI_Dimension other) {
+		if (other == null) {
+			return;
+		}
+		other._value = this._value;
+		other._sParam = this._sParam;
+		other._param = this._param;
+		other._type = this._type;
 	}
 }

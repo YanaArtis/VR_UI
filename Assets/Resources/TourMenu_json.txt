@@ -15,15 +15,15 @@
 		,	"gravity":"TOP|HCENTER"
 		,	"color_background":"#FF1e1736"
 		,	"color_border":"#00000000"
-		,	"padding_bottom":0.01
-		,	"padding_top":0.01
+		,	"padding_bottom":"0.01m"
+		,	"padding_top":"0.01m"
 		,	"vrui_objects":
 		[	{	"id":"Current Tour Title"
 			,	"type":"VRUI_Text"
-			,	"height":0.1
+			,	"height":"0.1m"
 			,	"text":"'Current Tour Title', \uf06e123"
 			,	"color":"#FFFFFFFF"
-			,	"margin_top":0.01
+			,	"margin_top":"0.01m"
 			,	"font":"fontawesome-webfont"
 			}
 		]
@@ -31,19 +31,19 @@
 	,	{	"id":"Tour Menu Bottom"
 		,	"type":"VRUI_Container"
 		,	"layout":"HORIZONTAL"
-		,	"width":2.84
-		,	"height":0.2
+		,	"width":"2.84m"
+		,	"height":"0.2m"
 		,	"gravity":"BOTTOM|RIGHT"
 		,	"color_background":"#FF1e1736"
 		,	"color_border":"#00000000"
-		,	"padding_bottom":0.01
+		,	"padding_bottom":"0.01m"
 		,	"vrui_objects":
 			[	{	"id":"btnMainMenu"
 				,	"type":"VRUI_Button"
-				,	"width":0.4
-				,	"height":0.16
+				,	"width":"0.4m"
+				,	"height":"0.16m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -79,10 +79,10 @@
 				}
 			,	{	"id":"btnLikes"
 				,	"type":"VRUI_Button"
-				,	"width":0.4
-				,	"height":0.16
+				,	"width":"0.4m"
+				,	"height":"0.16m"
 				,	"layout":"ZSORTED"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -117,17 +117,17 @@
 					,	{	"id":"Likes Number Container"
 						,	"type":"VRUI_Container"
 						,	"layout":"VERTICAL"
-						,	"width":0.4
-						,	"height":0.16
+						,	"width":"0.4m"
+						,	"height":"0.16m"
 						,	"gravity":"BOTTOM|RIGHT"
 						,	"color_background":"#00000000"
 						,	"color_border":"#00000000"
-						,	"padding_bottom":0.01
-						,	"padding_top":0.01
+						,	"padding_bottom":"0.01m"
+						,	"padding_top":"0.01m"
 						,	"vrui_objects":
 							[	{	"type":"VRUI_Text"
 								,	"text":"123"
-								,	"height":0.06
+								,	"height":"0.06m"
 								,	"font":"fontawesome-webfont"
 								}
 							]
@@ -136,10 +136,10 @@
 				}
 			,	{	"id":"btnComments"
 				,	"type":"VRUI_Button"
-				,	"width":0.4
-				,	"height":0.16
+				,	"width":"0.4m"
+				,	"height":"0.16m"
 				,	"layout":"ZSORTED"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -174,17 +174,17 @@
 					,	{	"id":"Comments Number Container"
 						,	"type":"VRUI_Container"
 						,	"layout":"VERTICAL"
-						,	"width":0.4
-						,	"height":0.16
+						,	"width":"0.4m"
+						,	"height":"0.16m"
 						,	"gravity":"BOTTOM|RIGHT"
 						,	"color_background":"#00000000"
 						,	"color_border":"#00000000"
-						,	"padding_bottom":0.01
-						,	"padding_top":0.01
+						,	"padding_bottom":"0.01m"
+						,	"padding_top":"0.01m"
 						,	"vrui_objects":
 							[	{	"type":"VRUI_Text"
 								,	"text":"456"
-								,	"height":0.06
+								,	"height":"0.06m"
 								,	"font":"fontawesome-webfont"
 								}
 							]
@@ -193,10 +193,10 @@
 				}
 			,	{	"id":"btnSoundOn"
 				,	"type":"VRUI_Button"
-				,	"width":0.4
-				,	"height":0.16
+				,	"width":"0.4m"
+				,	"height":"0.16m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -232,10 +232,10 @@
 				}
 			,	{	"id":"btnComplain"
 				,	"type":"VRUI_Button"
-				,	"width":0.4
-				,	"height":0.16
+				,	"width":"0.4m"
+				,	"height":"0.16m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -271,10 +271,10 @@
 				}
 			,	{	"id":"btnDownload"
 				,	"type":"VRUI_Button"
-				,	"width":0.4
-				,	"height":0.16
+				,	"width":"0.4m"
+				,	"height":"0.16m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"
@@ -310,10 +310,10 @@
 				}
 			,	{	"id":"btnTourMenuSwitch"
 				,	"type":"VRUI_Button"
-				,	"width":0.16
-				,	"height":0.16
+				,	"width":"0.16m"
+				,	"height":"0.16m"
 				,	"layout":"HORIZONTAL"
-				,	"margin":0.02
+				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
 						,	"type":"VRUI_ButtonState"

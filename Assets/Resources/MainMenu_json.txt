@@ -1,8 +1,8 @@
 ﻿{	"id":"Main Menu"
 ,	"type":"VRUI_Container"
 ,	"layout":"VERTICAL"
-,	"width":0.6
-,	"height":0.9
+,	"width":"0.6m"
+,	"height":"0.9m"
 ,	"gravity":"VCENTER|HCENTER"
 ,	"color_background":"#00000000"
 ,	"color_border":"#00000000"

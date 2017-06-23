@@ -23,17 +23,18 @@ public class VRUI_TestScript : MonoBehaviour {
 
 	void Start () {
 		InitReticles ();
-
-		string sJson = FileManager.ReadTextFromResources ("TestMenu_json");
-		JSONObject j = new JSONObject (sJson);
-		VRUI_Container testMenu = VRUI_Container.CreateFromJSON (j);
-		testMenu.transform.position = new Vector3 (-1.8f, 0f, 2f);
-
-		sJson = FileManager.ReadTextFromResources ("MainMenu_json");
-		j = new JSONObject (sJson);
-		VRUI_Container mainMenu = VRUI_Container.CreateFromJSON (j);
-		mainMenu.transform.position = new Vector3 (-1.15f, 0f, 2f);
-
+		{
+			string sJson = FileManager.ReadTextFromResources ("TestMenu_json");
+			JSONObject j = new JSONObject (sJson);
+			VRUI_Container testMenu = VRUI_Container.CreateFromJSON (j);
+			testMenu.transform.position = new Vector3 (-1.8f, 0f, 2f);
+		}
+		{
+			string sJson = FileManager.ReadTextFromResources ("MainMenu_json");
+			JSONObject j = new JSONObject (sJson);
+			VRUI_Container mainMenu = VRUI_Container.CreateFromJSON (j);
+			mainMenu.transform.position = new Vector3 (-1.15f, 0f, 2f);
+		}
 		string sJson2 = FileManager.ReadTextFromResources ("TourMenu_json");
 		JSONObject j2 = new JSONObject (sJson2);
 		VRUI_Container tourMenu = VRUI_Container.CreateFromJSON (j2);

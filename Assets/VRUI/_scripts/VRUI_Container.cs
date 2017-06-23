@@ -371,8 +371,25 @@ public class VRUI_Container : VRUI_Object {
 	}
 
 	public static VRUI_Container CreateFromJSON (JSONObject j) {
-		float width = j.HasField("width") ? j.GetField ("width").f : 1f;
-		float height = j.HasField("height") ? j.GetField ("height").f : 1f;
+		float width = 0f;
+		string sWidth = j.HasField("width") ? j.GetField ("width").str : null;
+		VRUI_Dimension d = new VRUI_Dimension ();
+		d.Parse (sWidth);
+		switch (d.type) {
+		case VRUI_Dimension.Type.METERS:
+			width = d.value;
+			break;
+		}
+			
+		float height = 0f;
+		string sHeight = j.HasField("height") ? j.GetField ("height").str : null;
+		d = new VRUI_Dimension ();
+		d.Parse (sHeight);
+		switch (d.type) {
+		case VRUI_Dimension.Type.METERS:
+			height = d.value;
+			break;
+		}
 
 		string sLayout = j.HasField("layout") ? j.GetField ("layout").str : null;
 		Layout layout = Layout.VERTICAL;

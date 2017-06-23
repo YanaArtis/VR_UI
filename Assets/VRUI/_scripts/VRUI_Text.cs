@@ -116,7 +116,18 @@ public class VRUI_Text : VRUI_Object {
 	public static VRUI_Text CreateFromJSON (JSONObject j, float parentHeight) {
 //		Debug.Log ("------------- VRUI_Text CreateFromJSON ()");
 //		Debug.Log (j);
-		float stringHeight = j.HasField ("height") ? j.GetField ("height").f : parentHeight;
+//		float stringHeight = j.HasField ("height") ? j.GetField ("height").f : parentHeight;
+
+		float stringHeight = parentHeight;
+		string sHeight = j.HasField("height") ? j.GetField ("height").str : null;
+		VRUI_Dimension d = new VRUI_Dimension ();
+		d.Parse (sHeight);
+		switch (d.type) {
+		case VRUI_Dimension.Type.METERS:
+			stringHeight = d.value;
+			break;
+		}
+
 		string text = j.HasField ("text") ? j.GetField ("text").str : null;
 		string sColor = j.HasField ("color") ? j.GetField ("color").str : null;
 		Color color = (sColor == null) ? Color.black : VRUI_Utils.ParseColor (sColor);

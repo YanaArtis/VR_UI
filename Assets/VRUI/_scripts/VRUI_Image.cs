@@ -41,7 +41,17 @@ public class VRUI_Image: VRUI_Object {
 	}
 
 	public static VRUI_Image CreateFromJSON (JSONObject j) {
-		float height = j.HasField ("height") ? j.GetField ("height").f : 1f;
+//		float height = j.HasField ("height") ? j.GetField ("height").f : 1f;
+		float height = 0f;
+		string sHeight = j.HasField("height") ? j.GetField ("height").str : null;
+		VRUI_Dimension d = new VRUI_Dimension ();
+		d.Parse (sHeight);
+		switch (d.type) {
+		case VRUI_Dimension.Type.METERS:
+			height = d.value;
+			break;
+		}
+
 		string sTextureFname = j.HasField ("src") ? j.GetField ("src").str : null;
 		if (sTextureFname != null) {
 			Texture2D tex = null;

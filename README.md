@@ -10,7 +10,7 @@ Describe your VR menu in JSON format, and load the menu in your application from
 Now VR_UI works on Cardboard, Gear VR, Oculus Rift + Touch. We plan to support HTC Vive and Daydream too.
 
 ### Build Status
-VR_UI in master branch is in alpha state. VR_UI in develop branch has unfinished changes and is not functional for a day - until changes will be finished.
+VR_UI is in alpha state.
 
 ### News
 **6/22/2017**
