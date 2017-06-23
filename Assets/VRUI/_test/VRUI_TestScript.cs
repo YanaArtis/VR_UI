@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Add parameter "visibility":VISIBLE|INVISIBLE|GONE
 // TODO: Refactor VRUI_Object, VRUI_Image and VRUI_Test to make standardized JSON parsing.
 // TODO: Add width/height "MATCH_PARENT", "WRAP_CONTENT", "XXXm" (in meters), "XXXd" (in degrees) values - let they be in text.
 // TODO: Add weight in percent and in units to create proportional autocalculated size for container's child.
-// TODO: Add parameter "visibility":VISIBLE|INVISIBLE|GONE
 // TODO: Create VRUI_Text with default color from code. Now such VRUI_Text can be created fron JSON only.
 // TODO: Add styles - for easier buttons colors and dimension setting.
 // TODO: Add mask for partially seen elements in containers. Now they are hidden.
@@ -30,6 +30,8 @@ public class VRUI_TestScript : MonoBehaviour {
 	VRUI_Container tourMenuBrief;
 	VRUI_Button btnShowMainMenu;
 	VRUI_Button btnShowTourMenu;
+	VRUI_Button btnModeCardboard;
+	VRUI_Button btnModeTablet;
 
 	void Start () {
 		InitReticles ();
@@ -62,6 +64,11 @@ public class VRUI_TestScript : MonoBehaviour {
 
 		VRUI_Button btnExpandTourMenu = tourMenuBrief.FindById ("btnTourMenuExpand") as VRUI_Button;
 		btnExpandTourMenu.SetOnActivatedDelegate (OnButtonExpandTourMenu);
+
+		btnModeCardboard = tourMenuBrief.FindById ("btnCardboardMode") as VRUI_Button;
+		btnModeCardboard.SetOnActivatedDelegate (OnButtonModeCardboard);
+		btnModeTablet = tourMenuBrief.FindById ("btnTabletMode") as VRUI_Button;
+		btnModeTablet.SetOnActivatedDelegate (OnButtonModeTablet);
 
 		btnShowMainMenu = testMenu.FindById ("btnMainMenu") as VRUI_Button;
 //		btnShowMainMenu.SetOnOverDelegate (OnButtonOverDelegate);
@@ -171,6 +178,19 @@ public class VRUI_TestScript : MonoBehaviour {
 		tourMenuBrief.gameObject.SetActive (true);
 		tourMenu.gameObject.SetActive (false);
 	}
+
+	public void OnButtonModeCardboard (string buttonId) {
+		btnModeTablet.SetVisibility (VRUI_Object.Visibility.VISIBLE);
+		btnModeCardboard.SetVisibility (VRUI_Object.Visibility.GONE);
+		tourMenuBrief.Refresh ();
+	}
+
+	public void OnButtonModeTablet (string buttonId) {
+		btnModeCardboard.SetVisibility (VRUI_Object.Visibility.VISIBLE);
+		btnModeTablet.SetVisibility (VRUI_Object.Visibility.GONE);
+		tourMenuBrief.Refresh ();
+	}
+
 	/*
 	public void OnButtonOverDelegate (string buttonId) {
 		Debug.Log ("Button OVER: \""+buttonId+"\"");

@@ -198,10 +198,13 @@ public class VRUI_Container : VRUI_Object {
 		float objectsWidth = 0;
 		int i;
 		for (i = 0; i < _objects.Count; i++) {
-			objectsWidth += _objects [i]._width + _objects [i].marginLeft + _objects [i].paddingLeft + _objects [i].marginRight + _objects [i].paddingRight;
 			if (_objects [i] is VRUI_Text) {
 				(_objects [i] as VRUI_Text).SetAnchor (textAnchor);
 			}
+			if (_objects [i]._visibility == Visibility.GONE) {
+				continue;
+			}
+			objectsWidth += _objects [i]._width + _objects [i].marginLeft + _objects [i].paddingLeft + _objects [i].marginRight + _objects [i].paddingRight;
 		}
 
 		float rightX = _width / 2f - _paddingRight;
@@ -210,7 +213,11 @@ public class VRUI_Container : VRUI_Object {
 			x = leftX;
 			for (i = 0; (i < _objects.Count) && (x < rightX); i++) {
 //				Debug.Log ("CalculateLayout_Horizontal() IsGravityLeft "+i+" setActive(true)");
-				_objects [i].gameObject.SetActive (true);
+//				_objects [i].gameObject.SetActive (true);
+				_objects [i].gameObject.SetActive (_objects [i]._visibility == Visibility.VISIBLE);
+				if (_objects [i]._visibility == Visibility.GONE) {
+					continue;
+				}
 				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x += (_objects [i].marginLeft + _objects [i].paddingLeft);
 				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, _childZ);
@@ -224,7 +231,11 @@ public class VRUI_Container : VRUI_Object {
 			x = rightX;
 			for (i = _objects.Count-1; (i >= 0) && (x > leftX); i--) {
 //				Debug.Log ("CalculateLayout_Horizontal() IsGravityRight "+i+" setActive(true)");
-				_objects [i].gameObject.SetActive (true);
+//				_objects [i].gameObject.SetActive (true);
+				_objects [i].gameObject.SetActive (_objects [i]._visibility == Visibility.VISIBLE);
+				if (_objects [i]._visibility == Visibility.GONE) {
+					continue;
+				}
 				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x -= (_objects [i].marginRight + _objects [i].paddingRight);
 				_objects [i].transform.localPosition = new Vector3 (x - _objects [i]._width / 2f, objY, _childZ);
@@ -245,7 +256,11 @@ public class VRUI_Container : VRUI_Object {
 			}
 			for (; (i < _objects.Count) && (x < rightX); i++) {
 //				Debug.Log ("CalculateLayout_Horizontal() IsGravity HCenter "+i+" setActive(true)");
-				_objects [i].gameObject.SetActive (true);
+//				_objects [i].gameObject.SetActive (true);
+				_objects [i].gameObject.SetActive (_objects [i]._visibility == Visibility.VISIBLE);
+				if (_objects [i]._visibility == Visibility.GONE) {
+					continue;
+				}
 				float objY = y + GetObjectDeltaY_forHorizontalLayout (_objects [i]._height);
 				x += (_objects [i].marginLeft + _objects [i].paddingLeft);
 				_objects [i].transform.localPosition = new Vector3 (x + _objects [i]._width / 2f, objY, _childZ);

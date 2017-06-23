@@ -7,7 +7,7 @@
 ,	"color_background":"#00000000"
 ,	"color_border":"#00000000"
 ,	"vrui_objects":
-	[	{	"id":"btnDownload"
+	[	{	"id":"btnCardboardMode"
 		,	"type":"VRUI_Button"
 		,	"width":"0.4m"
 		,	"height":"0.16m"
@@ -42,6 +42,46 @@
 		,	"vrui_objects":
 			[	{	"type":"VRUI_Image"
 				,	"src":"cardboard_grey"
+				,	"height":"0.14m"
+				}
+			]
+		}
+	,	{	"id":"btnTabletMode"
+		,	"type":"VRUI_Button"
+		,	"width":"0.4m"
+		,	"height":"0.16m"
+		,	"layout":"HORIZONTAL"
+		,	"margin":"0.02m"
+		,	"visibility":"GONE"
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#00000000"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF606060"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FFF0F0F0"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF80FFFF"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Image"
+				,	"src":"tablet_grey"
 				,	"height":"0.14m"
 				}
 			]

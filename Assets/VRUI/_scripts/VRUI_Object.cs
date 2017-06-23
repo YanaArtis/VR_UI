@@ -30,6 +30,8 @@ public class VRUI_Object : MonoBehaviour {
 	protected float _paddingBottom = 0f;
 
 	public string _id = null;
+	public enum Visibility {VISIBLE, INVISIBLE, GONE}
+	public Visibility _visibility = Visibility.VISIBLE;
 
 	public float marginLeft {
 		get {
@@ -352,11 +354,25 @@ public class VRUI_Object : MonoBehaviour {
 		if (_layoutPaddingBottom.type == VRUI_Dimension.Type.METERS) {
 			_paddingBottom = _layoutPaddingBottom.value;
 		}
+			
+		string sVisibility = j.HasField("visibility") ? j.GetField ("visibility").str : null;
+		_visibility = Visibility.VISIBLE;
+		if ("VISIBLE".Equals (sVisibility)) {
+			_visibility = Visibility.VISIBLE;
+		} else if ("INVISIBLE".Equals (sVisibility)) {
+			_visibility = Visibility.INVISIBLE;
+		} else if ("GONE".Equals (sVisibility)) {
+			_visibility = Visibility.GONE;
+		}
 	}
 
 	public static VRUI_Object CreateFromJSON (JSONObject j) {
 		VRUI_Object vruiObject = new VRUI_Object ();
 		vruiObject.ReadDataFromJson (j);
 		return vruiObject;
+	}
+
+	public void SetVisibility (Visibility newVisibility) {
+		_visibility = newVisibility;
 	}
 }
