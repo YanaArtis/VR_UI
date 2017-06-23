@@ -13,7 +13,7 @@ Now VR_UI works on Cardboard, Gear VR, Oculus Rift + Touch. We plan to support H
 VR_UI is in alpha state.
 
 ### News
-**6/22/2017**
+**6/23/2017**
 Alpha version merged into master.
 
 **6/20/2017**
