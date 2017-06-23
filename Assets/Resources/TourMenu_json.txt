@@ -191,11 +191,11 @@
 						}
 					]
 				}
-			,	{	"id":"btnSoundOn"
+			,	{	"id":"btnSound"
 				,	"type":"VRUI_Button"
 				,	"width":"0.4m"
 				,	"height":"0.16m"
-				,	"layout":"HORIZONTAL"
+				,	"layout":"ZSORTED"
 				,	"margin":"0.02m"
 				,	"states":
 					[	{	"id":"NORMAL"
@@ -224,8 +224,16 @@
 						}
 					]
 				,	"vrui_objects":
-					[	{	"type":"VRUI_Text"
+					[	{	"id":"iconSoundOn"
+						,	"visibility":"VISIBLE"
+						,	"type":"VRUI_Text"
 						,	"text":"\uf028"
+						,	"font":"fontawesome-webfont"
+						}
+					,	{	"id":"iconSoundOff"
+						,	"visibility":"GONE"
+						,	"type":"VRUI_Text"
+						,	"text":"\uf026"
 						,	"font":"fontawesome-webfont"
 						}
 					]

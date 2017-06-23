@@ -374,6 +374,9 @@ public class VRUI_Object : MonoBehaviour {
 
 	public void SetVisibility (Visibility newVisibility) {
 		_visibility = newVisibility;
+		if (gameObject != null) {
+			gameObject.SetActive (_visibility == Visibility.VISIBLE);
+		}
 	}
 
 	public Visibility GetVisibility () {

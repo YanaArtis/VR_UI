@@ -34,6 +34,9 @@ public class VRUI_TestScript : MonoBehaviour {
 	VRUI_Button btnModeTablet;
 	VRUI_Button btnAbout;
 
+	VRUI_Object iconSoundOn;
+	VRUI_Object iconSoundOff;
+
 	void Start () {
 		InitReticles ();
 		string sJson = FileManager.ReadTextFromResources ("TestMenu_json");
@@ -69,6 +72,11 @@ public class VRUI_TestScript : MonoBehaviour {
 		btnAbout = mainMenu.FindById ("btnAbout") as VRUI_Button;
 		VRUI_Button btnToursFromWeb = mainMenu.FindById ("btnToursFromWeb") as VRUI_Button;
 		btnToursFromWeb.SetOnActivatedDelegate (OnButtonToursFromWeb);
+
+		VRUI_Button btnSound = tourMenu.FindById ("btnSound") as VRUI_Button;
+		iconSoundOn = btnSound.FindById ("iconSoundOn");
+		iconSoundOff = btnSound.FindById ("iconSoundOff");
+		btnSound.SetOnActivatedDelegate (OnButtonSound);
 
 		btnModeCardboard = tourMenuBrief.FindById ("btnCardboardMode") as VRUI_Button;
 		btnModeCardboard.SetOnActivatedDelegate (OnButtonModeCardboard);
@@ -203,6 +211,16 @@ public class VRUI_TestScript : MonoBehaviour {
 	public void OnButtonToursFromWeb (string buttonId) {
 		btnAbout.SetVisibility ((btnAbout.GetVisibility() == VRUI_Object.Visibility.VISIBLE) ? VRUI_Object.Visibility.GONE : VRUI_Object.Visibility.VISIBLE);
 		mainMenu.Refresh ();
+	}
+
+	public void OnButtonSound (string buttonId) {
+		bool isSoundOn = (iconSoundOn.GetVisibility () == VRUI_Object.Visibility.VISIBLE);
+		Debug.Log ("-------- isSoundOn: " + isSoundOn);
+		iconSoundOn.SetVisibility (isSoundOn ? VRUI_Object.Visibility.GONE : VRUI_Object.Visibility.VISIBLE);
+		iconSoundOff.SetVisibility (isSoundOn ? VRUI_Object.Visibility.VISIBLE : VRUI_Object.Visibility.GONE);
+		tourMenu.Refresh ();
+//		iconSoundOn.gameObject.SetActive(!isSoundOn);
+//		iconSoundOff.gameObject.SetActive(isSoundOn);
 	}
 
 	/*
