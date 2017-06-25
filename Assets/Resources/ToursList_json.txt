@@ -1,0 +1,129 @@
+{	"id":"Tours List"
+,	"type":"VRUI_Container"
+,	"layout":"HORIZONTAL"
+,	"width":"2.2m"
+,	"height":"0.4m"
+,	"gravity":"BOTTOM|RIGHT"
+,	"color_background":"#FF808000"
+,	"color_border":"#FF000000"
+,	"vrui_objects":
+	[	{	"id":"btnCardboardMode"
+		,	"type":"VRUI_Button"
+		,	"width":"50%"
+		,	"height":"90%"
+		,	"layout":"HORIZONTAL"
+		,	"margin":"0.02m"
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF000000"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF606060"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FFF0F0F0"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF80FFFF"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Image"
+				,	"src":"cardboard_grey"
+				,	"height":"0.14m"
+				}
+			]
+		}
+	,	{	"id":"btnTabletMode"
+		,	"type":"VRUI_Button"
+		,	"width":"30%"
+		,	"height":"90%"
+		,	"layout":"HORIZONTAL"
+		,	"margin":"0.02m"
+		,	"visibility":"GONE"
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF000000"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF606060"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FFF0F0F0"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF80FFFF"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Image"
+				,	"src":"tablet_grey"
+				,	"height":"0.14m"
+				}
+			]
+		}
+	,	{	"id":"btnToursListExpand"
+		,	"type":"VRUI_Button"
+		,	"width":"10%"
+		,	"height":"90%"
+		,	"layout":"HORIZONTAL"
+		,	"margin":"0.02m"
+		,	"states":
+			[	{	"id":"NORMAL"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#00000000"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF606060"
+				}
+			,	{	"id":"OVER"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF808080"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FFF0F0F0"
+				}
+			,	{	"id":"ACTIVATED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF80FFFF"
+				}
+			,	{	"id":"DISABLED"
+				,	"type":"VRUI_ButtonState"
+				,	"color_background":"#FF302a48"
+				,	"color_border":"#00000000"
+				,	"color_text":"#FF404040"
+				}
+			]
+		,	"vrui_objects":
+			[	{	"type":"VRUI_Text"
+				,	"text":"\uf142"
+				,	"font":"fontawesome-webfont"
+				}
+			]
+		}
+	]
+}

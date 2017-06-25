@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Add parameter "visibility":VISIBLE|INVISIBLE|GONE
+// TODO: Implement SetWidth/HeightWithoutRefresh for VRUI_Text, VRUI_Image.
 // TODO: Refactor VRUI_Object, VRUI_Image and VRUI_Test to make standardized JSON parsing.
 // TODO: Add width/height "MATCH_PARENT", "WRAP_CONTENT", "XXXm" (in meters), "XXXd" (in degrees) values - let they be in text.
 // TODO: Add weight in percent and in units to create proportional autocalculated size for container's child.
@@ -33,9 +33,9 @@ public class VRUI_TestScript : MonoBehaviour {
 	VRUI_Button btnModeCardboard;
 	VRUI_Button btnModeTablet;
 	VRUI_Button btnAbout;
-
 	VRUI_Object iconSoundOn;
 	VRUI_Object iconSoundOff;
+	VRUI_Container toursList;
 
 	void Start () {
 		InitReticles ();
@@ -94,6 +94,14 @@ public class VRUI_TestScript : MonoBehaviour {
 		btnShowTourMenu.SetOnActivatedDelegate (OnButtonShowTourMenu);
 
 		OnButtonShowMainMenu (null);
+
+		sJson = FileManager.ReadTextFromResources ("ToursList_json");
+		j = new JSONObject (sJson);
+		toursList = VRUI_Container.CreateFromJSON (j);
+		toursList.transform.position = new Vector3 (0.25f, 0.5f, 2f);
+
+		VRUI_Button btnToursList = toursList.FindById ("btnCardboardMode") as VRUI_Button; // ("btnToursListExpand") as VRUI_Button;
+		btnToursList.SetOnActivatedDelegate (OnButtonToursListExpand);
 
 		/*
 //		TestVerticalLayout ();
@@ -219,8 +227,14 @@ public class VRUI_TestScript : MonoBehaviour {
 		iconSoundOn.SetVisibility (isSoundOn ? VRUI_Object.Visibility.GONE : VRUI_Object.Visibility.VISIBLE);
 		iconSoundOff.SetVisibility (isSoundOn ? VRUI_Object.Visibility.VISIBLE : VRUI_Object.Visibility.GONE);
 		tourMenu.Refresh ();
-//		iconSoundOn.gameObject.SetActive(!isSoundOn);
-//		iconSoundOff.gameObject.SetActive(isSoundOn);
+	}
+
+	public void OnButtonToursListExpand (string buttonId) {
+		if (toursList._width < 2) {
+			toursList.SetWidthInMeters (toursList._width * 2);
+		} else if (toursList._width > 2) {
+			toursList.SetWidthInMeters (toursList._width / 2);
+		}
 	}
 
 	/*

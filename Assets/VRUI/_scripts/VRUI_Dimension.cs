@@ -20,7 +20,7 @@ public class VRUI_Dimension {
 	protected string _sParam;
 	protected float _param;
 	public enum Type {METERS, PERCENTS, PROPORTION, WRAP_CONTENT, ERROR, UNDEFINED} // , DEGREES}
-	protected Type _type;
+	protected Type _type = Type.UNDEFINED;
 	public Type type {get {return _type;}}
 
 	public Type Parse (string s) {
@@ -28,31 +28,40 @@ public class VRUI_Dimension {
 		_param = 0f;
 		_sParam = null;
 		if ((s == null) || (s.Length < 1)) {
-			return _type = Type.ERROR;
+			_type = Type.ERROR;
+			return _type;
 		}
 		if ("MATCH_PARENT".Equals (s)) {
 			_param = 100f;
-			return _type = Type.PERCENTS;
+			_type = Type.PERCENTS;
+			return _type;
 		}
 		if ("WRAP_CONTENT".Equals (s)) {
-			return _type = Type.WRAP_CONTENT;
+			_type = Type.WRAP_CONTENT;
+			return _type;
 		}
 		char postfix = s [s.Length - 1];
 		float value;
+//		Debug.Log ("VRUI_Dimension.Parse(): postfix = '"+postfix+"'");
 		if (postfix == '%') {
 			_sParam = s.Substring (0, s.Length - 1);
 			if (float.TryParse (_sParam, out _param)) {
-				return _type = Type.PERCENTS;
+				_type = Type.PERCENTS;
+				Debug.Log ("VRUI_Dimension.Parse(): _type = '"+_type+"'");
+				return _type;
 			}
-			return _type = Type.ERROR;
+			_type = Type.ERROR;
+			return _type;
 		}
 		if (postfix == 'm') {
 			_sParam = s.Substring (0, s.Length - 1);
 			if (float.TryParse (_sParam, out _param)) {
 				_value = _param;
-				return _type = Type.METERS;
+				_type = Type.METERS;
+				return _type;
 			}
-			return _type = Type.ERROR;
+			_type = Type.ERROR;
+			return _type;
 		}
 //		if (postfix == 'd') {
 //			if (float.TryParse (s.Substring (0, s.Length - 1), out _param)) {
@@ -65,19 +74,22 @@ public class VRUI_Dimension {
 			_sParam = s.Substring (0, s.Length - 1);
 			if (float.TryParse (_sParam, out _param)) {
 				_value = _param;
-				return _type = Type.PROPORTION;
+				_type = Type.PROPORTION;
+				return _type;
 			}
-			return _type = Type.ERROR;
+			_type = Type.ERROR;
+			return _type;
 		}
-		return _type = Type.ERROR;
+		_type = Type.ERROR;
+		return _type;
 	}
 
 //	public float CalculateGrades (float distanceFromCamera) {
 //		return _value = 
 //	}
 
-	public float CalculatePercents (VRUI_Dimension parentDimension) {
-		return _value = parentDimension.value * _param;
+	public float CalculatePercents (float parentDimensionInMeters) {
+		return _value = parentDimensionInMeters * _param / 100f;
 	}
 
 	public float CalculateProportional (float spaceForProportionalChildren, float weightsSumOfProportionalChildren) {

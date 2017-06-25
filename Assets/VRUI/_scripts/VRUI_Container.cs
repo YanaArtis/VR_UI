@@ -100,6 +100,26 @@ public class VRUI_Container : VRUI_Object {
 		}
 	}
 
+	private void RecalculateObjectSizeIfRequired (VRUI_Object obj) {
+		float newObjWidth = 0;
+		if (obj._layoutWidth.type == VRUI_Dimension.Type.PERCENTS) {
+			newObjWidth = obj._layoutWidth.CalculatePercents (_width);
+		}
+		float newObjHeight = 0;
+		if (obj._layoutHeight.type == VRUI_Dimension.Type.PERCENTS) {
+			newObjHeight = obj._layoutHeight.CalculatePercents (_height);
+		}
+		if ((newObjWidth > 0) && (newObjWidth != obj._width)) {
+			if ((newObjHeight > 0) && (newObjHeight != obj._height)) {
+				obj.SetWidthAndHeightInMeters (newObjWidth, newObjHeight);
+			} else {
+				obj.SetWidthInMeters (newObjWidth);
+			}
+		} else if ((newObjHeight > 0) && (newObjHeight != obj._height)) {
+			obj.SetHeightInMeters (newObjHeight);
+		}
+	}
+
 	private void CalculateLayout_Vertical () {
 		float x, y;
 		TextAnchor textAnchor = TextAnchor.MiddleCenter;
@@ -121,6 +141,7 @@ public class VRUI_Container : VRUI_Object {
 			if (_objects [i]._visibility == Visibility.GONE) {
 				continue;
 			}
+			RecalculateObjectSizeIfRequired (_objects [i]);
 			objectsHeight += _objects [i]._height + _objects [i].marginTop + _objects [i].paddingTop + _objects [i].marginBottom + _objects [i].paddingBottom;
 		}
 
@@ -222,6 +243,8 @@ public class VRUI_Container : VRUI_Object {
 			if (_objects [i]._visibility == Visibility.GONE) {
 				continue;
 			}
+			RecalculateObjectSizeIfRequired (_objects [i]);
+
 			objectsWidth += _objects [i]._width + _objects [i].marginLeft + _objects [i].paddingLeft + _objects [i].marginRight + _objects [i].paddingRight;
 		}
 
@@ -475,5 +498,20 @@ public class VRUI_Container : VRUI_Object {
 			}
 		}
 		return null;
+	}
+
+	public override void SetWidthInMetersWithoutRefresh (float newWidth) {
+		base.SetWidthInMetersWithoutRefresh (newWidth);
+		_vruiPanel.SetWidthInMeters (newWidth);
+	}
+
+	public override void SetHeightInMetersWithoutRefresh (float newHeight) {
+		base.SetHeightInMetersWithoutRefresh (newHeight);
+		_vruiPanel.SetHeightInMeters (newHeight);
+	}
+
+	public override void SetWidthAndHeightInMetersWithoutRefresh (float newWidth, float newHeight) {
+		base.SetWidthAndHeightInMetersWithoutRefresh (newWidth, newHeight);
+		_vruiPanel.SetWidthAndHeightInMeters (newWidth, newHeight);
 	}
 }

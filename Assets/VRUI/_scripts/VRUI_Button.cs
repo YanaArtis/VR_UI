@@ -27,6 +27,7 @@ public class VRUI_Button : VRUI_Container {
 	private bool _wasReticleTriggerOn = true;
 
 	private VRUI_Panel _indicator;
+	private BoxCollider _boxCollider;
 
 	public delegate void DelegateMethod (string buttonId);
 	private DelegateMethod OnOverDelegate = null;
@@ -46,8 +47,8 @@ public class VRUI_Button : VRUI_Container {
 		vruiContainer.CopyTo (vruiButton);
 		vruiContainer.Clear ();
 		Destroy (vruiContainer);
-		BoxCollider bc = vruiButton.gameObject.AddComponent<BoxCollider> ();
-		bc.size = new Vector3(width, height, 0.01f);
+		vruiButton._boxCollider = vruiButton.gameObject.AddComponent<BoxCollider> ();
+		vruiButton._boxCollider.size = new Vector3(width, height, 0.01f);
 //		bc.transform.position = vruiContainer.transform.position;
 //		bc.transform.localScale = vruiContainer.transform.localScale;
 
@@ -351,5 +352,20 @@ public class VRUI_Button : VRUI_Container {
 
 	public void SetOnActivatedDelegate (DelegateMethod del) {
 		OnActivatedDelegate = del;
+	}
+
+	public override void SetWidthInMetersWithoutRefresh (float newWidth) {
+		base.SetWidthInMetersWithoutRefresh (newWidth);
+		_boxCollider.size = new Vector3(_width, _height, 0.01f);
+	}
+
+	public override void SetHeightInMetersWithoutRefresh (float newHeight) {
+		base.SetHeightInMetersWithoutRefresh (newHeight);
+		_boxCollider.size = new Vector3(_width, _height, 0.01f);
+	}
+
+	public override void SetWidthAndHeightInMetersWithoutRefresh (float newWidth, float newHeight) {
+		base.SetWidthAndHeightInMetersWithoutRefresh (newWidth, newHeight);
+		_boxCollider.size = new Vector3(_width, _height, 0.01f);
 	}
 }

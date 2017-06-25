@@ -32,6 +32,7 @@ public class VRUI_Object : MonoBehaviour {
 	public string _id = null;
 	public enum Visibility {VISIBLE, INVISIBLE, GONE}
 	public Visibility _visibility = Visibility.VISIBLE;
+//	public VRUI_Object _parent = null;
 
 	public float marginLeft {
 		get {
@@ -120,8 +121,6 @@ public class VRUI_Object : MonoBehaviour {
 		_paddingLeft = _paddingTop = _paddingRight =  _paddingBottom = paddingSpace;
 		Refresh ();
 	}
-
-	public virtual void Refresh () {}
 
 	public void CopyTo (VRUI_Object other) {
 		if (other == null) {
@@ -228,6 +227,7 @@ public class VRUI_Object : MonoBehaviour {
 			}
 			this._layoutPaddingBottom.CopyTo (other._layoutPaddingBottom);
 		}
+		other._visibility = this._visibility;
 	}
 
 	public void ReadDataFromJson (JSONObject j) {
@@ -381,5 +381,35 @@ public class VRUI_Object : MonoBehaviour {
 
 	public Visibility GetVisibility () {
 		return _visibility;
+	}
+
+	public virtual void Refresh () {}
+
+	public virtual void SetWidthInMetersWithoutRefresh (float newWidth) {
+		_width = newWidth;
+	}
+
+	public virtual void SetWidthInMeters (float newWidth) {
+		SetWidthInMetersWithoutRefresh (newWidth);
+		Refresh ();
+	}
+
+	public virtual void SetWidthAndHeightInMetersWithoutRefresh (float newWidth, float newHeight) {
+		_width = newWidth;
+		_height = newHeight;
+	}
+
+	public virtual void SetWidthAndHeightInMeters (float newWidth, float newHeight) {
+		SetWidthAndHeightInMetersWithoutRefresh (newWidth, newHeight);
+		Refresh ();
+	}
+
+	public virtual void SetHeightInMetersWithoutRefresh (float newHeight) {
+		_height = newHeight;
+	}
+
+	public virtual void SetHeightInMeters (float newHeight) {
+		SetHeightInMetersWithoutRefresh (newHeight);
+		Refresh ();
 	}
 }
