@@ -95,7 +95,7 @@
 		,	"states":
 			[	{	"id":"NORMAL"
 				,	"type":"VRUI_ButtonState"
-				,	"color_background":"#00000000"
+				,	"color_background":"#FF000000"
 				,	"color_border":"#00000000"
 				,	"color_text":"#FF606060"
 				}

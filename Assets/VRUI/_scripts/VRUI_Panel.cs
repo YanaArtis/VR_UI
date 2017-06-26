@@ -110,19 +110,21 @@ public class VRUI_Panel: VRUI_Object {
 
 
 	public override void Refresh () {
-		_goBg.transform.localScale = new Vector3 (_width, _height, 1f);
-		for (int i = 0; i < _borderMeshRenderer.Length; i++) {
-			_goBorder [0].transform.localScale = new Vector3 (_borderWidth, _height + _borderWidth, 1f);
-			_goBorder [0].transform.localPosition = new Vector3 (-_width/2, 0f, 0f);
+		if ((_goBg.transform.localScale.x != _width) || (_goBg.transform.localScale.y != _height)) {
+			_goBg.transform.localScale = new Vector3 (_width, _height, 1f);
+			for (int i = 0; i < _borderMeshRenderer.Length; i++) {
+				_goBorder [0].transform.localScale = new Vector3 (_borderWidth, _height + _borderWidth, 1f);
+				_goBorder [0].transform.localPosition = new Vector3 (-_width / 2, 0f, 0f);
 
-			_goBorder [1].transform.localScale = new Vector3 (_borderWidth, _height + _borderWidth, 1f);
-			_goBorder [1].transform.localPosition = new Vector3 (_width/2, 0f, 0f);
+				_goBorder [1].transform.localScale = new Vector3 (_borderWidth, _height + _borderWidth, 1f);
+				_goBorder [1].transform.localPosition = new Vector3 (_width / 2, 0f, 0f);
 
-			_goBorder [2].transform.localScale = new Vector3 (_width + _borderWidth, _borderWidth, 1f);
-			_goBorder [2].transform.localPosition = new Vector3 (0f, -_height/2, 0f);
+				_goBorder [2].transform.localScale = new Vector3 (_width + _borderWidth, _borderWidth, 1f);
+				_goBorder [2].transform.localPosition = new Vector3 (0f, -_height / 2, 0f);
 
-			_goBorder [3].transform.localScale = new Vector3 (_width + _borderWidth, _borderWidth, 1f);
-			_goBorder [3].transform.localPosition = new Vector3 (0f, _height/2, 0f);
+				_goBorder [3].transform.localScale = new Vector3 (_width + _borderWidth, _borderWidth, 1f);
+				_goBorder [3].transform.localPosition = new Vector3 (0f, _height / 2, 0f);
+			}
 		}
 	}
 }
